@@ -1,5 +1,6 @@
 package com.main.pj;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -24,6 +25,17 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		
+		// ---------------------- testLine
+		try {
+			postgreSQLconnect.getConnection();
+			postgreSQLconnect.testConnect();;
+		}  catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// ---------------------- testLine
+		
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
