@@ -17,5 +17,13 @@
 	<button onclick="">Mainlist</button>
 </form>
 
+<form action="loginPage">
+	<button onclick="">LoginPage</button>
+</form>
+
+
+
+
+
 </body>
 </html>
