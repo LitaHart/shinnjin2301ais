@@ -23,4 +23,5 @@
 hs_err_pid*
 /.metadata/
 /Servers/
-/01_YUJIN_another/
+/MANIFEST.MF/
+/pom.properties/
