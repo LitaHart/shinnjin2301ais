@@ -15,14 +15,32 @@
     	
     	let timer = setInterval(function() {
     		percent += 1
-    		$('.progress-text').text(percent)
+    		$('.progress-text').text(percent + '%')
     		$('.bar').css('width', percent)
     		
     		if(percent >= tasseirituValue) {
     			clearInterval(timer)
     		}
     	}, 30);
+    	
+    	
+    	// 체크박스    https://openlife.tistory.com/381
+    	
+    	$(".cbox").change(function(){
+            if($($(this)).is(":checked")) {
+            	$('#asdasd').text("完了")
+            	
+            } else {
+            	$(".asdasd").html("")
+            	$(".asdasd").append("<a href='syuuseigamenn'>修正</a>"); // 태그 추가
+            }
+        });
+    	
+    	
+    	
+    	
     });
+    
 	</script>
 <link href='resources/css/mainlistPage.css' rel='stylesheet' type='text/css'> 
 </head>
@@ -31,7 +49,7 @@
 	
 	<div class="PageMainDiv">
 	<!-- Main div 【上】-->
-		<div>${simpleDate }の目標<button　onclick=""　>▼</button></div>
+		<div>${simpleDate }の目標<button　onclick="">▼</button></div>
 	DB달성률<input value="38" id="tasseiritu">
 		<div class="progress-bar">
 			<div class="bar">
@@ -41,19 +59,13 @@
 		
 		<div> <button>追加</button> </div>
 		<div>
-		<!-- table あります。 【下】-->
-			<table border="1">
-			<tr>
-				<td>課題</td>
-				<td><input type="checkbox">︎</td>
-				<td>完了or修正</td>
-			</tr>
-			</table>
-		<!-- table あります。 【上】-->
+		<div>
+			<div>과제갯수만큼 뿌려주기</div>
+		</div>
 		</div>
 	
-	
-	
+	<input type="checkbox" class="cbox">
+	<span class="asdasd" id="asdasd"></span>
 	
 	<!--　Main div 【下】 -->
 	</div>

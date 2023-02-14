@@ -1,35 +1,17 @@
 @charset "UTF-8";
 
-
-
-* {
-  font-family: "Microsoft JhengHei", sans-serif;
-  box-sizing: border-box;
-}
-
-html, body {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
-
 body {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: skyblue;
 }
 
 .progress-text {
-  color: #fff;
+  color: #9f9fa1;
 }
 
 .progress-bar {
   width: 200px;
   height: 15px;
-  background-color: #fff;
+  background-color: #727373;
   border-radius: 5px;
   position: relative;
   overflow: hidden;
@@ -39,5 +21,9 @@ body {
   top: 0;
   left: 0;
   height: 100%;
-  background-color: red;
+  background-color: #00ff00;
+}
+
+a {
+  text-decoration-line: none;
 }
