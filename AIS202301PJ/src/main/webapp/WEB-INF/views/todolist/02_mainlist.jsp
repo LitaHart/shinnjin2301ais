@@ -46,10 +46,10 @@
 </head>
 <body>
 	
-	
+
 	<div class="PageMainDiv">
 	<!-- Main div 【上】-->
-		<div>${simpleDate }の目標<button　onclick="">▼</button></div>
+		<div>${simpleDate }の目標<button onclick="">▼</button></div>
 	DB달성률<input value="38" id="tasseiritu">
 		<div class="progress-bar">
 			<div class="bar">
@@ -64,7 +64,7 @@
 		</div>
 		</div>
 	
-	<input type="checkbox" class="cbox">
+	체크여부 값 바꾸기<input type="checkbox" class="cbox">
 	<span class="asdasd" id="asdasd"></span>
 	
 	<!--　Main div 【下】 -->

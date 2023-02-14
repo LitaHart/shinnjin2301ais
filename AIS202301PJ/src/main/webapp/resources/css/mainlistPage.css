@@ -11,7 +11,7 @@ body {
 .progress-bar {
   width: 200px;
   height: 15px;
-  background-color: #727373;
+  background-color: #8b8b8d;
   border-radius: 5px;
   position: relative;
   overflow: hidden;
