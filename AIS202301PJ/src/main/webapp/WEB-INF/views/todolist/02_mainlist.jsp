@@ -8,19 +8,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 	<script type="text/javascript">
     $(document).ready(function() {
-    	console.clear();
-
+		
     	let percent = 0
-
+    	let tasseiritu = document.getElementById('tasseiritu');
+    	let tasseirituValue = Number(tasseiritu.value);
+    	
     	let timer = setInterval(function() {
     		percent += 1
-    		$('.progress-text').text(`${percent} %`)
-    		$('.bar').css('width', `${percent}%`)
+    		$('.progress-text').text(percent)
+    		$('.bar').css('width', percent)
     		
-    		if(percent >= 38.8) {
+    		if(percent >= tasseirituValue) {
     			clearInterval(timer)
     		}
-    	}, 30)
+    	}, 30);
     });
 	</script>
 <link href='resources/css/mainlistPage.css' rel='stylesheet' type='text/css'> 
@@ -30,14 +31,14 @@
 	
 	<div class="PageMainDiv">
 	<!-- Main div 【上】-->
-		
 		<div>${simpleDate }の目標<button　onclick=""　>▼</button></div>
-		.progress-text
-		<div class="progress-text"></div>
-		.progress-bar
-		<div class="progress-bar"></div>
-		.bar
-		<div class="bar"></div>
+	DB달성률<input value="38" id="tasseiritu">
+		<div class="progress-bar">
+			<div class="bar">
+				<div class="progress-text"></div>
+			</div>
+		</div>
+		
 		<div> <button>追加</button> </div>
 		<div>
 		<!-- table あります。 【下】-->
