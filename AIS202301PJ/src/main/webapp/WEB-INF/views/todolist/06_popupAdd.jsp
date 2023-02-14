@@ -13,6 +13,8 @@
 		<h4>⚠️登録された課題は削除できません。ご注意ください。</h4>
 		<button>キャンセル</button>
 		<button>登録</button>
+		
+		지수 팝업 수정중!
 	</div>
 </body>
 </html>
