@@ -13,14 +13,22 @@
 </h1>
 <P>  The time on the server is ${serverTime}. </P>
 
-<form action="mainlist">
-	<button onclick="">Mainlist</button>
-</form>
-
+<!-- 臨時JUMP -->
 <form action="loginPage">
 	<button onclick="">LoginPage</button>
 </form>
 
+<form action="mainlist">
+	<button onclick="">Mainlist</button>
+</form>
+
+<form action="monthlylist">
+	<button onclick="">MonthlyDownloadList</button>
+</form>
+
+<form action="csvdownload">
+	<button onclick="">CSVDownloadPage</button>
+</form>
 
 
 

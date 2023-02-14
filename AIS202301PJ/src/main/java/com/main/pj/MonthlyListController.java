@@ -5,10 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class LoginController {
-
-	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
-	public String loginPage() {
+public class MonthlyListController {
+	
+	
+	
+	@RequestMapping(value = "/monthlylist", method = RequestMethod.GET)
+	public String monthlyListPage() {
 
 		// DB link Check
 		try {
@@ -20,7 +22,7 @@ public class LoginController {
 			e.printStackTrace();
 		}
 
-		return "todolist/01_login";
+		return "todolist/03_monthlylist";
 	}
 
 }

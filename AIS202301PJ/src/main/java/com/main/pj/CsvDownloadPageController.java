@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class LoginController {
+public class CsvDownloadPageController {
+	
 
-	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
-	public String loginPage() {
+	@RequestMapping(value = "/csvdownload", method = RequestMethod.GET)
+	public String csvDownloadPage() {
 
 		// DB link Check
 		try {
@@ -20,7 +21,7 @@ public class LoginController {
 			e.printStackTrace();
 		}
 
-		return "todolist/01_login";
+		return "todolist/04_csvdownload";
 	}
 
 }
