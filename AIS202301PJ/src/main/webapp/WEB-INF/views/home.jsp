@@ -13,5 +13,9 @@
 </h1>
 <P>  The time on the server is ${serverTime}. </P>
 
+<form action="mainlist">
+	<button onclick="">Mainlist</button>
+</form>
+
 </body>
 </html>
