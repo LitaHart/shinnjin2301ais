@@ -14,7 +14,7 @@
 		<div>
 			<input placeholder="社員番号入力">
 			<button type="button">
-				<img src="이미지 경로" alt="LoginButton">LOGIN
+			<img src="이미지 경로" alt="LoginButton">LOGIN
 			</button>
 		</div>
 	
