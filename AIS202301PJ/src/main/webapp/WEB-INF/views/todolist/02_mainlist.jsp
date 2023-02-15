@@ -21,7 +21,7 @@
     		if(percent >= tasseirituValue) {
     			clearInterval(timer)
     		}
-    	}, 30);
+    	},30 );
     	
     	
     	// 체크박스    https://openlife.tistory.com/381
@@ -50,7 +50,7 @@
 	<div class="PageMainDiv">
 	<!-- Main div 【上】-->
 		<div>${simpleDate }の目標<button onclick="">▼</button></div>
-	DB달성률<input value="38" id="tasseiritu">
+	DB달성률<input value="27" id="tasseiritu">
 		<div class="progress-bar">
 			<div class="bar">
 				<div class="progress-text"></div>
