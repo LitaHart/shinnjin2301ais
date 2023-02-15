@@ -17,14 +17,14 @@ public class MainlistController {
 	@RequestMapping(value = "/mainlist", method = RequestMethod.GET)
 	public String mainlist(Locale locale, Model model) {
 		
-		try {
-			postgreSQLconnect.getConnection();
-			postgreSQLconnect.testConnect();;
-		}  catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+//		try {
+//			postgreSQLconnect.getConnection();
+//			postgreSQLconnect.testConnect();;
+//		}  catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 		
 		Date date = new Date();
         
