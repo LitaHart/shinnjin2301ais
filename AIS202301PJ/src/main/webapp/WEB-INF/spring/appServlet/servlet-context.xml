@@ -55,5 +55,5 @@
 		<beans:constructor-arg name="sqlSessionFactory"
 			ref="sqlSessionFactory" />
 	</beans:bean>
-
+	
 </beans:beans>
