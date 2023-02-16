@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,24 +25,40 @@
     	},30 );
     	
     	
-    	// 체크박스    https://openlife.tistory.com/381
     	
-    	$(".cbox").change(function(){
-            if($($(this)).is(":checked")) {
-            	$('#asdasd').text("完了")
-            	
-            } else {
-            	$(".asdasd").html("")
-            	$(".asdasd").append("<a href='syuuseigamenn'>修正</a>"); // 태그 추가
-            }
-        });
+    	   
+    	 $('input:checkbox[name="aaa"]').each(function () {
+   		  
+        	 $(this).change(function(){
+        	        if($(this).is(":checked")){
+        	            $(this).siblings('span').text("完了");
+        	            
+        	        }else{
+        	            $(this).siblings('span').text(" ");
+        	            $(this).siblings('span').html("<a href='asd'>修正</a>");
+        	            
+        	            
+        	        }
+        	    });
+    		
+    	})
+
+    		
+    	
     	
     	
     	
     	
     });
     
+   
+	
+  
+    
 	</script>
+	
+	
+	
 <link href='resources/css/mainlistPage.css' rel='stylesheet' type='text/css'> 
 </head>
 <body>
@@ -59,13 +76,25 @@
 		
 		<div> <button>追加</button> </div>
 		<div>
-		<div>
-			<div>과제갯수만큼 뿌려주기</div>
-		</div>
+		
+		
+		
+     <div class="cbox2">
+     <table style="border-color: black; border: 1px;">
+     	<c:forEach var="k" items="${kadais}">
+     	<tr>
+     		<td>
+     			${k.kadai_naiyou }<input type='checkbox' id="bbb" name='aaa' value='${k.kadaikannri_number }'><span class="asdasd" name="spanname" id="result"></span>
+     		</td>
+     	</tr>
+      	</c:forEach>
+     </table>
+     </div>
+		
+		
+		
 		</div>
 	
-	체크여부 값 바꾸기<input type="checkbox" class="cbox">
-	<span class="asdasd" id="asdasd"></span>
 	
 	<!--　Main div 【下】 -->
 	</div>
