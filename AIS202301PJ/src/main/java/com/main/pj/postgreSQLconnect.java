@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class postgreSQLconnect {
 
 	public static Connection getConnection() throws SQLException, ClassNotFoundException {
