@@ -43,10 +43,14 @@ public class MainListDAO {
 		k.setShainn_number("ais230102");
 		List<KadaiDTO> kadais = new ArrayList<KadaiDTO>();
 		kadais = ss.getMapper(MainlistMapper.class).getAllkadaiList(k);
+		
+		
+		
 		request.setAttribute("kadais",kadais);
 		
 		
 		
 	}
-
+	
+	
 }
