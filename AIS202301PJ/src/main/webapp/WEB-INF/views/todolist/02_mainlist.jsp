@@ -9,49 +9,37 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 	<script type="text/javascript">
     $(document).ready(function() {
-    
-    		 
-    			 /*  // 선택된 목록 가져오기
-    			  const query = 'input[name="checkname"]:checked';
-    			  const selectedElements =  document.querySelectorAll(query);
-    			  
-    			  // 선택된 목록의 갯수 세기
-    			  const selectedElementsCnt = selectedElements.length;
-    			  
-    			  // 출력
-    			  document.getElementById('result').innerText
-    			    = selectedElementsCnt; */
-    		 
-    		 
-    	
-    	
 		
     	//達成率バー
-    	let percent = 0
-    	let tasseiritu = document.getElementById('tasseiritu');
-    	let tasseirituValue = Number(tasseiritu.value);
-    	
-    	let timer = setInterval(function() {
-    		percent += 1
-    		$('.progress-text').text(percent + '%')
-    		$('.bar').css('width', percent * 2)
-    		
-    		if(percent >= tasseirituValue) {
-    			clearInterval(timer)
-    		}
-    	},30 );
     	
     	
     	var checkArr = new Array();
    	 	$('input[name="tasseiritu"]').each(function () {
    	    checkArr.push($(this).val());
-      	$('input[name=tasseirituValuee]').attr('value',checkArr[0]);
       	})
     	
-    	
-    	
+    	var checkArr = new Array();
+   		var total = 0;
+   		
+   		
+   		
+   		
     	 //checkbox
-    	 $('input:checkbox[name="checkname"]').each(function () {
+    	 $('input:checkbox[name="checkname"]').each(function (i, e) {
+    		 
+    		    checkArr.push($(this).val());
+    		
+    		if (checkArr[i] == 1) {
+				total ++;
+			} else {
+				
+			}
+    		// 2
+    		
+    		 aaa = ((total / checkArr.length) * 100);
+    		 
+    		 
+    		 
     		 
     		 
     		 if ($(this).val() == 0) {
@@ -73,21 +61,52 @@
         	            const selectedElementsCnt = selectedElements.length;
         	          
         	          // 출력
-        	    		$('input[name=result]').attr('value',selectedElementsCnt);
+        	          aaa = ((selectedElementsCnt / checkArr.length) * 100 )
+        	          
+        	        let percent = 0
+        	      	let tasseiritu = document.getElementById('resultID2');
+        	      	let tasseirituValue = Number(tasseiritu.value);
+        	      	
+        	      	let timer = setInterval(function() {
+        	      		percent += 1
+        	      		$('.progress-text').text(aaa + '%')
+        	      		$('.bar').css('width', aaa * 2)
+        	      		
+        	      		if(percent >= tasseirituValue) {
+        	      			clearInterval(timer)
+        	      		}
+        	      	},30 );
+        	          
+        	          
 
         	            
         	            
         		}else{
         	 			$(this).siblings('span').text(" ");
         	            $(this).siblings('span').html("<a href='asd'>修正</a>");
-        	            $(this).siblings('span').text("完了");
         	            const query = 'input[name="checkname"]:checked';
         	            const selectedElements = document.querySelectorAll(query);
         	            const selectedElementsCnt = selectedElements.length;
         	          
         	          // 출력
-        	    		$('input[name=result]').attr('value',selectedElementsCnt);
+          	          aaa = ((selectedElementsCnt / checkArr.length) * 100 )
+          	    		
 
+          	        let percent = 0
+          	    	let tasseiritu = document.getElementById('resultID2');
+          	    	let tasseirituValue = Number(tasseiritu.value);
+          	    	
+          	    	let timer = setInterval(function() {
+          	    		percent += 1
+          	    		$('.progress-text').text(aaa + '%')
+          	    		$('.bar').css('width', aaa * 2)
+          	    		
+          	    		if(percent >= tasseirituValue) {
+          	    			clearInterval(timer)
+          	    		}
+          	    	},30 );
+        	          
+        	          
         	            
         	        }
         	    });
@@ -95,31 +114,31 @@
     	})
     	
     	
+    	// 4
+ 		
+    	$('input[name=result2]').attr('value',aaa);
     	
+ 		
+ 		let percent = 0
+    	let tasseiritu = document.getElementById('resultID2');
+    	let tasseirituValue = Number(tasseiritu.value);
+    	
+    	let timer = setInterval(function() {
+    		percent += 1
+    		$('.progress-text').text(aaa + '%')
+    		$('.bar').css('width', aaa * 2)
+    		
+    		if(percent >= tasseirituValue) {
+    			clearInterval(timer)
+    		}
+    	},30 );
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
     });
-    
-   
-	
- /*  //갯수
-    const query = 'input[name="checkname"]:checked';
-    const selectedElements = 
-        document.querySelectorAll(query);
-    
-    // 선택된 목록의 갯수 세기
-    const selectedElementsCnt =
-          selectedElements.length;
-    
-    // 출력
-    document.getElementById('result').innerText
-      = selectedElementsCnt; */
-    
-    
-    
-    
-    
-    
-    
-  
     
 	</script>
 	
@@ -131,23 +150,13 @@
 
 	<div class="PageMainDiv">
 	<!-- Main div 【上】-->
-	<input type="text" value="" name="result"/>
+	<input type="hidden" value="" name="result2" id="resultID2"/>
 		<div>${simpleDate }の目標<button onclick="">▼</button></div>
-	DB달성률<input value="" name="tasseirituValuee">
 		<div class="progress-bar">
 			<div class="bar">
 				<div class="progress-text"></div>
 			</div>
 		</div>
-
-
-		<div>${simpleDate }の目標<button　onclick=""　>▼</button></div>
-		.progress-text
-		<div class="progress-text"></div>
-		.progress-bar
-		<div class="progress-bar"></div>
-		.bar
-		<div class="bar"></div>
 		
 <button onclick="popupAdd()">追加</button>
 
