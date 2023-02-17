@@ -3,7 +3,11 @@
 <mapper namespace="com.main.pj.MainlistMapper">
 
 	<select id="getAllkadaiList" parameterType="com.main.pj.KadaiDTO" resultType="com.main.pj.KadaiDTO" >
-		select * from kadai_table where shainn_number = #{shainn_number }
+		SELECT kadaikannri_number,kadai_table.shainn_number,tassei_yoteibi,kadai_naiyou,tassei_kahi,tasseiritu FROM daily_table INNER JOIN kadai_table ON daily_table.shainn_number = kadai_table.shainn_number
+		where kadai_table.shainn_number = #{shainn_number }
+		
+		
+		
 	</select>
 
 
