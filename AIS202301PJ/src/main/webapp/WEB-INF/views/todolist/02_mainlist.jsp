@@ -56,8 +56,23 @@
 				<div class="progress-text"></div>
 			</div>
 		</div>
+
+
+		<div>${simpleDate }の目標<button　onclick=""　>▼</button></div>
+		.progress-text
+		<div class="progress-text"></div>
+		.progress-bar
+		<div class="progress-bar"></div>
+		.bar
+		<div class="bar"></div>
 		
-		<div> <button>追加</button> </div>
+<button onclick="popupAdd()">追加</button>
+
+<script>
+function popupAdd() {
+    window.open("popupAdd", "Pop-up Window", "width=500,height=500");
+}
+</script>
 		<div>
 		<div>
 			<div>과제갯수만큼 뿌려주기</div>
