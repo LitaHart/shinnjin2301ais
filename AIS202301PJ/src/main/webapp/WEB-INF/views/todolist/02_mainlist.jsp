@@ -38,7 +38,16 @@
 		<div class="progress-bar"></div>
 		.bar
 		<div class="bar"></div>
-		<div> <button>追加</button> </div>
+		
+<button onclick="popupAdd()">追加</button>
+
+<script>
+function popupAdd() {
+    window.open("popupAdd", "Pop-up Window", "width=500,height=500");
+}
+</script>
+
+
 		<div>
 		<!-- table あります。 【下】-->
 			<table border="1">
