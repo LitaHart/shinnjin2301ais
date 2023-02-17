@@ -26,7 +26,7 @@
 	<context:component-scan base-package="com.main.pj" />
 
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<beans:property name="driverClassName" value="org.postgresql.Driver" />
 		<beans:property name="url"
 			value="jdbc:postgresql://localhost:5432/postgres"/>
 		<beans:property name="username" value="postgres" />
@@ -45,6 +45,8 @@
 	<beans:list>
 				<!-- 원하면 추가하면 됨. -->
 				<beans:value>classpath:testMapper.xml</beans:value>
+				<beans:value>classpath:mainlistMapper.xml</beans:value>
+				<beans:value>classpath:loginMapper.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
@@ -53,5 +55,5 @@
 		<beans:constructor-arg name="sqlSessionFactory"
 			ref="sqlSessionFactory" />
 	</beans:bean>
-
+	
 </beans:beans>

@@ -1,26 +1,29 @@
 @charset "UTF-8";
 
-
+body {
+  display: flex;
+}
 
 .progress-text {
-	color: #fff;
-	
+  color: #9f9fa1;
 }
 
 .progress-bar {
-	width: 200px;
-	height: 15px;
-	background-color: #fff;
-	border-radius: 5px;
-	position: relative;
-	overflow: hidden;
+  width: 200px;
+  height: 15px;
+  background-color: #8b8b8d;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
 }
-	
-	
-.bar {
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100%;
-		background-color: tomato;
-	}
+.progress-bar .bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #00ff00;
+}
+
+a {
+  text-decoration-line: none;
+}
