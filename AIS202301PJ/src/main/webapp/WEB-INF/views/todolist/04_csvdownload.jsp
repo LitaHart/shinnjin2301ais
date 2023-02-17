@@ -24,7 +24,8 @@
 		</div>
 		
 		<div>
-			<button onclick="location.href='csvdownload.test'">csvダウンロード</button>
+			<button onclick="location.href='csvdownload.test.csv'">csvダウンロード</button>
+			<button onclick="location.href='csvdownload.test.excel'">excelダウンロード</button>
 		</div>
 	<!--　Main div 【下】 -->
 	</div>
