@@ -7,8 +7,60 @@
 <meta charset="UTF-8">
 <title>MAIN LIST UP PAGE</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+
 	<script type="text/javascript">
+	function locationFunction() {
+		location.htrf='naver.com';s
+	}
+	
+	
     $(document).ready(function() {
+    	
+    
+    	
+    	
+    	
+    	 $(window).bind("beforeunload", function (){
+    		
+    		var kahiArr = new Array();
+     		var kadaiArr = new Array();
+     		var yoteibiArr = new Array();
+     		var shainn_number = new Array();
+        	 	$('input[name="checkname"]').each(function (i,e) {
+        	 	kahiArr.push($(this).siblings('#changeKahi').val());
+        	 	shainn_number.push($(this).siblings('#shainn_number').val());
+        	 	kadaiArr.push($(this).siblings('#kadaiNum').val());
+        	 	yoteibiArr.push($(this).siblings('#yoteibi').val());
+     		
+        	 	console.log(kahiArr);
+     		
+     		$.ajax({
+                url: 'update.tassei.kahi',
+                data : {
+                    "kahiArr": kahiArr[i],
+                    "kadaiArr": kadaiArr[i],
+                    "yoteibiArr": yoteibiArr[i],
+                    "shainn_number": shainn_number[i]
+                },
+                type: 'get',
+                dataType : 'text',
+                success : function(getData) {
+    				console.log(getData);
+    				if (getData == 1) {
+    					console.log("成功");
+    				}else {
+    					console.log("失敗");
+    				}
+    			}
+            })
+     		
+           	})
+    	        
+    	    });
+    	
+    	
+    	
 		
     	//達成率バー
     	
@@ -55,7 +107,8 @@
    		  //checkbox click event
         	 $(this).change(function(){
         	 	if($(this).is(":checked")){
-        	            $(this).siblings('span').text("完了");
+        	            $(this).siblings('#changeKahi').attr("value","1");
+        	            $(this).siblings('#span1').text("完了");
         	            const query = 'input[name="checkname"]:checked';
         	            const selectedElements = document.querySelectorAll(query);
         	            const selectedElementsCnt = selectedElements.length;
@@ -63,13 +116,14 @@
         	          // 출력
         	          aaa = ((selectedElementsCnt / checkArr.length) * 100 )
         	          
+					        	          
         	        let percent = 0
         	      	let tasseiritu = document.getElementById('resultID2');
         	      	let tasseirituValue = Number(tasseiritu.value);
         	      	
         	      	let timer = setInterval(function() {
         	      		percent += 1
-        	      		$('.progress-text').text(aaa + '%')
+        	      		$('.progress-text').text((aaa).toFixed() + '%')
         	      		$('.bar').css('width', aaa * 2)
         	      		
         	      		if(percent >= tasseirituValue) {
@@ -82,8 +136,9 @@
         	            
         	            
         		}else{
-        	 			$(this).siblings('span').text(" ");
-        	            $(this).siblings('span').html("<a href='asd'>修正</a>");
+        			$(this).siblings('#changeKahi').attr("value","0");
+        	 			$(this).siblings('#span1').text(" ");
+        	            $(this).siblings('#span1').html("<a href='asd'>修正</a>");
         	            const query = 'input[name="checkname"]:checked';
         	            const selectedElements = document.querySelectorAll(query);
         	            const selectedElementsCnt = selectedElements.length;
@@ -98,7 +153,7 @@
           	    	
           	    	let timer = setInterval(function() {
           	    		percent += 1
-          	    		$('.progress-text').text(aaa + '%')
+          	    		$('.progress-text').text((aaa).toFixed() + '%')
           	    		$('.bar').css('width', aaa * 2)
           	    		
           	    		if(percent >= tasseirituValue) {
@@ -116,7 +171,7 @@
     	
     	// 4
  		
-    	$('input[name=result2]').attr('value',aaa);
+    	$('input[name=result2]').attr('value',(aaa).toFixed());
     	
  		
  		let percent = 0
@@ -125,7 +180,7 @@
     	
     	let timer = setInterval(function() {
     		percent += 1
-    		$('.progress-text').text(aaa + '%')
+    		$('.progress-text').text((aaa).toFixed() + '%')
     		$('.bar').css('width', aaa * 2)
     		
     		if(percent >= tasseirituValue) {
@@ -140,6 +195,18 @@
  		
     });
     
+    function noEvent() {
+        if (event.keyCode == 116) {
+            event.keyCode= 2;
+            return false;
+        }
+        else if(event.ctrlKey && (event.keyCode==78 || event.keyCode == 82))
+        {
+            return false;
+        }
+    }
+    
+    
 	</script>
 	
 	
@@ -148,10 +215,12 @@
 </head>
 <body>
 
+
 	<div class="PageMainDiv">
 	<!-- Main div 【上】-->
+	
 	<input type="hidden" value="" name="result2" id="resultID2"/>
-		<div>${simpleDate }の目標<button onclick="">▼</button></div>
+		<div><span name="datespan" >${simpleDate }</span>の目標<button onclick="">▼</button></div>
 		<div class="progress-bar">
 			<div class="bar">
 				<div class="progress-text"></div>
@@ -174,7 +243,11 @@ function popupAdd() {
      	<c:forEach var="k" items="${kadais}">
      	<tr>
      		<td>
-     			${k.kadai_naiyou }<input type='checkbox' id="" name='checkname' value='${k.tassei_kahi }'><span></span>
+     			${k.kadai_naiyou }<input type='checkbox' id="" name='checkname' value='${k.tassei_kahi }'><span id="span1"></span>
+     			<input type="hidden" id="kadaiNum" value='${k.kadaikannri_number }'>
+     			<input type="hidden" id="yoteibi" value='${k.tassei_yoteibi }'>
+     			<input type="hidden" value="${k.tassei_kahi }" id="changeKahi">
+     			<input type="hidden" value="${k.shainn_number }" id="shainn_number">
      		</td>
      		<td>
      			<input value="${k.tasseiritu }" type="hidden" id="tasseiritu" name="tasseiritu"> 
