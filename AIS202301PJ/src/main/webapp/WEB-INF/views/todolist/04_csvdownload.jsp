@@ -11,34 +11,48 @@
  
  
  <script type="text/javascript">
-	$(function() { 
-	
-			
+ /* checkBoxes */
+	function checkOnlyOne(element) {
+		const checkBoxes = document.getElementsByName("timeSelect");
+		checkBoxes.forEach((cb) => {
+		    cb.checked = false;
+		  })
+		 element.checked = true;
+	};
+ $(function() { 
 		/* 년도와 달이 선택 가능한 캘린더 */
 		 $('#csvCalendar').calendar({
 			type: 'month'
-		 });
-	 		 
+		 });	 
 	 	/* 오늘 날짜 불러오기 */
-	 	 var today = new Date().toLocaleDateString("en-us", { year: "numeric", month: "short" }); 
+	 	var today = new Date();
+	 	var todayEN = today.toLocaleDateString("en-us", { 
+	 		year: "numeric", 
+	 		month: "short" 
+	 		}); 
 		/* 오늘 연도,달 출력 */
-	 	console.log(today);
-		$('#yearAndMonthData').val(today);
+		$('#yearAndMonthData').val(todayEN);
+	 	console.log(todayEN);
+ 	 	/* =============================================== */ 	
 		
+ 	 	function getYmd10() {
+    	//yyyy-mm-dd 포맷 날짜 생성
+    		var d = new Date();
+    		return d.getFullYear() + "-" + ((d.getMonth() + 1) > 9 ? (d.getMonth() + 1).toString() : "0" + (d.getMonth() + 1)) + "-" + (d.getDate() > 9 ? d.getDate().toString() : "0" + d.getDate().toString());
+		}; // max날짜 정하고싶은데 진행중
+ 	 	/* =============================================== */ 	
 		/* 선택한 달 가져오기 */
 		document.getElementById( "yearAndMonthData" ).onblur = function(){
 		/* 인풋창	값 */
  	 	var yearAndMonthData = document.getElementById("yearAndMonthData").value;
  	 	/* 인풋창에서 선택한 날짜 출력 */ 
 		console.log(yearAndMonthData);
- 		};
+ 	 	/* =============================================== */ 	 	
+		};
 	});
  </script>
- 
- 
- 
 <meta charset="UTF-8">
-<title>CSV DOWNLOAD PAG</title>
+<title>CSV DOWNLOAD PAGE</title>
 </head>
 <body>
 
@@ -46,8 +60,8 @@
 	<div class="PageMainDiv">
 	<!-- Main div 【上】-->
 		<div>
-			<input value="csvMonth" type="checkbox">月別
-			<input value="csvAll" type="checkbox">すべて
+			<input name="timeSelect" value="csvMonth" type="checkbox" onclick='checkOnlyOne(this)'/>月別
+			<input name="timeSelect" value="csvAll" type="checkbox" onclick='checkOnlyOne(this)'/>すべて
 		</div>
 		<div>
 			<input value="csvInclude" type="checkbox">　未達成課題を含む
@@ -57,7 +71,7 @@
   				<div class="ui calendar" id="csvCalendar">
    				<div class="ui input left icon">
       			<i class="time icon"></i>
-     				<input id="yearAndMonthData" type="text" placeholder="Time">
+     				<input id="yearAndMonthData" type="text" placeholder="年月を選択"/>
     			</div>
   				</div>
   			<br/>
