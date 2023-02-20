@@ -56,33 +56,36 @@
 </head>
 <body>
 
-	
+<form action="csvdownload.check">
 	<div class="PageMainDiv">
 	<!-- Main div 【上】-->
 		<div>
-			<input name="timeSelect" value="csvMonth" type="checkbox" onclick='checkOnlyOne(this)'/>月別
-			<input name="timeSelect" value="csvAll" type="checkbox" onclick='checkOnlyOne(this)'/>すべて
+			<input name="timeSelect" value="csvMonth" type="checkbox" onclick='checkOnlyOne(this)' checked="checked"/> 月別
+			<input name="timeSelect" value="csvAll" type="checkbox" onclick='checkOnlyOne(this)'/> すべて
 		</div>
 		<div>
-			<input value="csvInclude" type="checkbox">　未達成課題を含む
+			<input name="csvInclude" value="csvInclude" type="checkbox"> 未達成課題を含む
 		</div>
 		<div>
 			 <h3>Month and year</h3>
   				<div class="ui calendar" id="csvCalendar">
    				<div class="ui input left icon">
       			<i class="time icon"></i>
-     				<input id="yearAndMonthData" type="text" placeholder="年月を選択"/>
+     				<input name="selectedMonth" id="yearAndMonthData" type="text" placeholder="年月を選択"/>
     			</div>
   				</div>
   			<br/>
 		</div>
 		<div>
+			<!--  -->
 			<button onclick="location.href='csvdownload.test.csv'">csvダウンロード</button>
 			<button onclick="location.href='csvdownload.test.excel'">excelダウンロード</button>
+			<button type="submit">SUBMIT</button>
 		</div>
 	<!--　Main div 【下】 -->
 	</div>
-		
+</form>
+
 
 
 

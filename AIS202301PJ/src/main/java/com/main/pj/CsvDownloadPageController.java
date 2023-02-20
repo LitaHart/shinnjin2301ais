@@ -1,5 +1,6 @@
 package com.main.pj;
 
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -33,6 +34,7 @@ public class CsvDownloadPageController {
 	public String csvDownloadPage() {
 		// DB link Check
 		try {
+			System.out.println("Start DownloadController");
 			postgreSQLconnect.getConnection();
 			postgreSQLconnect.testConnect();
 		} catch (Exception e) {
@@ -40,6 +42,22 @@ public class CsvDownloadPageController {
 		}
 		return "todolist/04_csvdownload";
 	}
+	
+	@RequestMapping(value="/csvdownload.check", method = RequestMethod.GET)
+	public void downloadDataCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		logger.info("------->>>>>>>>>> Download Controller DataCheck Start");
+		
+		CSVdownloadDAO.checkOption(request);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// ＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞　一般DOCUMENTファイル
 	@RequestMapping(value = "/csvdownload.test.csv", method = RequestMethod.GET)
@@ -47,7 +65,6 @@ public class CsvDownloadPageController {
 		logger.debug("------->>>>>>>>>> Download Controller Start");
 		String csvFileName = "KADAILISTcsv";	
 		response.setContentType("text/csv");
-
 		 // creates mock data
         String headerKey = "Content-Disposition";
         String headerValue = String.format("attachment; filename=\"%s\"",csvFileName);
@@ -78,7 +95,6 @@ public class CsvDownloadPageController {
 		}
         csvWriter.close();
 	}
-	
 	// ＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞　工事中　： XLXS ファイル
 	@RequestMapping(value = "/csvdownload.test.excel", method = RequestMethod.GET)
 	public void downloadEXCEL(HttpServletRequest request,HttpServletResponse response) throws Exception{
@@ -94,14 +110,6 @@ public class CsvDownloadPageController {
         		"shainn_number","shainn_name","kadai_naiyou","tassei_yoteibi","tassei_kahi","tassei_hiduke"
         };
 		
-		
-		
-		
-		
-		
-		
-		
-	    
         //臨時データ(後でSQL文作成)
         // Sheet를 채우기 위한 데이터들을 Map에 저장
 		Object[] c1 = new Object[] {"AIS123456", "AAA", "BEING", "2023-02-16", "1", "2023-02-16"};
@@ -150,5 +158,15 @@ public class CsvDownloadPageController {
 		wb.write(response.getOutputStream());
 		
 		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	}
 
