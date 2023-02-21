@@ -1,8 +1,6 @@
 package com.main.pj;
 
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -47,18 +45,8 @@ public class CsvDownloadPageController {
 	public void downloadDataCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		logger.info("------->>>>>>>>>> Download Controller DataCheck Start");
 		
-		CSVdownloadDAO.checkOption(request);
-		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-
 	// ＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞　一般DOCUMENTファイル
 	@RequestMapping(value = "/csvdownload.test.csv", method = RequestMethod.GET)
 	public void downloadCSV(HttpServletResponse response) throws Exception{
@@ -81,7 +69,7 @@ public class CsvDownloadPageController {
         CSVdownloadDTO c4 = new CSVdownloadDTO("AIS234567", "DDD", "ROUFHLY BEING", date, 2, date);
         CSVdownloadDTO c5 = new CSVdownloadDTO("AIS987654", "EEE", "SURELY BEING", date, 1, date);
         		
-        List<CSVdownloadDTO> csvList = Arrays.asList(c1,c2,c3,c4,c5);
+        List<CSVdownloadDTO> csvList = CSVdownloadDAO.inputcsvDownloadObject();
        
         logger.debug("------->>>>>>>>>> Download Controller Start csvファイル作成開始");
         // uses the Super CSV API to generate CSV data from the model data

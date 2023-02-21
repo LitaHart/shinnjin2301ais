@@ -47,6 +47,7 @@
 				<beans:value>classpath:testMapper.xml</beans:value>
 				<beans:value>classpath:mainlistMapper.xml</beans:value>
 				<beans:value>classpath:loginMapper.xml</beans:value>
+				<beans:value>classpath:csvDownloadMapper.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
