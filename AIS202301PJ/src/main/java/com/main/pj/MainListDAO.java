@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class MainListDAO {
@@ -39,6 +40,25 @@ public class MainListDAO {
 		request.setAttribute("kadais",kadais);
 		
 	}
+
+
+	public int updateTasseiKahi(HttpServletRequest request, String kahiArr, String kadaiArr, java.sql.Date yoteibiArr, String shainn_number) {
+		
+		KadaiDTO k = new KadaiDTO();
+		k.setKadaikannri_number(kadaiArr);
+		k.setShainn_number(shainn_number);
+		k.setTassei_yoteibi(yoteibiArr);
+		k.setTassei_kahi(Integer.parseInt(request.getParameter("kahiArr")));
+		
+		
+		return ss.getMapper(MainlistMapper.class).updateKadai(k);
+		
+		
+		
+		
+	}
+
+	
 	
 	
 }
