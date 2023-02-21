@@ -10,15 +10,12 @@
 
 
 	<script type="text/javascript">
-	function locationFunction() {
-		location.htrf='naver.com';s
-	}
-	
 	
     $(document).ready(function() {
     	
-    
-    	
+    	$('#example2').calendar({
+    		  type: 'date'
+    		});
     	
     	
     	 $(window).bind("beforeunload", function (){
@@ -189,28 +186,20 @@
     	},30 );
  		
  		
- 		
- 		
- 		
+
  		
     });
+  
+
     
-    function noEvent() {
-        if (event.keyCode == 116) {
-            event.keyCode= 2;
-            return false;
-        }
-        else if(event.ctrlKey && (event.keyCode==78 || event.keyCode == 82))
-        {
-            return false;
-        }
-    }
     
     
 	</script>
 	
-	
-	
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
 <link href='resources/css/mainlistPage.css' rel='stylesheet' type='text/css'> 
 </head>
 <body>
@@ -221,6 +210,28 @@
 	
 	<input type="hidden" value="" name="result2" id="resultID2"/>
 		<div><span name="datespan" >${simpleDate }</span>の目標<button onclick="">▼</button></div>
+		<input id="testInput">
+		
+		
+  <div class="ui calendar" id="example2">
+    <div class="ui input left icon">
+      <i class="calendar icon"></i>
+      <input id="calendarId" class="calendarClass" type="text" onchange="valueCheck()" placeholder="${simpleDate }" value="${simpleDate }">
+    </div>
+  </div>
+  <br/>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<div class="progress-bar">
 			<div class="bar">
 				<div class="progress-text"></div>
