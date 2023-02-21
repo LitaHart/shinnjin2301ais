@@ -18,6 +18,16 @@
     		});
     	
     	
+    	/* 오늘 날짜 불러오기 */
+	 	var today = new Date();
+	 	let month = today.getMonth() + 1;  // 월
+	 	let date = today.getDate();
+	 	
+	 	$('#yearAndMonthData').val(month + "月" + date + "日");
+	 	
+	 	
+    	
+    	
     	 $(window).bind("beforeunload", function (){
     		
     		var kahiArr = new Array();
@@ -216,7 +226,7 @@
   <div class="ui calendar" id="example2">
     <div class="ui input left icon">
       <i class="calendar icon"></i>
-      <input id="calendarId" class="calendarClass" type="text" onchange="valueCheck()" placeholder="${simpleDate }" value="${simpleDate }">
+      <input name="selectedMonth" id="yearAndMonthData" class="calendarClass" type="text" placeholder="" value="">
     </div>
   </div>
   <br/>
