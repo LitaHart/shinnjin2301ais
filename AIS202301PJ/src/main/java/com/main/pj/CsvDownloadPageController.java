@@ -1,7 +1,6 @@
 package com.main.pj;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +32,7 @@ public class CsvDownloadPageController {
 	public String csvDownloadPage() {
 		// DB link Check
 		try {
+			System.out.println("Start DownloadController");
 			postgreSQLconnect.getConnection();
 			postgreSQLconnect.testConnect();
 		} catch (Exception e) {
@@ -40,14 +40,19 @@ public class CsvDownloadPageController {
 		}
 		return "todolist/04_csvdownload";
 	}
-
+	
+	@RequestMapping(value="/csvdownload.check", method = RequestMethod.GET)
+	public void downloadDataCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		logger.info("------->>>>>>>>>> Download Controller DataCheck Start");
+		
+	}
+	
 	// ＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞　一般DOCUMENTファイル
 	@RequestMapping(value = "/csvdownload.test.csv", method = RequestMethod.GET)
 	public void downloadCSV(HttpServletResponse response) throws Exception{
 		logger.debug("------->>>>>>>>>> Download Controller Start");
 		String csvFileName = "KADAILISTcsv";	
 		response.setContentType("text/csv");
-
 		 // creates mock data
         String headerKey = "Content-Disposition";
         String headerValue = String.format("attachment; filename=\"%s\"",csvFileName);
@@ -64,7 +69,7 @@ public class CsvDownloadPageController {
         CSVdownloadDTO c4 = new CSVdownloadDTO("AIS234567", "DDD", "ROUFHLY BEING", date, 2, date);
         CSVdownloadDTO c5 = new CSVdownloadDTO("AIS987654", "EEE", "SURELY BEING", date, 1, date);
         		
-        List<CSVdownloadDTO> csvList = Arrays.asList(c1,c2,c3,c4,c5);
+        List<CSVdownloadDTO> csvList = CSVdownloadDAO.inputcsvDownloadObject();
        
         logger.debug("------->>>>>>>>>> Download Controller Start csvファイル作成開始");
         // uses the Super CSV API to generate CSV data from the model data
@@ -78,7 +83,6 @@ public class CsvDownloadPageController {
 		}
         csvWriter.close();
 	}
-	
 	// ＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞＞　工事中　： XLXS ファイル
 	@RequestMapping(value = "/csvdownload.test.excel", method = RequestMethod.GET)
 	public void downloadEXCEL(HttpServletRequest request,HttpServletResponse response) throws Exception{
@@ -93,7 +97,7 @@ public class CsvDownloadPageController {
 		String[] header = {
         		"shainn_number","shainn_name","kadai_naiyou","tassei_yoteibi","tassei_kahi","tassei_hiduke"
         };
-	    
+		
         //臨時データ(後でSQL文作成)
         // Sheet를 채우기 위한 데이터들을 Map에 저장
 		Object[] c1 = new Object[] {"AIS123456", "AAA", "BEING", "2023-02-16", "1", "2023-02-16"};
@@ -101,6 +105,7 @@ public class CsvDownloadPageController {
 		Object[] c3 = new Object[] {"AIS000000", "CCC", "UN BEING","2023-02-15", "1", "2023-02-15"};
 		Object[] c4 = new Object[] {"AIS234567", "DDD", "ROUFHLY BEING","2023-02-15", "1", "2023-02-15"};
 		Object[] c5 = new Object[] {"AIS234567", "DDD", "ROUFHLY BEING","2023-02-14", "1", "2023-02-14"};		
+		
         // >>>>>>>>>>>>>>>>>> Mapping　開始        
 		Map<String, Object[]> kadaiData = new TreeMap<String, Object[]>();
 		kadaiData.put("1", header);
@@ -141,5 +146,15 @@ public class CsvDownloadPageController {
 		wb.write(response.getOutputStream());
 		
 		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	}
 
