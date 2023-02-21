@@ -77,9 +77,6 @@
   			<br/>
 		</div>
 		<div>
-			<!--  -->
-			<button onclick="location.href='csvdownload.test.csv'">csvダウンロード</button>
-			<button onclick="location.href='csvdownload.test.excel'">excelダウンロード</button>
 			<button type="submit">SUBMIT</button>
 		</div>
 	<!--　Main div 【下】 -->

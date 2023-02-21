@@ -37,7 +37,9 @@ public class LoginController {
 		ldao.loginStart(Req, si);
 		ldao.loginCheck(Req);
 		
-		return "todolist/01_login";
+		
+		
+		return "home";
 	}
 	
 	

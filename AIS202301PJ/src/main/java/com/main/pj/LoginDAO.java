@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 public class LoginDAO {
 
 	@Autowired
-	SqlSession ss;
-
+	private SqlSession ss;
 	
 	public void loginStart(HttpServletRequest Req, Shainn_info si) {
 			

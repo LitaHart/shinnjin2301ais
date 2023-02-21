@@ -4,7 +4,7 @@
 
 	<select id="getShainnByID" parameterType="com.main.pj.Shainn_info" resultType="com.main.pj.Shainn_info">
 		select * from 
-			shainn_table 
+		shainn_table 
 		where shainn_number = #{shainn_number}
 	</select>
 
