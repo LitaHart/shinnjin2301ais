@@ -6,33 +6,43 @@
     <meta charset="UTF-8">
     <title>課題追加</title>
     <style>
-        .popup {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 500px;
-            text-align: center;
-        }
-        
-        .popup h2 {
-            text-align: left;
-        }
-        
-        .popup h4 {
-            color: red;
-            text-align: left;
-        }
-        
-        .popup input {
-            width: 100%;
-            padding: 10px;
-            font-size: 18px;
-            margin-top: 20px;
-        }
+		.popup {
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    bottom: 0;
+		    right: 0;
+		    background-color: white;
+		    padding: 20px;
+		    border-radius: 10px;
+		    width: 500px;
+		    height: 300px;
+		    margin: auto;
+		    text-align: center;
+		}
+		
+		.popup h2 {
+		    text-align: left;
+		}
+		
+		.popup h4 {
+		    color: red;
+		    text-align: left;
+		}
+		
+		.popup input {
+		    width: 100%;
+		    padding: 10px;
+		    font-size: 18px;
+		    margin-top: 20px;
+		}
+		
+		.popup #deadline-btn {
+		    position: absolute;
+		    top: 10px;
+		    right: 10px;
+		}
+
     </style>
 </head>
 <body>
@@ -43,6 +53,7 @@
         <h4>⚠️登録された課題は削除できません。ご注意ください。</h4>
         <button id="cancel-btn">キャンセル</button>
         <button id="register-btn">登録</button>
+        <button id="deadline-btn">達成予定日</button>
     </div>
     
     

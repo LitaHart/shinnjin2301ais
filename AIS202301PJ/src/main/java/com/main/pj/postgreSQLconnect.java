@@ -84,7 +84,7 @@ public class postgreSQLconnect {
 
 	    try {
 	        conn = getConnection();
-	        String sql = "UPDATE tasks SET task = ? WHERE id = ?";	//로컬로는 테스트 불가. 이후 테이블 생성 후 체크
+	        String sql = "UPDATE tasks SET task = 웅 WHERE id = 1";	//로컬로는 테스트 불가. 이후 테이블 생성 후 체크
 	        stmt = conn.prepareStatement(sql);
 	        System.out.println("Task updated successfully");
 
