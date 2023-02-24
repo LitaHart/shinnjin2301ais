@@ -5,8 +5,26 @@
 <title>Home</title>
 <!-- js link -->
 <script type="text/javascript" src="resources/js/jquery.js"></script>
+<link href="resources/css/todolistMain.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+			
+			
+			<div>
+				<jsp:include page="${innerPageData}"/>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
 <h1 style="color:red;">USE JSP_INCLUDE ON THIS PAGE</h1>
 <h1>
 	Hello world!  
