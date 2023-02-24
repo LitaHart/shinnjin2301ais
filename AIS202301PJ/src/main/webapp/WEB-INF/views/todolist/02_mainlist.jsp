@@ -8,7 +8,6 @@
 <title>MAIN LIST UP PAGE</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 
-
 	<script type="text/javascript">
 	
     $(document).ready(function() {
@@ -19,14 +18,32 @@
     	
     	
     	/* 오늘 날짜 불러오기 */
-	 	var today = new Date();
+	 	/* var today = new Date();
 	 	let month = today.getMonth() + 1;  // 월
 	 	let date = today.getDate();
 	 	
-	 	$('#yearAndMonthData').val(month + "月" + date + "日");
 	 	
-	 	
+	 	console.log(month + "月" + date + "日")
+	 	 */
     	
+	 	
+	 	document.getElementById( "yearAndMonthData" ).onblur = function(){	
+			/* 인풋창	값 */
+	 	 	var yearAndMonthData = document.getElementById("yearAndMonthData").value;
+	 	 	var shainn_number = document.getElementById("shainn_number").value;
+	 	 	/* 인풋창에서 선택한 날짜 출력 */ 
+			console.log(yearAndMonthData);
+			console.log(shainn_number);
+	 	 	/* =============================================== */
+	 	 	
+	 	$('#yearAndMonthData').val(yearAndMonthData);
+	 	 	location.href = 'selectHidukeDate?yearAndMonthData='+yearAndMonthData+'&shainn_number='+ shainn_number 
+	 	 	
+	 	 	
+			};
+	 	
+	 	
+	 	
     	
     	 $(window).bind("beforeunload", function (){
     		
@@ -100,15 +117,14 @@
     		 
     		 
     		 
-    		 
     		 if ($(this).val() == 0) {
-    			 $(this).siblings('span').html("<a href='asd'>修正</a>");
+    			 $(this).siblings('#span1').html("<a href='asd'>修正</a>");
     			 
     			 
     			 
 			}else if ($(this).val() == 1) {
 				$(this).prop('checked',true);
-				$(this).siblings('span').text("完了");
+				$(this).siblings('#span1').text("完了");
 			}
     		 
    		  //checkbox click event
@@ -220,13 +236,10 @@
 	
 	<input type="hidden" value="" name="result2" id="resultID2"/>
 		<div><span name="datespan" >${simpleDate }</span>の目標<button onclick="">▼</button></div>
-		<input id="testInput">
-		
-		
   <div class="ui calendar" id="example2">
     <div class="ui input left icon">
       <i class="calendar icon"></i>
-      <input name="selectedMonth" id="yearAndMonthData" class="calendarClass" type="text" placeholder="" value="">
+      <input name="selectedMonth" id="yearAndMonthData" class="calendarClass" type="text" placeholder="" value="${simpleDate }">
     </div>
   </div>
   <br/>
@@ -255,16 +268,30 @@ function popupAdd() {
     window.open("popupAdd", "Pop-up Window", "width=500,height=500");
 }
 </script>
+
+<c:if test="${empty kadais}">
+
+	<div class="empty_txt" >
+		<div class="emptyTxt">
+			目標の履歴がありません。
+		</div>
+	</div>
+
+</c:if>
+
+
+
 		<div>
 		
 		
 		
      <div class="cbox2">
-     <table style="border-color: black; border: 1px;">
+     <p id="demo"></p>
+     <table id="a1">
      	<c:forEach var="k" items="${kadais}">
      	<tr>
      		<td>
-     			${k.kadai_naiyou }<input type='checkbox' id="" name='checkname' value='${k.tassei_kahi }'><span id="span1"></span>
+     			<span id="kadai_naiyou">${k.kadai_naiyou }</span><input type='checkbox' id="checknameId" name='checkname' value='${k.tassei_kahi }'><span id="span1"></span>
      			<input type="hidden" id="kadaiNum" value='${k.kadaikannri_number }'>
      			<input type="hidden" id="yoteibi" value='${k.tassei_yoteibi }'>
      			<input type="hidden" value="${k.tassei_kahi }" id="changeKahi">
