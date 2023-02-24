@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.SessionScope;
 
 @Service
 public class CSVdownloadDAO {
@@ -17,10 +18,9 @@ public class CSVdownloadDAO {
 	@Autowired
 	private SqlSession ss;
 
-	public List<Object[]> checkOptionandExcute(HttpServletRequest request) {
+	public List<Object[]> checkOptionandExcute(HttpServletRequest request, String emID) {
 
-		String shainn_number = "AIS000000";
-		// (String) request.getSession().getAttribute("loginShainn");
+		String shainn_number = emID;
 		String timeSelect = request.getParameter("timeSelect");
 		String csvInclude = request.getParameter("csvInclude");
 		String selectedMonth = String.valueOf(request.getParameter("selectedMonth"));
