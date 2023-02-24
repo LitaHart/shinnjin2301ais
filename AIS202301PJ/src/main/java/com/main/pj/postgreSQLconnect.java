@@ -50,46 +50,21 @@ public class postgreSQLconnect {
 
 	//등록 버튼 SQL 입니다.
 	public static void insertTask(HttpServletRequest request) throws Exception {
-		  Connection conn = null;
-		  PreparedStatement stmt = null;
-
-		  String task = request.getParameter("task");
-		  System.out.println(task);
-
-		  try {
-		    conn = getConnection();
-		    String sql = "INSERT INTO tasks (task) VALUES(?)";	//등록 버튼 후 tasks 라는 테이블의 task열,에 테스트 하기 위한 SQL
-		    stmt = conn.prepareStatement(sql);
-		    System.out.println("Task added successfully");
-
-		    stmt.setString(1, task);
-
-		    if (stmt.executeUpdate() == 1) {
-		      conn.close();
-		    }
-		  } catch (Exception e) {
-		    e.printStackTrace();
-		  }
-		}
-	
-	
-	//수정 버튼 SQL 입니다.
-	public static void updateTask(HttpServletRequest request) throws Exception {
 	    Connection conn = null;
 	    PreparedStatement stmt = null;
 
-	    int id = Integer.parseInt(request.getParameter("id"));
 	    String task = request.getParameter("task");
-	    System.out.println(task);
+	    if (task == null || task.trim().isEmpty()) {
+	        throw new Exception("Task cannot be null or empty.");
+	    }
 
 	    try {
 	        conn = getConnection();
-	        String sql = "UPDATE tasks SET task = 웅 WHERE id = 1";	//로컬로는 테스트 불가. 이후 테이블 생성 후 체크
+	        String sql = "INSERT INTO tasks (task) VALUES(?)";
 	        stmt = conn.prepareStatement(sql);
-	        System.out.println("Task updated successfully");
+	        System.out.println("Task added successfully");
 
 	        stmt.setString(1, task);
-	        stmt.setInt(2, id);
 
 	        if (stmt.executeUpdate() == 1) {
 	            conn.close();
@@ -98,4 +73,30 @@ public class postgreSQLconnect {
 	        e.printStackTrace();
 	    }
 	}
+	
+	
+
+	//수정 버튼 SQL 입니다.
+	public static void updateTask(int id, String task) throws SQLException, Exception {
+	    Connection conn = null;
+	    PreparedStatement stmt = null;
+
+	    try {
+	        conn = getConnection();
+	        String sql = "UPDATE tasks SET task = ? WHERE id = ?";
+	        stmt = conn.prepareStatement(sql);
+
+	        stmt.setString(1, task);
+	        stmt.setInt(2, id);
+
+	        if (stmt.executeUpdate() == 1) {
+	            System.out.println("Task updated successfully");
+	            conn.close();
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+
 }
