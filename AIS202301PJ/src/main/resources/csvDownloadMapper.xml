@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.main.pj.CSVDownloadMapper">
+
+	<select id="getObjectMonth_onlyDone" parameterType="com.main.pj.csvDownloadSelectDTO" resultType="com.main.pj.CSVdownloadDTO">
+		select shainn_table.shainn_number, shainn_name, kadai_naiyou, tassei_yoteibi, tassei_kahi, tassei_hiduke
+		from shainn_table
+		join kadai_table 
+		on kadai_table.shainn_number = shainn_table.shainn_number
+		where kadai_table.shainn_number = #{shainn_number}
+		and kadai_table.tassei_kahi = '1'
+		and kadai_table.tassei_yoteibi between date'${betweenDate01}' and date'${betweenDate02}'
+	</select>
+	
+	<select id="getObjectMonth_all" parameterType="com.main.pj.csvDownloadSelectDTO" resultType="com.main.pj.CSVdownloadDTO">
+		select shainn_table.shainn_number, shainn_name, kadai_naiyou, tassei_yoteibi, tassei_kahi, tassei_hiduke
+		from shainn_table
+		join kadai_table 
+		on kadai_table.shainn_number = shainn_table.shainn_number
+		where kadai_table.shainn_number = #{shainn_number}
+		and kadai_table.tassei_yoteibi between date'${betweenDate01}' and date'${betweenDate02}'
+	</select>
+	
+	<select id="getObjectAll_onlyDone" parameterType="com.main.pj.csvDownloadSelectDTO" resultType="com.main.pj.CSVdownloadDTO">
+		select shainn_table.shainn_number, shainn_name, kadai_naiyou, tassei_yoteibi, tassei_kahi, tassei_hiduke
+		from shainn_table
+		join kadai_table 
+		on kadai_table.shainn_number = shainn_table.shainn_number
+		where kadai_table.shainn_number = #{shainn_number} and tassei_kahi = '1'
+	</select>
+	
+	<select id="getObjectAll_all" parameterType="com.main.pj.csvDownloadSelectDTO" resultType="com.main.pj.CSVdownloadDTO">
+		select shainn_table.shainn_number, shainn_name, kadai_naiyou, tassei_yoteibi, tassei_kahi, tassei_hiduke
+		from shainn_table
+		join kadai_table 
+		on kadai_table.shainn_number = shainn_table.shainn_number
+		where kadai_table.shainn_number = #{shainn_number}
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
