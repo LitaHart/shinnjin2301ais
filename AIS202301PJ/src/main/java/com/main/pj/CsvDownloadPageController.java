@@ -9,6 +9,8 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -44,9 +46,14 @@ public class CsvDownloadPageController {
 	}
 
 	@RequestMapping(value = "/csvdownload.check", method = RequestMethod.GET)
-	public void downloadDataCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void downloadDataCheck(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		logger.info("------->>>>>>>>>> Download Controller DataCheck Start");
-		List<Object[]> csvDataFromDB = csvDAO.checkOptionandExcute(request);
+		
+		Shainn_info loginShainn =  (Shainn_info) session.getAttribute("loginShainn");
+		String emID = loginShainn.getShainn_number();
+		System.out.println(emID);
+		
+		List<Object[]> csvDataFromDB = csvDAO.checkOptionandExcute(request, emID);
 
 		logger.info("------->>>>>>>>>> Download Controller writeCSV Start");
 
