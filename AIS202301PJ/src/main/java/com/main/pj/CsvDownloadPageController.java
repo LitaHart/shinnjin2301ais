@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,7 +29,7 @@ public class CsvDownloadPageController {
 	private static final Logger logger = LoggerFactory.getLogger(CsvDownloadPageController.class);
 
 	@RequestMapping(value = "/csvdownload", method = RequestMethod.GET)
-	public String csvDownloadPage() {
+	public String csvDownloadPage(Model model) {
 		// DB link Check
 		try {
 			System.out.println("Start DownloadController");
@@ -37,7 +38,9 @@ public class CsvDownloadPageController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "todolist/04_csvdownload";
+		
+		model.addAttribute("innerPageData", "todolist/04_csvdownload.jsp");
+		return "home";
 	}
 
 	@RequestMapping(value = "/csvdownload.check", method = RequestMethod.GET)

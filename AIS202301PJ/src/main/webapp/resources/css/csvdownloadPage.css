@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+
+
+
+#mainDiv_csvDownload{
+	font-family: 'DotGothic16', sans-serif;
+	text-align: center;
+	padding-right: auto;
+	padding-left: auto;
+	padding-top: 33%;
+	
+}
+
+#mainDiv_csvDownload input{
+	font-family: 'DotGothic16', sans-serif;
+}
+
+
+#mainDiv_csvDownload button {
+	width: 200px;
+	height: 40px;
+	
+	background-color: rgb(89,89,89);
+	color: white;
+	border: none;
+	font-size: 13pt;
+}

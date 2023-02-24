@@ -1,5 +1,84 @@
 @charset "UTF-8";
+/* Font Import  */
 
-#PageMainDiv{
-	/* TEST line */
+@font-face {
+    font-family: 'DotGothic16';
+    src: url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&display=swap');
+    font-weight: normal;
+    font-style: normal;
 }
+
+/* body 전체 적용 */
+body{
+	font-family: 'DotGothic16', sans-serif;
+	background-color: rgb(238,238,238);
+}
+/*스크롤 */
+.PageMainDiv{
+	/* background-color: rgb(238,238,238); */
+	background-color: tomato;
+	overflow:auto;
+	width:450px;
+    height:600px;
+}
+.container_home{    
+	display:flex;
+	background-color:lime;
+	/* 화면구조 */
+	margin: 10px;
+	width:500px;
+    height:600px;
+    position:absolute;
+    left:45%;
+    top:30%;
+    margin-left:-180px;
+    margin-top:-180px;
+}
+.PageMainDiv_home{
+	position:relative;
+	width:80%;
+    height:100%;
+}
+
+
+
+/* ============================= MENU */
+.wrapper {
+position: absolute;
+right: 0px;
+float:right;
+max-width: 50px;
+margin: 0 auto;
+}
+.menu {
+
+margin: 0;
+padding: 0;
+list-style: none;
+text-align: center;
+display: inline-block;
+}
+.menu li {
+background-color: whitesmoke;
+box-sizing: border-box;
+padding: 4px;
+width: 50px;
+border-top : 1px solid black;
+border-right : 1px solid black;
+border-bottom : 1px solid black;
+}
+.menu li:first-child {
+border-left:1px solid black;
+}
+.menu li:hover {
+background-color: coral;
+}
+a {
+text-decoration: none;
+}
+a:link, a:visited, a:hover, a:active {
+color: black;
+}
+
+
+

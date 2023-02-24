@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+#loginForm{
+
+}
+
+
+#loginForm form{
+	display: flex;
+	height: 50px;
+	background-color: white;
+	position: absolute;
+  	top: 50%;
+  	left: 55%;
+  transform: translate(-50%, -50%);
+}
+
+#loginForm input{
+	
+  float: left;
+	padding-left:15px;
+	align-self: baseline;
+	text-align:center;
+		padding: 0px;
+		margin: 0px;
+  height: 100%;
+  border: none;
+  outline-style:none;
+ 	background: none;
+  outline: none; 
+  font-size: 15px;
+}
+
+
+#loginForm button {
+  	float: right;
+  	margin-right:5px;
+  	margin-top: 5px;
+ 	width: 40px;
+ 	height: 40px;
+  	border-radius: 50%;
+  	align-items: center;
+  	justify-content: center;
+	background-color:transparent;
+	border: none;
+}
