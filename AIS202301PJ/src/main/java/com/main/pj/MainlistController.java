@@ -40,7 +40,6 @@ public class MainlistController {
 		};
 	
 	
-	// 장바구니 삭제
 	@ResponseBody
 	@RequestMapping(value = "/update.tassei.kahi", method = RequestMethod.GET)
 	public int updateTasseiKahi(HttpServletRequest request,@RequestParam("kahiArr") String kahiArr,
@@ -59,6 +58,27 @@ public class MainlistController {
 		return mDAO.updateTasseiKahi(request,kahiArr,kadaiArr,yoteibiArr,shainn_number);
 	}
 	
+	
+	
+	
+	
+	@RequestMapping(value = "/selectHidukeDate", method = RequestMethod.GET)
+	public String selectHidukeDate(HttpServletRequest request,@RequestParam("yearAndMonthData") String yearAndMonthData,
+			@RequestParam("shainn_number") String shainn_number) {
+		
+		try {
+			postgreSQLconnect.getConnection();
+			postgreSQLconnect.testConnect();;
+		}  catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		mDAO.selectHidukeDate(request,yearAndMonthData,shainn_number);
+		return "todolist/02_mainlist";
+	}
 	
 	
 	

@@ -19,77 +19,127 @@
 <head>
 <meta charset="UTF-8">
 <title>MAIN LIST UP PAGE</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 	
-	$(document).ready(function() {
-		$('#example2').calendar({
-			type : 'date'
-		});
-		$(window).bind("beforeunload", function() {
-			var kahiArr = new Array();
-			var kadaiArr = new Array();
-			var yoteibiArr = new Array();
-			var shainn_number = new Array();
-			$('input[name="checkname"]').each(function(i, e) {
-				kahiArr.push($(this).siblings('#changeKahi').val());
-				shainn_number.push($(this).siblings('#shainn_number').val());
-				kadaiArr.push($(this).siblings('#kadaiNum').val());
-				yoteibiArr.push($(this).siblings('#yoteibi').val());
-				console.log(kahiArr);
-				$.ajax({
-					url : 'update.tassei.kahi',
-					data : {
-						"kahiArr" : kahiArr[i],
-						"kadaiArr" : kadaiArr[i],
-						"yoteibiArr" : yoteibiArr[i],
-						"shainn_number" : shainn_number[i]
-					},
-					type : 'get',
-					dataType : 'text',
-					success : function(getData) {
-						console.log(getData);
-						if (getData == 1) {
-							console.log("成功");
-						} else {
-							console.log("失敗");
-						}
-					}
-				})
+    $(document).ready(function() {
+    	
+    	$('#example2').calendar({
+    		  type: 'date'
+    		});
+    	
+    	
+    	/* 오늘 날짜 불러오기 */
+	 	/* var today = new Date();
+	 	let month = today.getMonth() + 1;  // 월
+	 	let date = today.getDate();
+	 	
+	 	
+	 	console.log(month + "月" + date + "日")
+	 	 */
+    	
+	 	
+	 	document.getElementById( "yearAndMonthData" ).onblur = function(){	
+			/* 인풋창	값 */
+	 	 	var yearAndMonthData = document.getElementById("yearAndMonthData").value;
+	 	 	var shainn_number = document.getElementById("shainn_number").value;
+	 	 	/* 인풋창에서 선택한 날짜 출력 */ 
+			console.log(yearAndMonthData);
+			console.log(shainn_number);
+	 	 	/* =============================================== */
+	 	 	
+	 	$('#yearAndMonthData').val(yearAndMonthData);
+	 	 	location.href = 'selectHidukeDate?yearAndMonthData='+yearAndMonthData+'&shainn_number='+ shainn_number 
+	 	 	
+	 	 	
+			};
+	 	
+	 	
+	 	
+    	
+    	 $(window).bind("beforeunload", function (){
+    		
+    		var kahiArr = new Array();
+     		var kadaiArr = new Array();
+     		var yoteibiArr = new Array();
+     		var shainn_number = new Array();
+        	 	$('input[name="checkname"]').each(function (i,e) {
+        	 	kahiArr.push($(this).siblings('#changeKahi').val());
+        	 	shainn_number.push($(this).siblings('#shainn_number').val());
+        	 	kadaiArr.push($(this).siblings('#kadaiNum').val());
+        	 	yoteibiArr.push($(this).siblings('#yoteibi').val());
+     		
+        	 	console.log(kahiArr);
+     		
+     		$.ajax({
+                url: 'update.tassei.kahi',
+                data : {
+                    "kahiArr": kahiArr[i],
+                    "kadaiArr": kadaiArr[i],
+                    "yoteibiArr": yoteibiArr[i],
+                    "shainn_number": shainn_number[i]
+                },
+                type: 'get',
+                dataType : 'text',
+                success : function(getData) {
+    				console.log(getData);
+    				if (getData == 1) {
+    					console.log("成功");
+    				}else {
+    					console.log("失敗");
+    				}
+    			}
+            })
+     		
+           	})
+    	        
+    	    });
+    	
+    	
+    	
+		
+    	//達成率バー
+    	
+    	
+    	var checkArr = new Array();
+   	 	$('input[name="tasseiritu"]').each(function () {
+   	    checkArr.push($(this).val());
+      	})
+    	
+    	var checkArr = new Array();
+   		var total = 0;
+   		
+   		
+   		
+   		
+    	 //checkbox
+    	 $('input:checkbox[name="checkname"]').each(function (i, e) {
+    		 
+    		    checkArr.push($(this).val());
+    		
+    		if (checkArr[i] == 1) {
+				total ++;
 
-			})
-
-		});
-		//達成率バー
-
-		var checkArr = new Array();
-		$('input[name="tasseiritu"]').each(function() {
-			checkArr.push($(this).val());
-		})
-
-		var checkArr = new Array();
-		var total = 0;
-
-		//checkbox
-		$('input:checkbox[name="checkname"]').each(function(i, e) {
-
-			checkArr.push($(this).val());
-
-			if (checkArr[i] == 1) {
-				total++;
 			} else {
 
 			}
-			// 2
+    		// 2
+    		
+    		 aaa = ((total / checkArr.length) * 100);
+    		 
+    		 
+    		 
+    		 
+    		 if ($(this).val() == 0) {
+    			 $(this).siblings('#span1').html("<a href='asd'>修正</a>");
+    			 
+    			 
+    			 
+			}else if ($(this).val() == 1) {
+				$(this).prop('checked',true);
+				$(this).siblings('#span1').text("完了");
 
-			aaa = ((total / checkArr.length) * 100);
-
-			if ($(this).val() == 0) {
-				$(this).siblings('span').html("<a href='asd'>修正</a>");
-
-			} else if ($(this).val() == 1) {
-				$(this).prop('checked', true);
-				$(this).siblings('span').text("完了");
 			}
 
 			//checkbox click event
@@ -220,65 +270,79 @@
 <body>
 
 	<div class="PageMainDiv">
-		<div class="PageMainDiv_mainlist">
-			<!-- Main div 【上】-->
-			<input type="hidden" value="" name="result2" id="resultID2" />
-			<div>
-				<span name="datespan">${simpleDate }</span>の目標
-				<button onclick="">▼</button>
+	<!-- Main div 【上】-->
+	
+	<input type="hidden" value="" name="result2" id="resultID2"/>
+		<div><span name="datespan" >${simpleDate }</span>の目標<button onclick="">▼</button></div>
+  <div class="ui calendar" id="example2">
+    <div class="ui input left icon">
+      <i class="calendar icon"></i>
+      <input name="selectedMonth" id="yearAndMonthData" class="calendarClass" type="text" placeholder="" value="${simpleDate }">
+    </div>
+  </div>
+  <br/>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<div class="progress-bar">
+			<div class="bar">
+				<div class="progress-text"></div>
+
 			</div>
 			<input id="testInput">
 
+<script>
+function popupAdd() {
+    window.open("popupAdd", "Pop-up Window", "width=500,height=500");
+}
+</script>
 
-			<div class="ui calendar" id="example2">
-				<div class="ui input left icon">
-					<i class="calendar icon"></i> <input id="calendarId"
-						class="calendarClass" type="text" onchange="valueCheck()"
-						placeholder="${simpleDate }" value="${simpleDate }">
-				</div>
-			</div>
-			<br>
+<c:if test="${empty kadais}">
 
+	<div class="empty_txt" >
+		<div class="emptyTxt">
+			目標の履歴がありません。
+		</div>
+	</div>
 
-			<div class="progress-bar">
-				<div class="bar">
-					<div class="progress-text"></div>
-				</div>
-			</div>
-
-			<button onclick="popupAdd()">追加</button>
-
-			<script>
-				function popupAdd() {
-					window.open("popupAdd", "Pop-up Window",
-							"width=500,height=500");
-				}
-			</script>
+</c:if>
 
 
 
-			<div>
-				<div class="cbox2">
-					<table style="border-color: black; border: 1px;">
-						<c:forEach var="k" items="${kadais}">
-							<tr>
-								<td>${k.kadai_naiyou }<input type='checkbox' id=""
-									name='checkname' value='${k.tassei_kahi }'><span
-									id="span1"></span> <input type="hidden" id="kadaiNum"
-									value='${k.kadaikannri_number }'> <input type="hidden"
-									id="yoteibi" value='${k.tassei_yoteibi }'> <input
-									type="hidden" value="${k.tassei_kahi }" id="changeKahi">
-									<input type="hidden" value="${k.shainn_number }"
-									id="shainn_number">
-								</td>
-								<td><input value="${k.tasseiritu }" type="hidden"
-									id="tasseiritu" name="tasseiritu"></td>
-							</tr>
-						</c:forEach>
-					</table>
-				</div>
-			</div>
-			<!--　Main div 【下】 -->
+		<div>
+		
+		
+		
+     <div class="cbox2">
+     <table id="a1">
+     	<c:forEach var="k" items="${kadais}">
+     	<tr>
+     		<td>
+     			<span id="kadai_naiyou">${k.kadai_naiyou }</span><input type='checkbox' id="checknameId" name='checkname' value='${k.tassei_kahi }'><span id="span1"></span>
+     			<input type="hidden" id="kadaiNum" value='${k.kadaikannri_number }'>
+     			<input type="hidden" id="yoteibi" value='${k.tassei_yoteibi }'>
+     			<input type="hidden" value="${k.tassei_kahi }" id="changeKahi">
+     			<input type="hidden" value="${k.shainn_number }" id="shainn_number">
+     		</td>
+     		<td>
+     			<input value="${k.tasseiritu }" type="hidden" id="tasseiritu" name="tasseiritu"> 
+     		</td>
+     	</tr>
+      	</c:forEach>
+     </table>
+     </div>
+		
+		
+		
 		</div>
 	</div>
 

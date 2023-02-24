@@ -10,4 +10,6 @@ public interface MainlistMapper {
 
 	public int updateKadai(KadaiDTO k);
 
+	public List<KadaiDTO> selectHidukeDate(KadaiDTO k);
+
 }

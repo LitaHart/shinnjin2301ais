@@ -5,6 +5,7 @@
 	<select id="getAllkadaiList" parameterType="com.main.pj.KadaiDTO" resultType="com.main.pj.KadaiDTO" >
 		SELECT kadaikannri_number,kadai_table.shainn_number,tassei_yoteibi,kadai_naiyou,tassei_kahi,tasseiritu FROM daily_table INNER JOIN kadai_table ON daily_table.shainn_number = kadai_table.shainn_number
 		where kadai_table.shainn_number = #{shainn_number }
+		and tassei_yoteibi = #{tassei_yoteibi }
 		order by kadai_tourokubi desc
 	</select>
 	
@@ -12,5 +13,9 @@
 		UPDATE kadai_table SET tassei_kahi = #{tassei_kahi } WHERE kadaikannri_number  = #{kadaikannri_number } and shainn_number = #{shainn_number } and tassei_yoteibi = #{tassei_yoteibi }
 	</update>
 
+
+	<select id="selectHidukeDate" parameterType="com.main.pj.KadaiDTO" resultType="com.main.pj.KadaiDTO">
+		select * from kadai_table where shainn_number = #{shainn_number } and tassei_yoteibi = #{tassei_yoteibi }
+	</select>
 
 </mapper>
