@@ -3,34 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<link
-	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
-	rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-<script
-	src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
-<link href='resources/css/mainlistPage.css' rel='stylesheet'
-	type='text/css'>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
+<link href='resources/css/mainlistPage.css' rel='stylesheet' type='text/css'>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+
+
+
 <head>
 <meta charset="UTF-8">
 <title>MAIN LIST UP PAGE</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-
 <script type="text/javascript">	
     $(document).ready(function() {	
     	$('#example2').calendar({
     		  type: 'date'
-    		});
+    		}); 
 	 	document.getElementById( "yearAndMonthData" ).onblur = function(){	
 			/* 인풋창	값 */
 	 	 	var yearAndMonthData = document.getElementById("yearAndMonthData").value;
-	 	 	var shainn_number = document.getElementById("shainn_number").value;
+	 	 	var shainn_number = document.getElementById("shainn_numberInput").value;
 	 	 	/* 인풋창에서 선택한 날짜 출력 */ 
 			console.log(yearAndMonthData);
 			console.log(shainn_number);
@@ -183,9 +175,7 @@
 	function popupEdit() { // 팝업 수정창
 		window.open("popupEdit", "Pop-up Window", "width=500, height=500");
 	}
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 						let percent = 0
 						let tasseiritu = document.getElementById('tasseiritu');
 						let tasseirituValue = Number(tasseiritu.value);
@@ -224,6 +214,7 @@
 		<div>
 			<span name="datespan">${simpleDate }</span>の目標
 			<button onclick="">▼</button>
+			<input type="hidden" value="${sessionScope.loginShainn.shainn_number }" id="shainn_numberInput">
 		</div>
 		
 		<div class="ui calendar" id="example2">
@@ -253,7 +244,7 @@
 		</c:if>
 		<div>
 			<div class="cbox2">
-				<table id="a1">
+				<table>
 					<c:forEach var="k" items="${kadais}">
 						<tr>
 							<td><span id="kadai_naiyou">${k.kadai_naiyou }</span><input
