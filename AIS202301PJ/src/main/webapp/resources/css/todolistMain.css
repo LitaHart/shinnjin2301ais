@@ -11,19 +11,19 @@
 /* body 전체 적용 */
 body{
 	font-family: 'DotGothic16', sans-serif;
-	background-color: rgb(238,238,238);
+	background-color: black;
 }
 /*스크롤 */
 .PageMainDiv{
-	/* background-color: rgb(238,238,238); */
-	background-color: tomato;
+	font-family: 'DotGothic16', sans-serif;
+	background-color: rgb(238,238,238);
 	overflow:auto;
 	width:450px;
     height:600px;
 }
+
 .container_home{    
 	display:flex;
-	background-color:lime;
 	/* 화면구조 */
 	margin: 10px;
 	width:500px;
@@ -59,10 +59,16 @@ text-align: center;
 display: inline-block;
 }
 .menu li {
+font-size: 9pt;
+text-align: center;
 background-color: whitesmoke;
 box-sizing: border-box;
-padding: 4px;
-width: 50px;
+
+padding-top: 10px;
+padding-bottom: 10px;
+
+width: 60px;
+height: 40px;
 border-top : 1px solid black;
 border-right : 1px solid black;
 border-bottom : 1px solid black;

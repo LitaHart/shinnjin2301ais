@@ -1,21 +1,24 @@
 @charset "UTF-8";
 
 #loginForm{
-
+	
 }
 
 
 #loginForm form{
+	font-family: 'DotGothic16', sans-serif;
 	display: flex;
 	height: 50px;
 	background-color: white;
 	position: absolute;
-  	top: 50%;
+  	top: 45%;
   	left: 55%;
   transform: translate(-50%, -50%);
 }
 
 #loginForm input{
+	
+	
 	
   float: left;
 	padding-left:15px;

@@ -1,6 +1,7 @@
 package com.main.pj;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -10,7 +11,7 @@ public class MonthlyListController {
 	
 	
 	@RequestMapping(value = "/monthlylist", method = RequestMethod.GET)
-	public String monthlyListPage() {
+	public String monthlyListPage(Model model) {
 
 		// DB link Check
 		try {
@@ -21,8 +22,9 @@ public class MonthlyListController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return "todolist/03_monthlylist";
+		
+		model.addAttribute("innerPageData", "todolist/03_monthlylist.jsp");
+		return "home";
 	}
 
 }

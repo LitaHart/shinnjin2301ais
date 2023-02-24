@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <html>
@@ -17,9 +19,20 @@
 	type="text/css">
 <link href="resources/css/csvdownloadPage.css" rel="stylesheet"
 	type="text/css">
+<link
+	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
+	rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script
+	src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+<!-- https://codepen.io/SaadRegal/pen/ezVBJL -->
+
 </head>
-	<!-- Move Pages -->
-	<script type="text/javascript"></script>
+<!-- Move Pages -->
+<script type="text/javascript"></script>
 <body>
 
 	<div>
@@ -27,17 +40,17 @@
 			<div class="PageMainDiv_home">
 				<jsp:include page="${innerPageData}" />
 			</div>
-		<!-- menu bar -->
-		<div class="wrapper">
-			<ul class="menu">
-				<li><a href="login">001</a></li>
-				<li><a href="#">002</a></li>
-				<li><a href="#">003</a></li>
-				<li><a href="#" onclick="">004</a></li>
-				<li><a href="#">005</a></li>
-			</ul>
-		</div>
-		
+			<!-- menu bar -->
+			<div class="wrapper">
+				<ul class="menu">
+					<li><a href="loginPage">ログイン</a></li>
+					<li><a href="monthlylist">目標</a></li>
+					<li><a href="mainlist">月間</a></li>
+					<li><a href="csvdownload">　一覧　</a></li>
+					<li><a href="#">005</a></li>
+				</ul>
+			</div>
+
 		</div>
 	</div>
 

@@ -32,11 +32,11 @@ public class LoginDAO {
 	public boolean loginCheck(HttpServletRequest Req) {
 		Shainn_info shainn = (Shainn_info)Req.getSession().getAttribute("loginShainn");
 		if (shainn != null) {
-			Req.setAttribute("loginInfo", "login/loginSuccess.jsp" );
+			Req.setAttribute("innerPageData", "todolist/02_mainlist.jsp" );
 			System.out.println("LoginSuccess_check");
 			return true;
 		} 
-		Req.setAttribute("loginInfo", "login/loginSuccess.jsp");
+		Req.setAttribute("innerPageData", "todolist/01_login.jsp");
 		System.out.println("LoginFailed_check");
 		return false;
 	}
