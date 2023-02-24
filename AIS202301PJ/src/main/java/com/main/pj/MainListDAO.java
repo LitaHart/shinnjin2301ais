@@ -30,7 +30,8 @@ public class MainListDAO {
 
 	public void getAllKadaiList(HttpServletRequest request, KadaiDTO k) {
 		// 로그인한 사람의 목표리스트 가져오기
-		k.setShainn_number("ais230102");
+		
+		System.out.println(k.getShainn_number());
 		List<KadaiDTO> kadais = new ArrayList<KadaiDTO>();
 		
 		Date date = new Date();
@@ -39,7 +40,7 @@ public class MainListDAO {
 		String strNowDate = simpleDateFormat.format(date); 
 		
 		java.sql.Date d = java.sql.Date.valueOf(strNowDate);
-		
+		System.out.println(d);
 		k.setTassei_yoteibi(d);
 		kadais = ss.getMapper(MainlistMapper.class).getAllkadaiList(k);
 		

@@ -270,10 +270,9 @@
 					</c:forEach>
 				</table>
 			</div>
-
-
+      
 		</div>
-		<!-- Main div 【上】-->
+		<!-- Main div 【下】-->
 	</div>
 
 </body>

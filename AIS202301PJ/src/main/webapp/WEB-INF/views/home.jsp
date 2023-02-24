@@ -44,8 +44,8 @@
 			<div class="wrapper">
 				<ul class="menu">
 					<li><a href="loginPage">ログイン</a></li>
-					<li><a href="monthlylist">目標</a></li>
-					<li><a href="mainlist">月間</a></li>
+					<li><a href="mainlist">目標</a></li>
+					<li><a href="monthlylist">月間</a></li>
 					<li><a href="csvdownload">　一覧　</a></li>
 					<li><a href="#">005</a></li>
 				</ul>

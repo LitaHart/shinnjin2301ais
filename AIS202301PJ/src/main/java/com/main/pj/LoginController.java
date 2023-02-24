@@ -13,7 +13,8 @@ public class LoginController {
 	
 	@Autowired
 	private LoginDAO ldao;
-	
+	@Autowired
+	private MainListDAO mDAO;
 	
 
 	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
@@ -39,7 +40,10 @@ public class LoginController {
 		
 		ldao.loginStart(Req, si);
 		ldao.loginCheck(Req);
-		
+		KadaiDTO k = new KadaiDTO();
+		k.setShainn_number(si.getShainn_number());
+		mDAO.getSystemDate(Req);
+		mDAO.getAllKadaiList(Req, k);
 		
 		
 		return "home";
