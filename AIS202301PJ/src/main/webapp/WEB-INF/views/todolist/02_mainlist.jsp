@@ -3,21 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>MAIN LIST UP PAGE</title>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+<link href='resources/css/mainlistPage.css' rel='stylesheet' type='text/css'> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 
 
-	<script type="text/javascript">
-	
-    $(document).ready(function() {
-    	
-    	$('#example2').calendar({
+<head>
+<meta charset="UTF-8">
+<title>MAIN LIST UP PAGE</title>
+
+<script type="text/javascript">
+   
+   $(document).ready(function() {
+    		$('#example2').calendar({
     		  type: 'date'
     		});
-    	
-    	
     	 $(window).bind("beforeunload", function (){
     		
     		var kahiArr = new Array();
@@ -55,10 +58,6 @@
            	})
     	        
     	    });
-    	
-    	
-    	
-		
     	//達成率バー
     	
     	
@@ -185,22 +184,52 @@
     		}
     	},30 );
  		
- 		
-
- 		
     });
-  
-
-    
-    
     
 	</script>
 	
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
-<link href='resources/css/mainlistPage.css' rel='stylesheet' type='text/css'> 
+  /////////////////// HONGJS
+   <script type="text/javascript">
+  
+  	function popupAdd() {	// 팝업 추가창
+      window.open("popupAdd", "Pop-up Window","width=500,height=500");
+      }
+    
+    function popupEdit() { 	// 팝업 수정창
+      window.open("popupEdit", "Pop-up Window", "width=500, height=500");
+  	  }
+  	
+    $(document).ready(function() {
+  
+      let percent = 0
+      let tasseiritu = document.getElementById('tasseiritu');
+      let tasseirituValue = Number(tasseiritu.value);
+  
+      let timer = setInterval(function() {
+        percent += 1
+        $('.progress-text').text(percent + '%')
+        $('.bar').css('width', percent)
+  
+        if (percent >= tasseirituValue) {
+          clearInterval(timer)
+        }
+      }, 30);
+  
+      // 체크박스    https://openlife.tistory.com/381
+  
+      $(".cbox").change(function() {
+        if ($($(this)).is(":checked")) {
+          $('#asdasd').text("完了")
+  
+        } else {
+          $(".asdasd").html("");
+          $(".asdasd").append("<a href='#' onclick='popupEdit()'>修正</a>");
+        }
+      });
+  
+    });
+  </script>
+  
 </head>
 <body>
 
@@ -220,16 +249,6 @@
     </div>
   </div>
   <br/>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		<div class="progress-bar">
@@ -275,8 +294,7 @@ function popupAdd() {
 	
 	<!--　Main div 【下】 -->
 	</div>
-	
-	
-	
+
 </body>
 </html>
+      
