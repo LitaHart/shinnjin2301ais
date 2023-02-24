@@ -63,7 +63,7 @@ public class MainlistController {
 	
 	
 	@RequestMapping(value = "/selectHidukeDate", method = RequestMethod.GET)
-	public String selectHidukeDate(HttpServletRequest request,@RequestParam("yearAndMonthData") String yearAndMonthData,
+	public String selectHidukeDate(Model model,HttpServletRequest request,@RequestParam("yearAndMonthData") String yearAndMonthData,
 			@RequestParam("shainn_number") String shainn_number) {
 		
 		try {
@@ -77,7 +77,8 @@ public class MainlistController {
 		
 		
 		mDAO.selectHidukeDate(request,yearAndMonthData,shainn_number);
-		return "todolist/02_mainlist";
+		model.addAttribute("innerPageData", "todolist/02_mainlist.jsp");
+		return "home";
 	}
 	
 	
