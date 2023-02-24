@@ -9,28 +9,28 @@ public class KadaiDTO {
 	private Date tassei_yoteibi;
 	private String kadai_naiyou;
 	private int tassei_kahi;
-	private Date kadai_tourokubi;
-	private Date tassei_hiduke;
+	private int tasseiritu;
 	
 	
 	public KadaiDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
 
+	
+	
+	
 	public KadaiDTO(String kadaikannri_number, String shainn_number, Date tassei_yoteibi, String kadai_naiyou,
-			int tassei_kahi, Date kadai_tourokubi, Date tassei_hiduke) {
+			int tassei_kahi, int tasseiritu) {
 		super();
 		this.kadaikannri_number = kadaikannri_number;
 		this.shainn_number = shainn_number;
 		this.tassei_yoteibi = tassei_yoteibi;
 		this.kadai_naiyou = kadai_naiyou;
 		this.tassei_kahi = tassei_kahi;
-		this.kadai_tourokubi = kadai_tourokubi;
-		this.tassei_hiduke = tassei_hiduke;
+		this.tasseiritu = tasseiritu;
 	}
+
 
 
 
@@ -85,24 +85,18 @@ public class KadaiDTO {
 	}
 
 
-	public Date getKadai_tourokubi() {
-		return kadai_tourokubi;
+	public int getTasseiritu() {
+		return tasseiritu;
 	}
 
 
-	public void setKadai_tourokubi(Date kadai_tourokubi) {
-		this.kadai_tourokubi = kadai_tourokubi;
+	public void setTasseiritu(int tasseiritu) {
+		this.tasseiritu = tasseiritu;
 	}
 
+	
+	
 
-	public Date getTassei_hiduke() {
-		return tassei_hiduke;
-	}
-
-
-	public void setTassei_hiduke(Date tassei_hiduke) {
-		this.tassei_hiduke = tassei_hiduke;
-	}
 	
 	
 	

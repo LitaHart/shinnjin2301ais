@@ -86,6 +86,14 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.5.4</version>
 		</dependency>
+		
+		<dependency>
+<groupId>javax.servlet</groupId>
+<artifactId>javax.servlet-api</artifactId>
+<version>3.1.0</version>
+<scope>provided</scope>
+</dependency>
+		
 		<!-- Spring환경에서 MyBatis쓸 수 있게 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>

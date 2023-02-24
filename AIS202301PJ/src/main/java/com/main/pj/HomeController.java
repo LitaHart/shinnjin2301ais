@@ -36,6 +36,9 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
+		//들어왔을 때 로그인 페이지 출력		
+		model.addAttribute("innerPageData", "todolist/01_login.jsp");
+		
 		return "home";
 	}
 	

@@ -11,10 +11,10 @@
 	<div class="PageMainDiv">
 	<!-- Main div 【上】-->
 	
-		<div>
+		<div id="loginForm">
 			<form action="mainLogin" name="shainn_number" method="post">
 			<input required="required" placeholder="社員番号入力" id="shainn_number" name="shainn_number">
-			<button>LOGIN</button>
+			<button><img alt="PenToLogin" src="resources/img/penTOLogin_small.png"></button>
 			</form>
 		</div>
 	
