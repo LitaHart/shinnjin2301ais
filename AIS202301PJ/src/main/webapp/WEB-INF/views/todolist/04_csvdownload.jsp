@@ -3,13 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
- <!-- https://codepen.io/SaadRegal/pen/ezVBJL -->
- 
- 
  <script type="text/javascript">
  /* checkBoxes */
 	function checkOnlyOne(element) {
@@ -59,6 +52,7 @@
 <form action="csvdownload.check">
 	<div class="PageMainDiv">
 	<!-- Main div 【上】-->
+	<div id="mainDiv_csvDownload">
 		<div>
 			<input name="timeSelect" value="csvMonth" type="checkbox" onclick='checkOnlyOne(this)' checked="checked"/> 月別
 			<input name="timeSelect" value="csvAll" type="checkbox" onclick='checkOnlyOne(this)'/> すべて
@@ -67,7 +61,7 @@
 			<input name="csvInclude" value="csvInclude" type="checkbox"> 未達成課題を含む
 		</div>
 		<div>
-			 <h3>Month and year</h3>
+				<br>
   				<div class="ui calendar" id="csvCalendar">
    				<div class="ui input left icon">
       			<i class="time icon"></i>
@@ -77,11 +71,9 @@
   			<br/>
 		</div>
 		<div>
-			<!--  -->
-			<button onclick="location.href='csvdownload.test.csv'">csvダウンロード</button>
-			<button onclick="location.href='csvdownload.test.excel'">excelダウンロード</button>
-			<button type="submit">SUBMIT</button>
+			<button type="submit">csvダウンロード</button>
 		</div>
+	</div>
 	<!--　Main div 【下】 -->
 	</div>
 </form>

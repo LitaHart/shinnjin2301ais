@@ -1,8 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<link
+	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
+	rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script
+	src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+<link href='resources/css/mainlistPage.css' rel='stylesheet'
+	type='text/css'>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>MAIN LIST UP PAGE</title>
@@ -107,8 +120,9 @@
     		
     		if (checkArr[i] == 1) {
 				total ++;
+
 			} else {
-				
+
 			}
     		// 2
     		
@@ -125,111 +139,135 @@
 			}else if ($(this).val() == 1) {
 				$(this).prop('checked',true);
 				$(this).siblings('#span1').text("完了");
+
 			}
-    		 
-   		  //checkbox click event
-        	 $(this).change(function(){
-        	 	if($(this).is(":checked")){
-        	            $(this).siblings('#changeKahi').attr("value","1");
-        	            $(this).siblings('#span1').text("完了");
-        	            const query = 'input[name="checkname"]:checked';
-        	            const selectedElements = document.querySelectorAll(query);
-        	            const selectedElementsCnt = selectedElements.length;
-        	          
-        	          // 출력
-        	          aaa = ((selectedElementsCnt / checkArr.length) * 100 )
-        	          
-					        	          
-        	        let percent = 0
-        	      	let tasseiritu = document.getElementById('resultID2');
-        	      	let tasseirituValue = Number(tasseiritu.value);
-        	      	
-        	      	let timer = setInterval(function() {
-        	      		percent += 1
-        	      		$('.progress-text').text((aaa).toFixed() + '%')
-        	      		$('.bar').css('width', aaa * 2)
-        	      		
-        	      		if(percent >= tasseirituValue) {
-        	      			clearInterval(timer)
-        	      		}
-        	      	},30 );
-        	          
-        	          
 
-        	            
-        	            
-        		}else{
-        			$(this).siblings('#changeKahi').attr("value","0");
-        	 			$(this).siblings('#span1').text(" ");
-        	            $(this).siblings('#span1').html("<a href='asd'>修正</a>");
-        	            const query = 'input[name="checkname"]:checked';
-        	            const selectedElements = document.querySelectorAll(query);
-        	            const selectedElementsCnt = selectedElements.length;
-        	          
-        	          // 출력
-          	          aaa = ((selectedElementsCnt / checkArr.length) * 100 )
-          	    		
+			//checkbox click event
+			$(this).change(function() {
+				if ($(this).is(":checked")) {
+					$(this).siblings('#changeKahi').attr("value", "1");
+					$(this).siblings('#span1').text("完了");
+					const query = 'input[name="checkname"]:checked';
+					const selectedElements = document.querySelectorAll(query);
+					const selectedElementsCnt = selectedElements.length;
 
-          	        let percent = 0
-          	    	let tasseiritu = document.getElementById('resultID2');
-          	    	let tasseirituValue = Number(tasseiritu.value);
-          	    	
-          	    	let timer = setInterval(function() {
-          	    		percent += 1
-          	    		$('.progress-text').text((aaa).toFixed() + '%')
-          	    		$('.bar').css('width', aaa * 2)
-          	    		
-          	    		if(percent >= tasseirituValue) {
-          	    			clearInterval(timer)
-          	    		}
-          	    	},30 );
-        	          
-        	          
-        	            
-        	        }
-        	    });
-    		
-    	})
-    	
-    	
-    	// 4
- 		
-    	$('input[name=result2]').attr('value',(aaa).toFixed());
-    	
- 		
- 		let percent = 0
-    	let tasseiritu = document.getElementById('resultID2');
-    	let tasseirituValue = Number(tasseiritu.value);
-    	
-    	let timer = setInterval(function() {
-    		percent += 1
-    		$('.progress-text').text((aaa).toFixed() + '%')
-    		$('.bar').css('width', aaa * 2)
-    		
-    		if(percent >= tasseirituValue) {
-    			clearInterval(timer)
-    		}
-    	},30 );
- 		
- 		
+					// 출력
+					aaa = ((selectedElementsCnt / checkArr.length) * 100)
 
- 		
-    });
-  
+					let percent = 0
+					let tasseiritu = document.getElementById('resultID2');
+					let tasseirituValue = Number(tasseiritu.value);
 
-    
-    
-    
-	</script>
-	
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
-<link href='resources/css/mainlistPage.css' rel='stylesheet' type='text/css'> 
+					let timer = setInterval(function() {
+						percent += 1
+						$('.progress-text').text((aaa).toFixed() + '%')
+						$('.bar').css('width', aaa * 2)
+
+						if (percent >= tasseirituValue) {
+							clearInterval(timer)
+						}
+					}, 30);
+
+				} else {
+					$(this).siblings('#changeKahi').attr("value", "0");
+					$(this).siblings('#span1').text(" ");
+					$(this).siblings('#span1').html("<a href='asd'>修正</a>");
+					const query = 'input[name="checkname"]:checked';
+					const selectedElements = document.querySelectorAll(query);
+					const selectedElementsCnt = selectedElements.length;
+
+					// 출력
+					aaa = ((selectedElementsCnt / checkArr.length) * 100)
+
+					let percent = 0
+					let tasseiritu = document.getElementById('resultID2');
+					let tasseirituValue = Number(tasseiritu.value);
+
+					let timer = setInterval(function() {
+						percent += 1
+						$('.progress-text').text((aaa).toFixed() + '%')
+						$('.bar').css('width', aaa * 2)
+
+						if (percent >= tasseirituValue) {
+							clearInterval(timer)
+						}
+					}, 30);
+
+				}
+			});
+
+		})
+
+		// 4
+
+		$('input[name=result2]').attr('value', (aaa).toFixed());
+
+		let percent = 0
+		let tasseiritu = document.getElementById('resultID2');
+		let tasseirituValue = Number(tasseiritu.value);
+
+		let timer = setInterval(function() {
+			percent += 1
+			$('.progress-text').text((aaa).toFixed() + '%')
+			$('.bar').css('width', aaa * 2)
+
+			if (percent >= tasseirituValue) {
+				clearInterval(timer)
+			}
+		}, 30);
+
+	});
+</script>
+
+<!-- HONG JS -->
+<script type="text/javascript">
+	function popupAdd() { // 팝업 추가창
+		window.open("popupAdd", "Pop-up Window", "width=500,height=500");
+	}
+
+	function popupEdit() { // 팝업 수정창
+		window.open("popupEdit", "Pop-up Window", "width=500, height=500");
+	}
+
+	$(document)
+			.ready(
+					function() {
+
+						let percent = 0
+						let tasseiritu = document.getElementById('tasseiritu');
+						let tasseirituValue = Number(tasseiritu.value);
+
+						let timer = setInterval(function() {
+							percent += 1
+							$('.progress-text').text(percent + '%')
+							$('.bar').css('width', percent)
+
+							if (percent >= tasseirituValue) {
+								clearInterval(timer)
+							}
+						}, 30);
+
+						// 체크박스    https://openlife.tistory.com/381
+
+						$(".cbox")
+								.change(
+										function() {
+											if ($($(this)).is(":checked")) {
+												$('#asdasd').text("完了")
+
+											} else {
+												$(".asdasd").html("");
+												$(".asdasd")
+														.append(
+																"<a href='#' onclick='popupEdit()'>修正</a>");
+											}
+										});
+
+					});
+</script>
+
 </head>
 <body>
-
 
 	<div class="PageMainDiv">
 	<!-- Main div 【上】-->
@@ -258,10 +296,9 @@
 		<div class="progress-bar">
 			<div class="bar">
 				<div class="progress-text"></div>
+
 			</div>
-		</div>
-		
-<button onclick="popupAdd()">追加</button>
+			<input id="testInput">
 
 <script>
 function popupAdd() {
@@ -286,7 +323,6 @@ function popupAdd() {
 		
 		
      <div class="cbox2">
-     <p id="demo"></p>
      <table id="a1">
      	<c:forEach var="k" items="${kadais}">
      	<tr>
@@ -308,12 +344,8 @@ function popupAdd() {
 		
 		
 		</div>
-	
-	
-	<!--　Main div 【下】 -->
 	</div>
-	
-	
-	
+
 </body>
 </html>
+

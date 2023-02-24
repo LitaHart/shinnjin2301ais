@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,7 +17,7 @@ public class LoginController {
 	
 
 	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
-	public String loginPage() {
+	public String loginPage(Model model) {
 		// DB link Check
 		try {
 			postgreSQLconnect.getConnection();
@@ -27,7 +28,9 @@ public class LoginController {
 			e.printStackTrace();
 		}
 
-		return "todolist/01_login";
+		model.addAttribute("innerPageData", "todolist/01_login.jsp");
+		
+		return "home";
 	}
 	
 	
@@ -37,7 +40,9 @@ public class LoginController {
 		ldao.loginStart(Req, si);
 		ldao.loginCheck(Req);
 		
-		return "todolist/01_login";
+		
+		
+		return "home";
 	}
 	
 	

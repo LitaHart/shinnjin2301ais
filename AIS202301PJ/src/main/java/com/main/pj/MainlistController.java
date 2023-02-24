@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +21,7 @@ public class MainlistController {
 
 	
 	@RequestMapping(value = "/mainlist", method = RequestMethod.GET)
-	public String mainlist(HttpServletRequest request,KadaiDTO k) {
+	public String mainlist(Model model,HttpServletRequest request,KadaiDTO k) {
 		
 		try {
 			postgreSQLconnect.getConnection();
@@ -34,10 +35,8 @@ public class MainlistController {
 		mDAO.getSystemDate(request);
 		mDAO.getAllKadaiList(request,k);
 		
-		return "todolist/02_mainlist";
-		
-		
-		
+		model.addAttribute("innerPageData", "todolist/02_mainlist.jsp");
+		return "home";
 		};
 	
 	
