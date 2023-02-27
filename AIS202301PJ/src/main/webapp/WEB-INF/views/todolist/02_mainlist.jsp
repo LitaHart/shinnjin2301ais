@@ -185,15 +185,9 @@
 						let tasseiritu = document.getElementById('tasseiritu');
 						let tasseirituValue = Number(tasseiritu.value);
 
-						let timer = setInterval(function() {
-							percent += 1
 							$('.progress-text').text(percent + '%')
 							$('.bar').css('width', percent)
 
-							if (percent >= tasseirituValue) {
-								clearInterval(timer)
-							}
-						}, 30);
 						// 체크박스    https://openlife.tistory.com/381
 						$(".cbox")
 								.change(

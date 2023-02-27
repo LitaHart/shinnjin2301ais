@@ -4,6 +4,7 @@ package com.main.pj;
 import java.sql.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +19,11 @@ public class MainlistController {
 	
 	@Autowired
 	private MainListDAO mDAO;
-
+	@Autowired
+	private LoginDAO ldao;
 	
 	@RequestMapping(value = "/mainlist", method = RequestMethod.GET)
-	public String mainlist(Model model,HttpServletRequest request,KadaiDTO k) {
+	public String mainlist(Model model,HttpServletRequest request,KadaiDTO k,HttpSession session) {
 		
 		try {
 			postgreSQLconnect.getConnection();
@@ -32,8 +34,11 @@ public class MainlistController {
 		}
 		
 		
+		
+		
+		ldao.loginCheck(request);
 		mDAO.getSystemDate(request);
-		mDAO.getAllKadaiList(request,k);
+		mDAO.getAllKadaiList(request,k,session);
 		
 		model.addAttribute("innerPageData", "todolist/02_mainlist.jsp");
 		return "home";
@@ -75,7 +80,7 @@ public class MainlistController {
 		}
 		
 		
-		
+		ldao.loginCheck(request);
 		mDAO.selectHidukeDate(request,yearAndMonthData,shainn_number);
 		model.addAttribute("innerPageData", "todolist/02_mainlist.jsp");
 		return "home";

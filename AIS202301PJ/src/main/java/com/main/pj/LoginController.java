@@ -1,6 +1,7 @@
 package com.main.pj;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,14 +37,14 @@ public class LoginController {
 	
 	
 	@RequestMapping(value = "/mainLogin", method = RequestMethod.POST)
-	public String mainLoginStart(HttpServletRequest request, Shainn_info si) {
+	public String mainLoginStart(HttpServletRequest request, Shainn_info si,HttpSession session) {
 		
 		ldao.loginStart(request, si);
 		ldao.loginCheck(request);
 		KadaiDTO k = new KadaiDTO();
 		k.setShainn_number(si.getShainn_number());
 		mDAO.getSystemDate(request);
-		mDAO.getAllKadaiList(request, k);
+		mDAO.getAllKadaiList(request, k,session);
 		
 		
 		return "home";
