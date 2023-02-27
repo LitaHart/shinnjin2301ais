@@ -29,9 +29,11 @@ public class CsvDownloadPageController {
 	@Autowired
 	private CSVdownloadDAO csvDAO;
 	private static final Logger logger = LoggerFactory.getLogger(CsvDownloadPageController.class);
+	@Autowired
+	private LoginDAO ldao;
 
 	@RequestMapping(value = "/csvdownload", method = RequestMethod.GET)
-	public String csvDownloadPage(Model model) {
+	public String csvDownloadPage(Model model,HttpServletRequest request) {
 		// DB link Check
 		try {
 			System.out.println("Start DownloadController");
@@ -40,7 +42,7 @@ public class CsvDownloadPageController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		ldao.loginCheck(request);
 		model.addAttribute("innerPageData", "todolist/04_csvdownload.jsp");
 		return "home";
 	}

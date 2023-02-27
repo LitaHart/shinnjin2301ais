@@ -214,6 +214,7 @@
 		<div>
 			<span name="datespan">${simpleDate }</span>の目標
 			<button onclick="">▼</button>
+			<span>${sessionScope.loginShainn.shainn_name }様</span>
 			<input type="hidden" value="${sessionScope.loginShainn.shainn_number }" id="shainn_numberInput">
 		</div>
 		
