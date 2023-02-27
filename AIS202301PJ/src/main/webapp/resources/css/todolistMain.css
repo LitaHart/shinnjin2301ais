@@ -11,10 +11,10 @@
 /* body 전체 적용 */
 body{
 	font-family: 'DotGothic16', sans-serif;
-	background-color: black;
 }
 /*스크롤 */
 .PageMainDiv{
+	border: solid 2px black;
 	font-family: 'DotGothic16', sans-serif;
 	background-color: rgb(238,238,238);
 	overflow:auto;

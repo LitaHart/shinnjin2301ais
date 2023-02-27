@@ -3,11 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
-<link href='resources/css/mainlistPage.css' rel='stylesheet' type='text/css'>
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
-<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+<link
+	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
+	rel="stylesheet" type="text/css" />
+<link href='resources/css/mainlistPage.css' rel='stylesheet'
+	type='text/css'>
+<link
+	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
+	rel="stylesheet" type="text/css" />
+<script
+	src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
 
 
 
@@ -30,8 +38,7 @@
 	 	 	
 	 	$('#yearAndMonthData').val(yearAndMonthData);
 	 	 	location.href = 'selectHidukeDate?yearAndMonthData='+yearAndMonthData+'&shainn_number='+ shainn_number  	
-			};
-	 	
+			};	 	
     	 $(window).bind("beforeunload", function (){
     		
     		var kahiArr = new Array();
@@ -209,32 +216,54 @@
 <body>
 	<div class="PageMainDiv">
 		<!-- Main div 【上】-->
-		
+
 		<input type="hidden" value="" name="result2" id="resultID2" />
-		<div>
-			<span name="datespan">${simpleDate }</span>の目標
-			<button onclick="">▼</button>
-			<input type="hidden" value="${sessionScope.loginShainn.shainn_number }" id="shainn_numberInput">
+		<div id="mainlist_header">
+			<div>
+				<span name="datespan">${simpleDate }</span>の目標 <input type="hidden"
+					value="${sessionScope.loginShainn.shainn_number }"
+					id="shainn_numberInput">
+			</div>
+
+			<input type="hidden"
+				value="${sessionScope.loginShainn.shainn_number }"
+				id="shainn_numberInput">
+
+			<!-- sankaku button -->
+			<div class="ui calendar" id="example2">
+				<label for="yearAndMonthData"> <input style="opacity: 0;"
+					type="checkbox" id="yearAndMonthData" class="calendarClass"
+					value="${simpleDate}"> ▼
+				</label>
+			</div>
 		</div>
-		
-		<div class="ui calendar" id="example2">
+		<!-- =========================== -->
+		<div class="ui calendar" id="example2" style="visibility: hidden;">
 			<div class="ui input left icon">
 				<i class="calendar icon"></i> <input name="selectedMonth"
 					id="yearAndMonthData" class="calendarClass" type="text"
 					placeholder="" value="${simpleDate }">
 			</div>
 		</div>
-
-		<div class="progress-bar">
-			<div class="bar">
-				<div class="progress-text"></div>
+		<!-- =========================== -->
+		<div class="progress_bar_div">
+			<div class="progress-bar">
+				<div class="bar">
+					<div class="progress-text"></div>
+				</div>
 			</div>
 		</div>
-		
-				<div>
-					<button onclick="popupAdd()">追加</button>			
-				</div>
-		
+		<!-- =========================== -->
+
+		<div class="second_header">
+			<div id="box_image">
+				<img style="width: 40px; height: 40px;" alt="box_image"
+					src="resources/img/tasksInBox.png">
+			</div>
+			<div id="addBtn">
+				<button onclick="popupAdd()">追加</button>
+			</div>
+		</div>
 
 		<c:if test="${empty kadais}">
 			<div class="empty_txt">
@@ -261,7 +290,7 @@
 					</c:forEach>
 				</table>
 			</div>
-      
+
 		</div>
 		<!-- Main div 【下】-->
 	</div>
