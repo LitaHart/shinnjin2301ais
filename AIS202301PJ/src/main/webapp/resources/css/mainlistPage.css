@@ -1,6 +1,79 @@
 @charset "UTF-8";
+
+body{
+	font-family: 'DotGothic16', sans-serif;
+}
+
 .PageMainDiv_mainlist{
-	
+	font-size: 11pt;
+	margin-top: 10%;
+	width: 100%;
+	font-family: 'DotGothic16', sans-serif;
+	text-align: center;
+	padding-right: auto;
+	padding-left: auto;
+}
+
+#mainlist_header{
+	font-size: 13pt;
+	margin-top: 5%;
+	display: flex;
+	float: left;
+	margin-left: 27px;
+}
+.second_header{
+	margin-top: 5%;
+	margin-bottom: 10px;
+	width: 100%;
+	display: flex;
+}
+#box_image {
+	text-align: right;
+	padding-right: 70px;
+	width: 70%;
+	margin: auto;
+}
+#addBtn {
+	text-align: right;
+	padding-right: 30px;
+	width: 30%;
+	margin: auto;
+}
+/* =========================== */
+
+.empty_txt{
+	background-color: fuchsia;
+	width: 100%;
+	margin-top: 30px;
+	padding-left:35px; 
+}
+
+.cbox2 {
+	margin: 30px;
+}
+.touroku_kadai_table{
+	margin-top: 30px;
+	width: 100%;
+	padding-left:35px; 
+	padding-right:35px; 
+}
+
+#kadai_list{
+	height: 30px;
+	width: 300px;
+	text-align: left;
+}
+
+#kadai_tassei {
+	height: 30px;
+	width: 100px;	
+	text-align:right;
+}
+
+/* ============= PROGRESS BAR */
+.progress_bar_div {
+	width: 100%;
+	margin-top: 5%;
 }
 
 .progress-text {
@@ -8,10 +81,11 @@
 }
 
 .progress-bar {
-  width: 200px;
-  height: 15px;
+  margin: auto;
+  width: 400px;
+  height: 25px;
   background-color: #8b8b8d;
-  border-radius: 5px;
+  border-radius: 0px;
   position: relative;
   overflow: hidden;
 }
@@ -22,7 +96,6 @@
   height: 100%;
   background-color: #00ff00;
 }
-
 a {
   text-decoration-line: none;
 }
