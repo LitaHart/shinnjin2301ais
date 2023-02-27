@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
 #loginForm {
-	
+	font-family: 'DotGothic16', sans-serif;
+	background-color: rgb(238,238,238);
 }
 
 #loginForm form {
@@ -16,6 +17,7 @@
 }
 
 #loginForm input {
+	font-family: 'DotGothic16', sans-serif;
 	float: left;
 	padding-left: 15px;
 	align-self: baseline;

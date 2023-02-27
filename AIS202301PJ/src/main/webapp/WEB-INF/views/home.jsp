@@ -28,7 +28,6 @@
 <script type="text/javascript"></script>
 <body>
 
-	<div>
 		<div class="container_home">
 			<div class="PageMainDiv_home">
 				<jsp:include page="${innerPageData}" />
@@ -43,36 +42,7 @@
 					<li><a href="#">005</a></li>
 				</ul>
 			</div>
-
 		</div>
-	</div>
-
-
-
-
-	<h1 style="color: red;">USE JSP_INCLUDE ON THIS PAGE</h1>
-	<h1>Hello world!</h1>
-	<P>The time on the server is ${serverTime}.</P>
-
-	<!-- 臨時JUMP -->
-	<form action="loginPage">
-		<button onclick="">LoginPage</button>
-	</form>
-
-	<form action="mainlist">
-		<button onclick="">Mainlist</button>
-	</form>
-
-	<form action="monthlylist">
-		<button onclick="">MonthlyDownloadList</button>
-	</form>
-
-	<form action="csvdownload">
-		<button onclick="">CSVDownloadPage</button>
-	</form>
-
-
-
 
 </body>
 </html>

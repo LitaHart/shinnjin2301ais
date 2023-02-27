@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<div class="PageMainDiv">
+	<div class="PageMainDiv_login">
 	<!-- Main div 【上】-->
 	
 		<div id="loginForm">

@@ -3,7 +3,6 @@
 body{
 	font-family: 'DotGothic16', sans-serif;
 }
-
 .PageMainDiv_mainlist{
 	font-size: 11pt;
 	margin-top: 10%;
@@ -42,7 +41,7 @@ body{
 /* =========================== */
 
 .empty_txt{
-	background-color: fuchsia;
+	color: gray;
 	width: 100%;
 	margin-top: 30px;
 	padding-left:35px; 
@@ -87,7 +86,8 @@ body{
   background-color: #8b8b8d;
   border-radius: 0px;
   position: relative;
-  overflow: hidden;
+/*   overflow: hidden; */
+  overflow: visible;
 }
 .progress-bar .bar {
   position: absolute;
