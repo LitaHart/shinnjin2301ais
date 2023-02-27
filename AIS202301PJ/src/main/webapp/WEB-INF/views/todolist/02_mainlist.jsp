@@ -16,9 +16,6 @@
 	rel="stylesheet" type="text/css" />
 <script
 	src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
-
-
-
 <head>
 <meta charset="UTF-8">
 <title>MAIN LIST UP PAGE</title>
@@ -116,7 +113,8 @@
 					let timer = setInterval(function() {
 						percent += 1
 						$('.progress-text').text((aaa).toFixed() + '%')
-						$('.bar').css('width', aaa * 2)
+						/* Bar width */
+						$('.bar').css('width', aaa * 4)
 
 						if (percent >= tasseirituValue) {
 							clearInterval(timer)
@@ -141,7 +139,7 @@
 					let timer = setInterval(function() {
 						percent += 1
 						$('.progress-text').text((aaa).toFixed() + '%')
-						$('.bar').css('width', aaa * 2)
+						$('.bar').css('width', aaa * 4)
 
 						if (percent >= tasseirituValue) {
 							clearInterval(timer)
@@ -164,7 +162,7 @@
 		let timer = setInterval(function() {
 			percent += 1
 			$('.progress-text').text((aaa).toFixed() + '%')
-			$('.bar').css('width', aaa * 2)
+			$('.bar').css('width', aaa * 4)
 
 			if (percent >= tasseirituValue) {
 				clearInterval(timer)
@@ -265,32 +263,40 @@
 			</div>
 		</div>
 
+
+
+
+
+
+
 		<c:if test="${empty kadais}">
 			<div class="empty_txt">
 				<div class="emptyTxt">目標の履歴がありません。</div>
 			</div>
-
 		</c:if>
+		
 		<div>
-			<div class="cbox2">
+		<!-- here to sub -->
+			<div class="touroku_kadai_table">
 				<table>
 					<c:forEach var="k" items="${kadais}">
 						<tr>
-							<td><span id="kadai_naiyou">${k.kadai_naiyou }</span><input
-								type='checkbox' id="checknameId" name='checkname'
-								value='${k.tassei_kahi }'><span id="span1"></span> <input
-								type="hidden" id="kadaiNum" value='${k.kadaikannri_number }'>
-								<input type="hidden" id="yoteibi" value='${k.tassei_yoteibi }'>
-								<input type="hidden" value="${k.tassei_kahi }" id="changeKahi">
-								<input type="hidden" value="${k.shainn_number }"
-								id="shainn_number"></td>
-							<td><input value="${k.tasseiritu }" type="hidden"
-								id="tasseiritu" name="tasseiritu"></td>
+							<td id="kadai_list"><span id="kadai_naiyou">${k.kadai_naiyou }</span></td>
+							<td id="kadai_tassei">
+							<input type='checkbox' id="checknameId" name='checkname' value='${k.tassei_kahi }'>
+							<span id="span1"></span>
+							<input type="hidden" id="kadaiNum" value='${k.kadaikannri_number }'>
+							<input type="hidden" id="yoteibi" value='${k.tassei_yoteibi }'>
+							<input type="hidden" value="${k.tassei_kahi }" id="changeKahi">
+							<input type="hidden" value="${k.shainn_number }" id="shainn_number">
+							</td>
+							<td>
+							<input value="${k.tasseiritu }" type="hidden" id="tasseiritu" name="tasseiritu">
+							</td>
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
-
 		</div>
 		<!-- Main div 【下】-->
 	</div>

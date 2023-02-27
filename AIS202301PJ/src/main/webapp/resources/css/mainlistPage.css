@@ -5,6 +5,7 @@ body{
 }
 
 .PageMainDiv_mainlist{
+	font-size: 11pt;
 	margin-top: 10%;
 	width: 100%;
 	font-family: 'DotGothic16', sans-serif;
@@ -38,8 +39,36 @@ body{
 	width: 30%;
 	margin: auto;
 }
+/* =========================== */
 
+.empty_txt{
+	background-color: fuchsia;
+	width: 100%;
+	margin-top: 30px;
+	padding-left:35px; 
+}
 
+.cbox2 {
+	margin: 30px;
+}
+.touroku_kadai_table{
+	margin-top: 30px;
+	width: 100%;
+	padding-left:35px; 
+	padding-right:35px; 
+}
+
+#kadai_list{
+	height: 30px;
+	width: 300px;
+	text-align: left;
+}
+
+#kadai_tassei {
+	height: 30px;
+	width: 100px;	
+	text-align:right;
+}
 
 /* ============= PROGRESS BAR */
 .progress_bar_div {
