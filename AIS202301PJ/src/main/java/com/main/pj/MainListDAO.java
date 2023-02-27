@@ -1,6 +1,7 @@
 package com.main.pj;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,10 +29,14 @@ public class MainListDAO {
 		
 	}
 
-	public void getAllKadaiList(HttpServletRequest request, KadaiDTO k) {
+	public void getAllKadaiList(HttpServletRequest request, KadaiDTO k, HttpSession session) {
 		// 로그인한 사람의 목표리스트 가져오기
+		Shainn_info loginShainn =  (Shainn_info) session.getAttribute("loginShainn");
+		String emID = loginShainn.getShainn_number();
+		System.out.println(emID);
 		
-		System.out.println(k.getShainn_number());
+		k.setShainn_number(emID);
+		
 		List<KadaiDTO> kadais = new ArrayList<KadaiDTO>();
 		
 		Date date = new Date();
@@ -136,6 +141,68 @@ public class MainListDAO {
 		
 		request.setAttribute("simpleDate", strNowDate );
 		request.setAttribute("kadais",kadais);
+		
+		
+	}
+
+	public void getMonthList(HttpServletRequest request, KadaiDTO k, HttpSession session) {
+		
+		Shainn_info loginShainn =  (Shainn_info) session.getAttribute("loginShainn");
+		String emID = loginShainn.getShainn_number();
+		Date date = new Date();
+		csvDownloadSelectDTO d = new csvDownloadSelectDTO();
+		System.out.println(request.getParameter("yearAndMonthData"));
+		String yearAndMonthData = request.getParameter("yearAndMonthData");
+		String betweenDate01 = "";
+		String betweenDate02 = "";
+		String year = "";
+		String numMonth = "";
+		
+		
+		if (request.getParameter("yearAndMonthData") == null || request.getParameter("yearAndMonthData").isBlank()) {
+			
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+		        	//원하는 데이터 포맷 지정
+			String strNowDate = simpleDateFormat.format(date); 
+			
+			year = strNowDate.substring(0, 4);
+			numMonth = strNowDate.substring(5, 7);
+			
+			System.out.println(year);
+			System.out.println(numMonth);
+			String day = CSVdownloadDAO.setDateStringForSQL(numMonth, year);
+			// 검색용 날짜 문자열 설정
+			betweenDate01 = year + "-" + numMonth + "-01";
+			betweenDate02 = year + "-" + numMonth + "-" + day;
+			
+			
+			
+			
+			d.setBetweenDate01(betweenDate01);
+			d.setBetweenDate02(betweenDate02);
+			request.setAttribute("simpleDate", numMonth );
+			
+		}else {
+			year = yearAndMonthData.substring(yearAndMonthData.length()-4, yearAndMonthData.length());
+			String numMonthSub = yearAndMonthData.substring(0, 3);
+			numMonth = CSVdownloadDAO.changeMonth(numMonthSub);
+			String day = CSVdownloadDAO.setDateStringForSQL(numMonth, year);
+			
+			betweenDate01 = year + "-" + numMonth + "-01";
+			betweenDate02 = year + "-" + numMonth + "-" + day;
+			d.setBetweenDate01(betweenDate01);
+			d.setBetweenDate02(betweenDate02);
+			request.setAttribute("simpleDate", numMonth );
+		}
+		
+		d.setShainn_number(emID);
+		
+		
+		
+		List<CSVdownloadDTO> kadais = new ArrayList<CSVdownloadDTO>();
+		kadais = ss.getMapper(MainlistMapper.class).selectMonthDate(d);
+		request.setAttribute("kadais",kadais);
+		
 		
 		
 	}

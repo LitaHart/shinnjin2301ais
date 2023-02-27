@@ -48,8 +48,6 @@
 	</div>
 
 
-
-
 	<h1 style="color: red;">USE JSP_INCLUDE ON THIS PAGE</h1>
 	<h1>Hello world!</h1>
 	<P>The time on the server is ${serverTime}.</P>
