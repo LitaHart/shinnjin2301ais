@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,6 +101,7 @@ $(document).ready(function(){
 			<c:forEach items="${kadais }" var="k">
 			<tr>
 				<td>${k.kadai_naiyou }</td>
+				<td><fmt:formatDate value="${k.tassei_yoteibi }" pattern="dd日"/></td>
 				<td>✔︎︎</td>
 			</tr>
 			</c:forEach>
