@@ -18,4 +18,15 @@
 		select * from kadai_table where shainn_number = #{shainn_number } and tassei_yoteibi = #{tassei_yoteibi }
 	</select>
 
+
+	<select id="selectMonthDate" parameterType="com.main.pj.csvDownloadSelectDTO" resultType="com.main.pj.CSVdownloadDTO">
+		select shainn_table.shainn_number, shainn_name, kadai_naiyou, tassei_yoteibi, tassei_kahi, tassei_hiduke
+		from shainn_table
+		join kadai_table 
+		on kadai_table.shainn_number = shainn_table.shainn_number
+		where kadai_table.shainn_number = #{shainn_number}
+		and kadai_table.tassei_yoteibi between date'${betweenDate01}' and date'${betweenDate02}'
+	</select>
+
+
 </mapper>

@@ -1,6 +1,7 @@
 package com.main.pj;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,7 @@ public class LoginController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		model.addAttribute("innerPageData", "todolist/01_login.jsp");
 		
 		return "home";
@@ -36,16 +37,18 @@ public class LoginController {
 	
 	
 	@RequestMapping(value = "/mainLogin", method = RequestMethod.POST)
-	public String mainLoginStart(HttpServletRequest Req, Shainn_info si) {
+	public String mainLoginStart(HttpServletRequest request, Shainn_info si,HttpSession session) {
 		
-		ldao.loginStart(Req, si);
-		ldao.loginCheck(Req);
+		ldao.loginStart(request, si);
+		ldao.loginCheck(request);
+		
 		KadaiDTO k = new KadaiDTO();
 		k.setShainn_number(si.getShainn_number());
-		mDAO.getSystemDate(Req);
-		mDAO.getAllKadaiList(Req, k);
 		
+		mDAO.getSystemDate(request);
+		mDAO.getAllKadaiList(request, k,session);
 		
+		request.setAttribute("innerPageData", "todolist/02_mainlist.jsp" );
 		return "home";
 	}
 	

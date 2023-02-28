@@ -4,6 +4,7 @@ package com.main.pj;
 import java.sql.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,11 @@ public class MainlistController {
 	
 	@Autowired
 	private MainListDAO mDAO;
-
+	@Autowired
+	private LoginDAO ldao;
 	
 	@RequestMapping(value = "/mainlist", method = RequestMethod.GET)
-	public String mainlist(Model model,HttpServletRequest request,KadaiDTO k) {
-		
+	public String mainlist(Model model,HttpServletRequest request,KadaiDTO k,HttpSession session) {
 		try {
 			postgreSQLconnect.getConnection();
 			postgreSQLconnect.testConnect();;
@@ -30,12 +31,16 @@ public class MainlistController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//model.addAttribute("innerPageData", "todolist/02_mainlist.jsp");
 		
-		
-		mDAO.getSystemDate(request);
-		mDAO.getAllKadaiList(request,k);
-		
-		model.addAttribute("innerPageData", "todolist/02_mainlist.jsp");
+		if (ldao.loginCheck(request)) {
+			mDAO.getSystemDate(request);
+			mDAO.getAllKadaiList(request,k,session);		
+			request.setAttribute("innerPageData", "todolist/02_mainlist.jsp" );
+		} else {
+			request.setAttribute("innerPageData", "todolist/01_login.jsp");
+		}
+
 		return "home";
 		};
 	
@@ -63,7 +68,7 @@ public class MainlistController {
 	
 	
 	@RequestMapping(value = "/selectHidukeDate", method = RequestMethod.GET)
-	public String selectHidukeDate(HttpServletRequest request,@RequestParam("yearAndMonthData") String yearAndMonthData,
+	public String selectHidukeDate(Model model,HttpServletRequest request,@RequestParam("yearAndMonthData") String yearAndMonthData,
 			@RequestParam("shainn_number") String shainn_number) {
 		
 		try {
@@ -76,8 +81,14 @@ public class MainlistController {
 		
 		
 		
-		mDAO.selectHidukeDate(request,yearAndMonthData,shainn_number);
-		return "todolist/02_mainlist";
+		//model.addAttribute("innerPageData", "todolist/02_mainlist.jsp");
+		if (ldao.loginCheck(request)) {
+			mDAO.selectHidukeDate(request,yearAndMonthData,shainn_number);
+			request.setAttribute("innerPageData", "todolist/02_mainlist.jsp" );
+		} else {
+			request.setAttribute("innerPageData", "todolist/01_login.jsp");
+		}
+		return "home";
 	}
 	
 	

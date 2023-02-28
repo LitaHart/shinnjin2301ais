@@ -1,14 +1,13 @@
 package com.main.pj;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -27,9 +26,11 @@ public class CsvDownloadPageController {
 	@Autowired
 	private CSVdownloadDAO csvDAO;
 	private static final Logger logger = LoggerFactory.getLogger(CsvDownloadPageController.class);
+	@Autowired
+	private LoginDAO ldao;
 
 	@RequestMapping(value = "/csvdownload", method = RequestMethod.GET)
-	public String csvDownloadPage(Model model) {
+	public String csvDownloadPage(Model model,HttpServletRequest request) {
 		// DB link Check
 		try {
 			System.out.println("Start DownloadController");
@@ -39,14 +40,23 @@ public class CsvDownloadPageController {
 			e.printStackTrace();
 		}
 		
-		model.addAttribute("innerPageData", "todolist/04_csvdownload.jsp");
+		if (ldao.loginCheck(request)) {
+			model.addAttribute("innerPageData", "todolist/04_csvdownload.jsp");
+		} else {
+			request.setAttribute("innerPageData", "todolist/01_login.jsp");
+		}
 		return "home";
 	}
 
 	@RequestMapping(value = "/csvdownload.check", method = RequestMethod.GET)
-	public void downloadDataCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void downloadDataCheck(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		logger.info("------->>>>>>>>>> Download Controller DataCheck Start");
-		List<Object[]> csvDataFromDB = csvDAO.checkOptionandExcute(request);
+		
+		Shainn_info loginShainn =  (Shainn_info) session.getAttribute("loginShainn");
+		String emID = loginShainn.getShainn_number();
+		System.out.println(emID);
+		
+		List<Object[]> csvDataFromDB = csvDAO.checkOptionandExcute(request, emID);
 
 		logger.info("------->>>>>>>>>> Download Controller writeCSV Start");
 

@@ -3,17 +3,14 @@
 /* body 전체 적용 */
 body{
 	font-family: 'DotGothic16', sans-serif;
-	background-color: rgb(238,238,238);
 }
 /*스크롤 */
 .PageMainDiv{
-	/* background-color: rgb(238,238,238); */
-	background-color: tomato;
+	background-color: rgb(238,238,238);
 	overflow:auto;
 	width:450px;
     height:600px;
 }
-
 
 #mainDiv_csvDownload{
 	font-family: 'DotGothic16', sans-serif;

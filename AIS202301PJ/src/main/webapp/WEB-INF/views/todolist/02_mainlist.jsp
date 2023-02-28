@@ -3,34 +3,33 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<link href="resources/css/todolistMain.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
+	rel="stylesheet" type="text/css" />
+<link href='resources/css/mainlistPage.css' rel='stylesheet'
+	type='text/css'>
 <link
 	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css" />
 <link
 	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
 	rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 <script
 	src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
-<link href='resources/css/mainlistPage.css' rel='stylesheet'
-	type='text/css'>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>MAIN LIST UP PAGE</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-
 <script type="text/javascript">	
     $(document).ready(function() {	
     	$('#example2').calendar({
     		  type: 'date'
-    		});
+    		}); 
 	 	document.getElementById( "yearAndMonthData" ).onblur = function(){	
 			/* 인풋창	값 */
 	 	 	var yearAndMonthData = document.getElementById("yearAndMonthData").value;
-	 	 	var shainn_number = document.getElementById("shainn_number").value;
+	 	 	var shainn_number = document.getElementById("shainn_numberInput").value;
 	 	 	/* 인풋창에서 선택한 날짜 출력 */ 
 			console.log(yearAndMonthData);
 			console.log(shainn_number);
@@ -38,8 +37,7 @@
 	 	 	
 	 	$('#yearAndMonthData').val(yearAndMonthData);
 	 	 	location.href = 'selectHidukeDate?yearAndMonthData='+yearAndMonthData+'&shainn_number='+ shainn_number  	
-			};
-	 	
+			};	 	
     	 $(window).bind("beforeunload", function (){
     		
     		var kahiArr = new Array();
@@ -117,7 +115,8 @@
 					let timer = setInterval(function() {
 						percent += 1
 						$('.progress-text').text((aaa).toFixed() + '%')
-						$('.bar').css('width', aaa * 2)
+						/* Bar width */
+						$('.bar').css('width', aaa * 4)
 
 						if (percent >= tasseirituValue) {
 							clearInterval(timer)
@@ -142,7 +141,7 @@
 					let timer = setInterval(function() {
 						percent += 1
 						$('.progress-text').text((aaa).toFixed() + '%')
-						$('.bar').css('width', aaa * 2)
+						$('.bar').css('width', aaa * 4)
 
 						if (percent >= tasseirituValue) {
 							clearInterval(timer)
@@ -165,7 +164,7 @@
 		let timer = setInterval(function() {
 			percent += 1
 			$('.progress-text').text((aaa).toFixed() + '%')
-			$('.bar').css('width', aaa * 2)
+			$('.bar').css('width', aaa * 4)
 
 			if (percent >= tasseirituValue) {
 				clearInterval(timer)
@@ -183,22 +182,14 @@
 	function popupEdit() { // 팝업 수정창
 		window.open("popupEdit", "Pop-up Window", "width=500, height=500");
 	}
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 						let percent = 0
 						let tasseiritu = document.getElementById('tasseiritu');
 						let tasseirituValue = Number(tasseiritu.value);
 
-						let timer = setInterval(function() {
-							percent += 1
 							$('.progress-text').text(percent + '%')
 							$('.bar').css('width', percent)
 
-							if (percent >= tasseirituValue) {
-								clearInterval(timer)
-							}
-						}, 30);
 						// 체크박스    https://openlife.tistory.com/381
 						$(".cbox")
 								.change(
@@ -219,58 +210,89 @@
 <body>
 	<div class="PageMainDiv">
 		<!-- Main div 【上】-->
-		
+
 		<input type="hidden" value="" name="result2" id="resultID2" />
-		<div>
-			<span name="datespan">${simpleDate }</span>の目標
-			<button onclick="">▼</button>
+		<div id="mainlist_header">
+			<div>
+				<span name="datespan">${simpleDate }</span>の目標 <input type="hidden"
+					value="${sessionScope.loginShainn.shainn_number }"
+					id="shainn_numberInput">
+			</div>
+
+			<input type="hidden"
+				value="${sessionScope.loginShainn.shainn_number }"
+				id="shainn_numberInput">
+
+			<!-- sankaku button -->
+			<div class="ui calendar" id="example2">
+				<label for="yearAndMonthData"> <input style="opacity: 0;"
+					type="checkbox" id="yearAndMonthData" class="calendarClass"
+					value="${simpleDate}"> ▼
+				</label>
+			</div>
 		</div>
-		
-		<div class="ui calendar" id="example2">
+		<!-- =========================== -->
+		<div class="ui calendar" id="example2" style="visibility: hidden;">
 			<div class="ui input left icon">
 				<i class="calendar icon"></i> <input name="selectedMonth"
 					id="yearAndMonthData" class="calendarClass" type="text"
 					placeholder="" value="${simpleDate }">
 			</div>
 		</div>
-
-		<div class="progress-bar">
-			<div class="bar">
-				<div class="progress-text"></div>
+		<!-- =========================== -->
+		<div class="progress_bar_div">
+			<div class="progress-bar">
+				<div class="bar">
+					<div class="progress-text"></div>
+				</div>
 			</div>
 		</div>
-		
-				<div>
-					<button onclick="popupAdd()">追加</button>			
-				</div>
-		
+		<!-- =========================== -->
+
+		<div class="second_header">
+			<div id="box_image">
+				<img style="width: 40px; height: 40px;" alt="box_image"
+					src="resources/img/tasksInBox.png">
+			</div>
+			<div id="addBtn">
+				<button onclick="popupAdd()">追加</button>
+			</div>
+		</div>
+
+
+
+
+
+
 
 		<c:if test="${empty kadais}">
 			<div class="empty_txt">
 				<div class="emptyTxt">目標の履歴がありません。</div>
 			</div>
-
 		</c:if>
+		
 		<div>
-			<div class="cbox2">
-				<table id="a1">
+		<!-- here to sub -->
+			<div class="touroku_kadai_table">
+				<table>
 					<c:forEach var="k" items="${kadais}">
 						<tr>
-							<td><span id="kadai_naiyou">${k.kadai_naiyou }</span><input
-								type='checkbox' id="checknameId" name='checkname'
-								value='${k.tassei_kahi }'><span id="span1"></span> <input
-								type="hidden" id="kadaiNum" value='${k.kadaikannri_number }'>
-								<input type="hidden" id="yoteibi" value='${k.tassei_yoteibi }'>
-								<input type="hidden" value="${k.tassei_kahi }" id="changeKahi">
-								<input type="hidden" value="${k.shainn_number }"
-								id="shainn_number"></td>
-							<td><input value="${k.tasseiritu }" type="hidden"
-								id="tasseiritu" name="tasseiritu"></td>
+							<td id="kadai_list"><span id="kadai_naiyou">${k.kadai_naiyou }</span></td>
+							<td id="kadai_tassei">
+							<input type='checkbox' id="checknameId" name='checkname' value='${k.tassei_kahi }'>
+							<span id="span1"></span>
+							<input type="hidden" id="kadaiNum" value='${k.kadaikannri_number }'>
+							<input type="hidden" id="yoteibi" value='${k.tassei_yoteibi }'>
+							<input type="hidden" value="${k.tassei_kahi }" id="changeKahi">
+							<input type="hidden" value="${k.shainn_number }" id="shainn_number">
+							</td>
+							<td>
+							<input value="${k.tasseiritu }" type="hidden" id="tasseiritu" name="tasseiritu">
+							</td>
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
-      
 		</div>
 		<!-- Main div 【下】-->
 	</div>
