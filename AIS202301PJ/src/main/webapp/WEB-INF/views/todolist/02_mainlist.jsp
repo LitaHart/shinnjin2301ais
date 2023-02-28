@@ -171,9 +171,14 @@
 
 <!-- HONG JS -->
 <script type="text/javascript">
-	function popupAdd() { // 팝업 추가창
-		window.open("popupAdd", "Pop-up Window", "width=500,height=500");
-	}
+
+function popupAdd() {	//팝업 추가창
+    var yearAndMonthData = document.getElementById("yearAndMonthData").value;
+    var url = "popupAdd?yearAndMonthData=" + yearAndMonthData;
+    var popup = window.open(url, "Pop-up Window", "width=500,height=500");
+    popup.opener = window;
+}
+
 	function popupEdit() { // 팝업 수정창
 		window.open("popupEdit", "Pop-up Window", "width=500, height=500");
 	}

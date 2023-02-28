@@ -5,9 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -52,45 +53,59 @@ public class postgreSQLconnect {
 	}
 
 	// 등록 버튼 SQL
-	public static void insertTask(String kadaikannriNumber, String shainnNumber, LocalDate tasseiYoteibi, String kadaiNaiyou, int tasseiKahi, Date kadaiTourokubi, LocalDateTime tasseiHiduke) throws Exception {
-	    Connection conn = null;
-	    PreparedStatement stmt = null;
+	public static void insertTask(String kadaikannriNumber, 
+            String shainn_number, 
+            String tasseiYoteibi, 
+            String kadaiNaiyou, 
+            int tasseiKahi, 
+            LocalDate kadaiTourokubi, 
+            LocalDateTime tasseiHiduke)
+ throws Exception {
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date parsedDate = dateFormat.parse(tasseiYoteibi);
+		java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
+		
 
-	    if (kadaikannriNumber == null || kadaikannriNumber.trim().isEmpty() ||
-	            shainnNumber == null || shainnNumber.trim().isEmpty() ||
-	            tasseiYoteibi == null ||
-	            kadaiNaiyou == null || kadaiNaiyou.trim().isEmpty() ||
-	            kadaiTourokubi == null || tasseiHiduke == null) {
-	        throw new Exception("One or more parameters are null or empty.");
-	    }
 
-	    try {
-	        conn = getConnection();
-	        String sql = "INSERT INTO kadai_table (kadaikannri_number, shainn_number, tassei_yoteibi, kadai_naiyou, tassei_kahi, kadai_tourokubi, tassei_hiduke) VALUES (?, ?, ?, ?, ?, ?, ?)";
-	        stmt = conn.prepareStatement(sql);
-	        stmt.setString(1, kadaikannriNumber);
-	        stmt.setString(2, shainnNumber);
-	        stmt.setObject(3, tasseiYoteibi);
-	        stmt.setString(4, kadaiNaiyou);
-	        stmt.setInt(5, tasseiKahi);
-	        stmt.setDate(6, kadaiTourokubi);
-	        stmt.setObject(7, tasseiHiduke);
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		System.out.println(kadaikannriNumber);
+		System.out.println(shainn_number + "회원번호");
+		System.out.println(tasseiYoteibi);
+		System.out.println(kadaiNaiyou);
+		System.out.println(tasseiKahi);
+		System.out.println(kadaiTourokubi);
+		System.out.println(tasseiHiduke);
+		
+		if (kadaikannriNumber == null || kadaikannriNumber.trim().isEmpty() ||
+				shainn_number == null || shainn_number.trim().isEmpty() ||
+			tasseiYoteibi == null || tasseiYoteibi.trim().isEmpty() ||
+			kadaiNaiyou == null || kadaiNaiyou.trim().isEmpty()) {
+			throw new Exception("One or more parameters are null or empty.");
+		}
 
-	        if (stmt.executeUpdate() == 1) {
-	            conn.close();
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
+		try {
+			conn = getConnection();
+			String sql = "INSERT INTO kadai_table (kadaikannri_number, shainn_number, tassei_yoteibi, kadai_naiyou, tassei_kahi, kadai_tourokubi, tassei_hiduke) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, kadaikannriNumber);
+			stmt.setString(2, shainn_number);
+			stmt.setDate(3, sqlDate);
+			stmt.setString(4, kadaiNaiyou);
+			stmt.setInt(5, 0);
+			stmt.setDate(6, java.sql.Date.valueOf(LocalDate.now()));
+			stmt.setTimestamp(7, null);
+			
+			
+			if (stmt.executeUpdate() == 1) {
+				conn.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-
-
-
-
-
-
-
-
 
 	
 
