@@ -29,7 +29,7 @@ public class LoginController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		model.addAttribute("innerPageData", "todolist/01_login.jsp");
 		
 		return "home";
@@ -41,12 +41,14 @@ public class LoginController {
 		
 		ldao.loginStart(request, si);
 		ldao.loginCheck(request);
+		
 		KadaiDTO k = new KadaiDTO();
 		k.setShainn_number(si.getShainn_number());
+		
 		mDAO.getSystemDate(request);
 		mDAO.getAllKadaiList(request, k,session);
 		
-		
+		request.setAttribute("innerPageData", "todolist/02_mainlist.jsp" );
 		return "home";
 	}
 	

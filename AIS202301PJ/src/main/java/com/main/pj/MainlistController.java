@@ -24,7 +24,6 @@ public class MainlistController {
 	
 	@RequestMapping(value = "/mainlist", method = RequestMethod.GET)
 	public String mainlist(Model model,HttpServletRequest request,KadaiDTO k,HttpSession session) {
-		
 		try {
 			postgreSQLconnect.getConnection();
 			postgreSQLconnect.testConnect();;
@@ -32,15 +31,16 @@ public class MainlistController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//model.addAttribute("innerPageData", "todolist/02_mainlist.jsp");
 		
-		
-		
-		
-		ldao.loginCheck(request);
-		mDAO.getSystemDate(request);
-		mDAO.getAllKadaiList(request,k,session);
-		
-		model.addAttribute("innerPageData", "todolist/02_mainlist.jsp");
+		if (ldao.loginCheck(request)) {
+			mDAO.getSystemDate(request);
+			mDAO.getAllKadaiList(request,k,session);		
+			request.setAttribute("innerPageData", "todolist/02_mainlist.jsp" );
+		} else {
+			request.setAttribute("innerPageData", "todolist/01_login.jsp");
+		}
+
 		return "home";
 		};
 	
@@ -80,9 +80,14 @@ public class MainlistController {
 		}
 		
 		
-		ldao.loginCheck(request);
-		mDAO.selectHidukeDate(request,yearAndMonthData,shainn_number);
-		model.addAttribute("innerPageData", "todolist/02_mainlist.jsp");
+		
+		//model.addAttribute("innerPageData", "todolist/02_mainlist.jsp");
+		if (ldao.loginCheck(request)) {
+			mDAO.selectHidukeDate(request,yearAndMonthData,shainn_number);
+			request.setAttribute("innerPageData", "todolist/02_mainlist.jsp" );
+		} else {
+			request.setAttribute("innerPageData", "todolist/01_login.jsp");
+		}
 		return "home";
 	}
 	

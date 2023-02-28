@@ -1,12 +1,9 @@
 package com.main.pj;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -42,8 +39,12 @@ public class CsvDownloadPageController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		ldao.loginCheck(request);
-		model.addAttribute("innerPageData", "todolist/04_csvdownload.jsp");
+		
+		if (ldao.loginCheck(request)) {
+			model.addAttribute("innerPageData", "todolist/04_csvdownload.jsp");
+		} else {
+			request.setAttribute("innerPageData", "todolist/01_login.jsp");
+		}
 		return "home";
 	}
 
