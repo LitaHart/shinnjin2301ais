@@ -11,7 +11,7 @@ public class LoginDAO {
 
 	@Autowired
 	private SqlSession ss;
-	
+
 	public void loginStart(HttpServletRequest request, Shainn_info si) {
 		System.out.println(si.getShainn_number());
 		LoginMapper lm = ss.getMapper(LoginMapper.class);
@@ -20,26 +20,23 @@ public class LoginDAO {
 		if (shainn != null) {
 			if (si.getShainn_number().equals(shainn.getShainn_number())) {
 				request.getSession().setAttribute("loginShainn", shainn);
-				request.getSession().setMaxInactiveInterval(60*10);
+				request.getSession().setMaxInactiveInterval(60 * 10);
 				System.out.println("LoginSuccess_main");
 			}
 		} else {
-				request.setAttribute("result", "社員情報がありません。");
-				System.out.println("LoginFailed_main");
+			request.setAttribute("result", "社員情報がありません。");
+			System.out.println("LoginFailed_main");
 		}
 	}
 
 	public boolean loginCheck(HttpServletRequest request) {
-		Shainn_info shainn = (Shainn_info)request.getSession().getAttribute("loginShainn");
+		Shainn_info shainn = (Shainn_info) request.getSession().getAttribute("loginShainn");
 		if (shainn != null) {
 			System.out.println("LoginSuccess_check");
 			return true;
-		} 
+		}
 		System.out.println("LoginFailed_check");
 		return false;
 	}
-	
-	
-	
 
 }

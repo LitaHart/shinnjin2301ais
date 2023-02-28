@@ -15,14 +15,9 @@ $(document).ready(function(){
    	var simpleDateVal = document.getElementById("simpleDateInput").value;
 	var simpleDateSub = simpleDateVal.substr(0, 3);
 	$("#simpleDateSpan").text(simpleDateSub);
-	
-	
-	
-	
-	 $('#csvCalendar').calendar({
+	$('#csvCalendar').calendar({
 			type: 'month'
 		 });
-	
 	
 	 /* 오늘 날짜 불러오기 */
 	 	var today = new Date();
@@ -53,18 +48,7 @@ $(document).ready(function(){
 	 	
 		location.href='monthlylist?yearAndMonthData='+yearAndMonthData;
 	 	/* =============================================== */ 	 
-	 	
-	 	
-	 	
-	 	
-	 	
 		};
-	
-		
-		
-		
-		
-    
 });
 
 
