@@ -31,11 +31,14 @@ public class MonthlyListController {
 			e.printStackTrace();
 		}
 		
+		if (ldao.loginCheck(request)) {
+			mDAO.getSystemDate(request);
+			mDAO.getMonthList(request,k,session);
+			model.addAttribute("innerPageData", "todolist/03_monthlylist.jsp");
+		} else {
+			request.setAttribute("innerPageData", "todolist/01_login.jsp");
+		}
 		
-		mDAO.getSystemDate(request);
-		ldao.loginCheck(request);
-		mDAO.getMonthList(request,k,session);
-		model.addAttribute("innerPageData", "todolist/03_monthlylist.jsp");
 		return "home";
 	}
 

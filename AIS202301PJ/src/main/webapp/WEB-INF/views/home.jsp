@@ -19,6 +19,7 @@
 	type="text/css">
 <link href="resources/css/csvdownloadPage.css" rel="stylesheet"
 	type="text/css">
+	
 <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 <script
 	src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
@@ -35,11 +36,10 @@
 			<!-- menu bar -->
 			<div class="wrapper">
 				<ul class="menu">
-					<li><a href="loginPage">ログイン</a></li>
+					<!-- <li><a href="loginPage">ログイン</a></li> -->
 					<li><a href="mainlist">目標</a></li>
 					<li><a href="monthlylist">月間</a></li>
 					<li><a href="csvdownload">　一覧　</a></li>
-					<li><a href="#">005</a></li>
 				</ul>
 			</div>
 		</div>
