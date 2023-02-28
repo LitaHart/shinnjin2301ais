@@ -6,16 +6,11 @@
 <link
 	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
 	rel="stylesheet" type="text/css" />
-<link href='resources/css/mainlistPage.css' rel='stylesheet'
-	type='text/css'>
-<link
-	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
-	rel="stylesheet" type="text/css" />
-<script
-	src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+<link href='resources/css/mainlistPage.css' rel='stylesheet'type='text/css'>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>MAIN LIST UP PAGE</title>
@@ -228,6 +223,7 @@
 					value="${simpleDate}"> ▼
 				</label>
 			</div>
+			<div class="user_name"><span　>${sessionScope.loginShainn.shainn_name }様</span></div>
 		</div>
 		<!-- =========================== -->
 		<div class="ui calendar" id="example2" style="visibility: hidden;">
