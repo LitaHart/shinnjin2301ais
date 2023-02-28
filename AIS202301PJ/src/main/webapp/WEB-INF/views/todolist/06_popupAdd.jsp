@@ -73,6 +73,10 @@
 <body>
 	<div class="popup">
 		<p id="selected-date"></p>
+		<p>社員番号: ${employee.shainn_number}</p>
+		<p>社員名: ${employee.shainn_name}</p>
+		<p>日付: <input type="text" id="datepicker" value="<%= new java.util.Date() %>"></p>
+		
 		<h2>課題追加</h2>
 		<input name=addTask id="task-input" placeholder="新規課題入力"
 			onfocus="this.placeholder=''" onblur="this.placeholder='新規課題入力'"
@@ -86,66 +90,93 @@
 		</div>
 	</div>
 
-	<script>
-	$(document).ready(function() {
-		  $('#deadline-calendar').calendar({
-		    type: 'date',
-		    onChange: function(date, text, mode) {
-		      const japaneseDate = date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
-		      console.log('Selected date: ' + japaneseDate);
-		      document.getElementById("selected-date").textContent = japaneseDate;
-		    }
-		  });
-		});
+<script>
+    $(document).ready(function() {
+        $("#datepicker").datepicker();
+    });
 
+    $("#popupAddForm").submit(function(event) {
+        event.preventDefault();
 
-    	const deadlineBtn = document.getElementById('deadline-btn');
-    	deadlineBtn.addEventListener('click', () => {
-    	  $('#deadline-calendar').calendar('show');
-    	});
+        var formData = {
+            shainn_number: "${employee.shainn_number}",
+            kadaikannri_number: $("#kadaikannri_number").val(),
+            tassei_yoteibi: $("#datepicker").val(),
+            kadai_naiyou: $("#kadai_naiyou").val(),
+            tassei_kahi: false
+        };
 
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/mainLogin/popupAdd.do",
+            data: JSON.stringify(formData),
+            dataType: "json",
+            success: function(data) {
+                alert("Registration successful.");
+            },
+            error: function() {
+                alert("Registration failed.");
+            }
+        });
+    });
 
-    	const taskInput = document.getElementById('task-input');
-    	const warning = document.getElementById('warning');
+    $(document).ready(function() {
+        $('#deadline-calendar').calendar({
+            type: 'date',
+            onChange: function(date, text, mode) {
+                const japaneseDate = date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+                console.log('Selected date: ' + japaneseDate);
+                document.getElementById("selected-date").textContent = japaneseDate;
+            }
+        });
+    });
 
-    	taskInput.addEventListener('input', (event) => {
-    		  const inputRegex = /^[\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uD7B0-\uD7FF\u3040-\u30ff\uff01-\uff5e\u4e00-\u9faf\w\s]*$/;
-    		  if (!inputRegex.test(taskInput.value)) {
-    		    alert('ハングル、英語、日本語(全角、半角)以外は入力できません。');
-    		    event.preventDefault();
-    		    taskInput.value = taskInput.value.replace(/[^\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uD7B0-\uD7FF\u3040-\u30ff\uff01-\uff5e\u4e00-\u9faf\w\s]/g, '');
-    		  }
-    		});
+    const deadlineBtn = document.getElementById('deadline-btn');
+    deadlineBtn.addEventListener('click', () => {
+        $('#deadline-calendar').calendar('show');
+    });
 
+    const taskInput = document.getElementById('task-input');
+    const warning = document.getElementById('warning');
 
-    	'use strict';
+    taskInput.addEventListener('input', (event) => {
+        const inputRegex = /^[\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uD7B0-\uD7FF\u3040-\u30ff\uff01-\uff5e\u4e00-\u9faf\w\s]*$/;
+        if (!inputRegex.test(taskInput.value)) {
+            alert('ハングル、英語、日本語(全角、半角)以外は入力できません。');
+            event.preventDefault();
+            taskInput.value = taskInput.value.replace(/[^\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uD7B0-\uD7FF\u3040-\u30ff\uff01-\uff5e\u4e00-\u9faf\w\s]/g, '');
+        }
+    });
 
-    	// 작동 스크립트
-    	window.addEventListener('load', () => {
-    	  const cancelBtn = document.getElementById('cancel-btn');
-    	  const registerBtn = document.getElementById('register-btn');
-    	  const taskInput = document.getElementById('task-input');
-    	  registerBtn.addEventListener('click', () => {
-    	    const task = taskInput.value;
-    	    if (task.trim().length < 1) {
-    	      warning.style.display = 'block';
-    	    } else {
-    	      try {
-    	        location.href = 'popupAdd.do?task=' + task;
-    	        window.close();
-    	      } catch (e) {
-    	        console.error(e);
-    	      }
-    	    }
-    	  });
+    'use strict';
 
-    	  cancelBtn.addEventListener('click', () => {
-    	    window.close();
-    	  });
+    // 작동 스크립트
+    window.addEventListener('load', () => {
+        const cancelBtn = document.getElementById('cancel-btn');
+        const registerBtn = document.getElementById('register-btn');
+        const taskInput = document.getElementById('task-input');
+        registerBtn.addEventListener('click', () => {
+            const task = taskInput.value;
+            if (task.trim().length < 1) {
+                warning.style.display = 'block';
+            } else {
+                try {
+                    location.href = 'popupAdd.do?task=' + task;
+                    window.close();
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+        });
 
-    	});
+        cancelBtn.addEventListener('click', () => {
+            window.close();
+        });
 
-    </script>
+    });
+</script>
+
 
 </body>
 </html>

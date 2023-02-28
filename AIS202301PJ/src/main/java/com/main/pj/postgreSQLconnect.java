@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,23 +51,30 @@ public class postgreSQLconnect {
 		}
 	}
 
-	//등록 버튼 SQL 입니다.
-	public static void insertTask(HttpServletRequest request) throws Exception {
+	// 등록 버튼 SQL
+	public static void insertTask(String kadaikannriNumber, String shainnNumber, LocalDate tasseiYoteibi, String kadaiNaiyou, int tasseiKahi, Date kadaiTourokubi, LocalDateTime tasseiHiduke) throws Exception {
 	    Connection conn = null;
 	    PreparedStatement stmt = null;
 
-	    String task = request.getParameter("task");
-	    if (task == null || task.trim().isEmpty()) {
-	        throw new Exception("Task cannot be null or empty.");
+	    if (kadaikannriNumber == null || kadaikannriNumber.trim().isEmpty() ||
+	            shainnNumber == null || shainnNumber.trim().isEmpty() ||
+	            tasseiYoteibi == null ||
+	            kadaiNaiyou == null || kadaiNaiyou.trim().isEmpty() ||
+	            kadaiTourokubi == null || tasseiHiduke == null) {
+	        throw new Exception("One or more parameters are null or empty.");
 	    }
 
 	    try {
 	        conn = getConnection();
-	        String sql = "INSERT INTO tasks (task) VALUES(?)";
+	        String sql = "INSERT INTO kadai_table (kadaikannri_number, shainn_number, tassei_yoteibi, kadai_naiyou, tassei_kahi, kadai_tourokubi, tassei_hiduke) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	        stmt = conn.prepareStatement(sql);
-	        System.out.println("Task added successfully");
-
-	        stmt.setString(1, task);
+	        stmt.setString(1, kadaikannriNumber);
+	        stmt.setString(2, shainnNumber);
+	        stmt.setObject(3, tasseiYoteibi);
+	        stmt.setString(4, kadaiNaiyou);
+	        stmt.setInt(5, tasseiKahi);
+	        stmt.setDate(6, kadaiTourokubi);
+	        stmt.setObject(7, tasseiHiduke);
 
 	        if (stmt.executeUpdate() == 1) {
 	            conn.close();
@@ -73,7 +83,15 @@ public class postgreSQLconnect {
 	        e.printStackTrace();
 	    }
 	}
-	
+
+
+
+
+
+
+
+
+
 	
 
 	//수정 버튼 SQL 입니다.
@@ -96,6 +114,8 @@ public class postgreSQLconnect {
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
+	    
+	    
 	}
 
 
