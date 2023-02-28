@@ -5,8 +5,13 @@ import javax.servlet.http.HttpSession;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Comparator;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -157,7 +162,7 @@ public class MainListDAO {
 		String betweenDate02 = "";
 		String year = "";
 		String numMonth = "";
-		
+		String day = "";
 		
 		if (request.getParameter("yearAndMonthData") == null || request.getParameter("yearAndMonthData").isBlank()) {
 			
@@ -170,7 +175,7 @@ public class MainListDAO {
 			
 			System.out.println(year);
 			System.out.println(numMonth);
-			String day = CSVdownloadDAO.setDateStringForSQL(numMonth, year);
+			day = CSVdownloadDAO.setDateStringForSQL(numMonth, year);
 			// 검색용 날짜 문자열 설정
 			betweenDate01 = year + "-" + numMonth + "-01";
 			betweenDate02 = year + "-" + numMonth + "-" + day;
@@ -186,7 +191,7 @@ public class MainListDAO {
 			year = yearAndMonthData.substring(yearAndMonthData.length()-4, yearAndMonthData.length());
 			String numMonthSub = yearAndMonthData.substring(0, 3);
 			numMonth = CSVdownloadDAO.changeMonth(numMonthSub);
-			String day = CSVdownloadDAO.setDateStringForSQL(numMonth, year);
+			day = CSVdownloadDAO.setDateStringForSQL(numMonth, year);
 			
 			betweenDate01 = year + "-" + numMonth + "-01";
 			betweenDate02 = year + "-" + numMonth + "-" + day;
@@ -199,15 +204,47 @@ public class MainListDAO {
 		
 		
 		
+		
 		List<CSVdownloadDTO> kadais = new ArrayList<CSVdownloadDTO>();
 		kadais = ss.getMapper(MainlistMapper.class).selectMonthDate(d);
-		request.setAttribute("kadais",kadais);
 		
 		
 		
+		Date checkDate1 = null;
+		String checkDate2 = null;
+		String checkDate2Str = null;
+		
+		List<CSVdownloadDTO> daykadai = new ArrayList<CSVdownloadDTO>();
+		HashMap<String, List<CSVdownloadDTO>> dayList = new HashMap<String, List<CSVdownloadDTO>>();
+	
+		System.out.println("여기서부터---------------------------------");
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+			//내용으로 돌림
+			for (int i = 0; i < kadais.size() ; i++) {
+					checkDate1 = kadais.get(i).getTassei_yoteibi();
+					checkDate2 = simpleDateFormat.format(checkDate1); 
+					checkDate2Str = checkDate2.substring(checkDate2.length()-2, checkDate2.length());
+					System.out.println(checkDate2Str + ": 뒤에 2글자");
+				for (int a = 0; a < Integer.parseInt(day); a++) {
+					//10보다 작으면 같지 않으니까 예외처리
+					if (Integer.parseInt(checkDate2Str)== a) {
+						daykadai.add(kadais.get(i));
+						System.out.println("내부for문: " + kadais.get(i) + "몇일이야? :" + a);
+					}
+				}
+				dayList.put(checkDate2Str,daykadai);		
+				System.out.println("============ 일별dayList추가완료");
+			}
+//			확인용
+		System.out.println("★★★★★★★★★★★★★★★★★★★★★");
+		for(String i : dayList.keySet()){ //저장된 key값 확인
+		    System.out.println("[Key]:" + i + " [Value]:" + dayList.get(i));
+		    	for (CSVdownloadDTO csVdownloadDTO : daykadai) {
+					System.out.println(csVdownloadDTO.getKadai_naiyou());
+				}
+		}
+		System.out.println("★★★★★★★★★★★★★★★★★★★★★");
+		request.setAttribute("kadais",kadais);		
 	}
 
-	
-	
-	
 }
