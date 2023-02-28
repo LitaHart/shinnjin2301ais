@@ -37,9 +37,9 @@
 			<div class="wrapper">
 				<ul class="menu">
 					<!-- <li><a href="loginPage">ログイン</a></li> -->
-					<li><a href="mainlist">目標</a></li>
-					<li><a href="monthlylist">月間</a></li>
-					<li><a href="csvdownload">　一覧　</a></li>
+					<li id="l1"><a href="mainlist">目標</a></li>
+					<li id="l2"><a href="monthlylist">月間</a></li>
+					<li id="l3"><a href="csvdownload">　一覧　</a></li>
 				</ul>
 			</div>
 		</div>
