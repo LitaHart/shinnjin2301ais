@@ -173,63 +173,40 @@ public class MainListDAO {
 		Date checkDate1 = null;
 		String checkDate2 = null;
 		String checkDate2Str = null;
-
-		List<CSVdownloadDTO> daykadai = new ArrayList<CSVdownloadDTO>();
-//		HashMap<String, CSVdownloadDTO> dayList = new HashMap<String, CSVdownloadDTO>();
-		HashMap<String, List<String>> dayList = new HashMap<String, List<String>>();
-//		rinnji
 		
+//		List<CSVdownloadDTO> daykadai = new ArrayList<CSVdownloadDTO>();
 		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
 		// 내용으로 돌림
+//		Map<String, ArrayList<String>> dayList = new HashMap<String, ArrayList<String>>(); 		
+		
+		List<Map<String, String>> forRequest = new ArrayList<Map<String,String>>();
+		
+		
+		
 		for (int i = 0; i < kadais.size(); i++) {
-			//	달성예정일로 비교			
+			
 			checkDate1 = kadais.get(i).getTassei_yoteibi();
 			checkDate2 = simpleDateFormat.format(checkDate1);
 			checkDate2Str = checkDate2.substring(checkDate2.length() - 2, checkDate2.length());
-//			
-//			for (int a = 0; a < Integer.parseInt(day); a++) {
-//				// 10보다 작으면 같지 않으니까 예외처리
-//				if (Integer.parseInt(checkDate2Str)==a) {
-//					System.out.println("내부for문: " + kadais.get(i) + "몇일이야? :" + a);				
-//					
-//					daykadai.add(kadais.get(i));
-//		
-//					dayList.put(checkDate2Str, daykadai);
-//					
-//					System.out.println(daykadai.size());
-//				}
-				//System.out.println(checkDate2Str + daykadai);
-		//	}
-			List<String> daySch = new ArrayList();
+			
+			Map<String, String> forADD = new HashMap<String, String>();
 			
 			for (int a = 0; a < Integer.parseInt(day); a++) {
-				if (Integer.parseInt(checkDate2Str)==a) {
-					
-					
-					daySch.add(kadais.get(i).getKadai_naiyou());
-					daySch.add(simpleDateFormat.format(kadais.get(i).getTassei_yoteibi()));
-					
-					dayList.put(checkDate2Str, daySch);
-					
-//					CSVdownloadDTO daySch = new CSVdownloadDTO();
-//					daySch.setKadai_naiyou(kadais.get(i).getKadai_naiyou());
-//					daySch.setTassei_yoteibi(kadais.get(i).getTassei_yoteibi());
-					
-					
-				}
+					if (Integer.parseInt(checkDate2Str)==a) {
+						System.out.println(kadais.get(i).getKadai_naiyou());
+						
+						forADD.put(checkDate2Str, kadais.get(i).getKadai_naiyou());
+						forRequest.add(forADD);
+						
+						System.out.println(forADD);
+						System.out.println(forRequest);
+					}
 			}
-			
-			
-			System.out.println(daySch);
-
-			
 			System.out.println("============ 일별dayList추가완료");
-		}
-		
+		}	
 		request.setAttribute("kadais", kadais);
-		request.setAttribute("dayList", dayList);
+		request.setAttribute("forRequest", forRequest);
 	}
 
 }

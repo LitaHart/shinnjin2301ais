@@ -75,39 +75,34 @@
 </script>
 </head>
 <body>
-
-
-
-
-
-
-
 	<div class="PageMainDiv">
 	
+<%-- 	<td>${y.checkDate2Str}</td>
+					<td>${y.key}=${y.value}</td>
+					<td>${y.value}</td>
+					<td>${y.key.kadai_naiyou}</td>
+		<td> --%>
 	
 	<!-- ========================= -->
 
 
 		<table border="1">
-			<c:forEach items="${dayList}" var="y" varStatus="status">
+
+			
+			<c:forEach items="${forRequest}" var="fr" varStatus="frstatus">
+				<c:forEach items="${fr}" var="fa" varStatus="faStatus">
 				<tr>
-					<td>${y.key}   ${y.value}</td>
-					<%-- <td>${y.value}</td> --%>
-					<%-- <td>${y.key.kadai_naiyou}</td> --%>
-					<td>
-						<%-- <c:forEach items="${y.value}" var="k">		
-							
-								<c:out value="${k.kadai_naiyou}"/>		
-				
-						</c:forEach> --%>
-					</td>
-				</tr>				
+						<td>${fa.key}</td>
+						<td>${fa.value}</td>
+				</tr>
+				</c:forEach>
 			</c:forEach>
+			
 		</table>
 
 
 
-	<!-- ========================= -->
+		<!-- ========================= -->
 	
 	
 	
