@@ -58,94 +58,69 @@
 	font-size: 14px;
 	margin-top: 5px;
 }
-#selected-date {
-  display: inline-block;
-  margin-right: 10px;
-  position: absolute;
-  top: 47px;
-  right: 17px;
-}
-
-
-
 </style>
 </head>
 <body>
 	<div class="popup">
-		<p id="selected-date"></p>
 		<h2>課題追加</h2>
-		<input name=addTask id="task-input" placeholder="新規課題入力"
-			onfocus="this.placeholder=''" onblur="this.placeholder='新規課題入力'"
-			required>
+		<input type="text" value="${sessionScope.loginShainn.shainn_number }"
+			id="shainn_number"> <input name=addTask id="task-input"
+			placeholder="新規課題入力" onfocus="this.placeholder=''"
+			onblur="this.placeholder='新規課題入力'" required>
 		<div id="warning">必ず一文字以上書いてください。</div>
 		<h4>⚠️登録された課題は削除できません。ご注意ください。</h4>
 		<button id="cancel-btn">キャンセル</button>
 		<button id="register-btn">登録</button>
-		<div class="ui calendar" id="deadline-calendar">
-			<button id="deadline-btn" class="ui button">達成予定日</button>
-		</div>
 	</div>
 
 	<script>
-	$(document).ready(function() {
-		  $('#deadline-calendar').calendar({
-		    type: 'date',
-		    onChange: function(date, text, mode) {
-		      const japaneseDate = date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
-		      console.log('Selected date: ' + japaneseDate);
-		      document.getElementById("selected-date").textContent = japaneseDate;
-		    }
-		  });
-		});
+  const taskInput = document.getElementById('task-input');
+  const warning = document.getElementById('warning');
 
+  taskInput.addEventListener('input', (event) => {
+    const inputRegex = /^[\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uD7B0-\uD7FF\u3040-\u30ff\uff01-\uff5e\u4e00-\u9faf\w\s]*$/;
+    if (!inputRegex.test(taskInput.value)) {
+      alert('ハングル、英語、日本語(全角、半角)以外は入力できません。');
+      event.preventDefault();
+      taskInput.value = taskInput.value.replace(/[^\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uD7B0-\uD7FF\u3040-\u30ff\uff01-\uff5e\u4e00-\u9faf\w\s]/g, '');
+    }
+  });
 
-    	const deadlineBtn = document.getElementById('deadline-btn');
-    	deadlineBtn.addEventListener('click', () => {
-    	  $('#deadline-calendar').calendar('show');
-    	});
+  'use strict';
 
+//작동 스크립트
+  window.addEventListener('load', () => {
+    const cancelBtn = document.getElementById('cancel-btn');
+    const registerBtn = document.getElementById('register-btn');
+    const taskInput = document.getElementById('task-input');
+    const kadaikannriNumber = '<%= request.getParameter("kadaikannri_number") %>';
+    const yearAndMonthData = '<%= request.getParameter("yearAndMonthData") %>';
+   
+    
+    
+    registerBtn.addEventListener('click', () => {
+    	 var shainn_number = document.getElementById('shainn_number').value;
+    	    
+    	
+      const task = taskInput.value;
+      if (task.trim().length < 1) {
+        warning.style.display = 'block';
+      } else {
+        try {
+          location.href = 'popupAdd.do?kadaikannri_number=' + kadaikannriNumber + '&kadai_naiyou=' + task + '&tassei_yoteibi=' + yearAndMonthData  + '&shainn_number=' + shainn_number;
+          window.close();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    });
 
-    	const taskInput = document.getElementById('task-input');
-    	const warning = document.getElementById('warning');
+    cancelBtn.addEventListener('click', () => {
+      window.close();
+    });
 
-    	taskInput.addEventListener('input', (event) => {
-    		  const inputRegex = /^[\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uD7B0-\uD7FF\u3040-\u30ff\uff01-\uff5e\u4e00-\u9faf\w\s]*$/;
-    		  if (!inputRegex.test(taskInput.value)) {
-    		    alert('ハングル、英語、日本語(全角、半角)以外は入力できません。');
-    		    event.preventDefault();
-    		    taskInput.value = taskInput.value.replace(/[^\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uD7B0-\uD7FF\u3040-\u30ff\uff01-\uff5e\u4e00-\u9faf\w\s]/g, '');
-    		  }
-    		});
-
-
-    	'use strict';
-
-    	// 작동 스크립트
-    	window.addEventListener('load', () => {
-    	  const cancelBtn = document.getElementById('cancel-btn');
-    	  const registerBtn = document.getElementById('register-btn');
-    	  const taskInput = document.getElementById('task-input');
-    	  registerBtn.addEventListener('click', () => {
-    	    const task = taskInput.value;
-    	    if (task.trim().length < 1) {
-    	      warning.style.display = 'block';
-    	    } else {
-    	      try {
-    	        location.href = 'popupAdd.do?task=' + task;
-    	        window.close();
-    	      } catch (e) {
-    	        console.error(e);
-    	      }
-    	    }
-    	  });
-
-    	  cancelBtn.addEventListener('click', () => {
-    	    window.close();
-    	  });
-
-    	});
-
-    </script>
+  });
+</script>
 
 </body>
 </html>

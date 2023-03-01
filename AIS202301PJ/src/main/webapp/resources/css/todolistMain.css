@@ -1,91 +1,93 @@
 @charset "UTF-8";
 /* Font Import  */
-
 @font-face {
-    font-family: 'DotGothic16';
-    src: url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&display=swap');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'DotGothic16';
+	src:
+		url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&display=swap');
+	font-weight: normal;
+	font-style: normal;
 }
 
 /* body 전체 적용 */
-body{
+body {
 	font-family: 'DotGothic16', sans-serif;
 }
 /*스크롤 */
-.PageMainDiv{
+.PageMainDiv {
 	border: solid 2px black;
 	font-family: 'DotGothic16', sans-serif;
-	background-color: rgb(238,238,238);
-	overflow:auto;
-	width:450px;
-    height:600px;
+	background-color: rgb(238, 238, 238);
+	overflow: auto;
+	width: 450px;
+	height: 600px;
 }
 
-.container_home{    
-	display:flex;
+.container_home {
+	display: flex;
 	/* 화면구조 */
-    position:absolute;
+	position: absolute;
 	margin: 10px;
-	width:500px;
-    height:600px;
-    left:45%;
-    top:30%;
-    margin-left:-180px;
-    margin-top:-180px;
-}
-.PageMainDiv_home{
-	background-color: rgb(238,238,238);
-	position:relative;
-	width:80%;
-    height:100%;
+	width: 500px;
+	height: 600px;
+	left: 45%;
+	top: 30%;
+	margin-left: -180px;
+	margin-top: -180px;
 }
 
-
+.PageMainDiv_home {
+	background-color: rgb(238, 238, 238);
+	position: relative;
+	width: 80%;
+	height: 100%;
+}
 
 /* ============================= MENU */
 .wrapper {
-position: absolute;
-right: 0px;
-float:right;
-max-width: 50px;
-margin: 0 auto;
+	position: absolute;
+	right: 0px;
+	float: right;
+	max-width: 50px;
+	margin: 0 auto;
 }
+
 .menu {
-margin: 0;
-padding: 0;
-list-style: none;
-text-align: center;
-display: inline-block;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-align: center;
+	display: inline-block;
 }
+
 .menu li {
-font-size: 9pt;
-text-align: center;
-/* background-color: whitesmoke; */
-box-sizing: border-box;
-
-padding-top: 10px;
-padding-bottom: 10px;
-
-width: 60px;
-height: 40px;
-border-top : 1px solid black;
-border-right : 1px solid black;
-border-bottom : 1px solid black;
-margin-bottom: 10px;
-}
-.menu li:first-child {
-border-left:1px solid black;
-}
-.menu li:hover {
-background-color: coral;
-}
-a {
-text-decoration: none;
-}
-a:link, a:visited, a:hover, a:active {
-color: black;
+	font-size: 9pt;
+	text-align: center;
+	box-sizing: border-box;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 60px;
+	height: 40px;
+	margin-top: 5px;
+	margin-bottom: 15px;
 }
 
+.menu #l1 {
+	background-color: rgb(233, 202, 203);
+	border-top: 1px solid rgb(210, 150, 150);
+	border-right: 2px solid rgb(210, 150, 150);
+	border-bottom: 2px solid rgb(210, 150, 150);
+}
 
+.menu #l2 {
+	background-color: rgb(251, 241, 204);
+	border-top: 1px solid rgb(245, 227, 165);
+	border-right: 2px solid rgb(245, 227, 165);
+	border-bottom: 2px solid rgb(245, 227, 165);
+}
 
+.menu #l3 {
+	background-color: rgb(221, 233, 211);
+	border-top: 1px solid rgb(172, 193, 153);
+	border-right: 2px solid rgb(172, 193, 153);
+	border-bottom: 2px solid rgb(172, 193, 153);
+}

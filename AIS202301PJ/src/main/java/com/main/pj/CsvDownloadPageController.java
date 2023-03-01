@@ -74,7 +74,7 @@ public class CsvDownloadPageController {
 			kadaiData.put(Integer.toString(j + 1), csvDataFromDB.get(j));
 		}
 
-		// data에서 keySet를 가져온다. 이 Set 값들을 조회하면서 데이터들을 sheet에 입력한다.
+		// data에서 keySet를 가져온다. 이 Set 값들을 조회하면서 데이터들을 sheet에 입력
 		Set<String> keyset = kadaiData.keySet();
 		int rownum = 0;
 
