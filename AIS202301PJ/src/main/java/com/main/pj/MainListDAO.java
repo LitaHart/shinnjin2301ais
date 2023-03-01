@@ -5,13 +5,10 @@ import javax.servlet.http.HttpSession;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-import java.util.Comparator;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +34,6 @@ public class MainListDAO {
 		// 로그인한 사람의 목표리스트 가져오기
 		Shainn_info loginShainn = (Shainn_info) session.getAttribute("loginShainn");
 		String emID = loginShainn.getShainn_number();
-		System.out.println(emID);
 
 		k.setShainn_number(emID);
 
@@ -74,23 +70,13 @@ public class MainListDAO {
 
 		KadaiDTO k = new KadaiDTO();
 
-		System.out.println(yearAndMonthData);
-
 		String yearAndMonthDataSplit[] = yearAndMonthData.split("\\s");
 
 		String month1 = yearAndMonthDataSplit[0];
 		String dateconma = yearAndMonthDataSplit[1];
 		String year = yearAndMonthDataSplit[2];
-
 		String date = dateconma.replaceAll("[,]", "");
-
-		System.out.println(month1);
-		System.out.println(date);
-		System.out.println(year);
-
 		String month = month1.substring(0, 3);
-
-		System.out.println(month);
 
 		if (month.equals("Jan")) {
 			month = "01";
@@ -118,14 +104,12 @@ public class MainListDAO {
 			month = "12";
 		}
 
-		System.out.println(month + "몇월선택?");
-
 		String hiduke = year + "-" + month + "-" + date;
 		java.sql.Date d = java.sql.Date.valueOf(hiduke);
 
-		System.out.println(d);
 		k.setTassei_yoteibi(d);
 		k.setShainn_number(shainn_number);
+
 		String strNowDate = month + "月" + date + "日";
 
 		List<KadaiDTO> kadais = new ArrayList<KadaiDTO>();
@@ -159,8 +143,6 @@ public class MainListDAO {
 			year = strNowDate.substring(0, 4);
 			numMonth = strNowDate.substring(5, 7);
 
-			System.out.println(year);
-			System.out.println(numMonth);
 			day = CSVdownloadDAO.setDateStringForSQL(numMonth, year);
 			// 검색용 날짜 문자열 설정
 			betweenDate01 = year + "-" + numMonth + "-01";
@@ -193,36 +175,61 @@ public class MainListDAO {
 		String checkDate2Str = null;
 
 		List<CSVdownloadDTO> daykadai = new ArrayList<CSVdownloadDTO>();
-		HashMap<String, List<CSVdownloadDTO>> dayList = new HashMap<String, List<CSVdownloadDTO>>();
-
-		System.out.println("여기서부터---------------------------------");
+//		HashMap<String, CSVdownloadDTO> dayList = new HashMap<String, CSVdownloadDTO>();
+		HashMap<String, List<String>> dayList = new HashMap<String, List<String>>();
+//		rinnji
+		
+		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
 		// 내용으로 돌림
 		for (int i = 0; i < kadais.size(); i++) {
+			//	달성예정일로 비교			
 			checkDate1 = kadais.get(i).getTassei_yoteibi();
 			checkDate2 = simpleDateFormat.format(checkDate1);
 			checkDate2Str = checkDate2.substring(checkDate2.length() - 2, checkDate2.length());
-			System.out.println(checkDate2Str + ": 뒤에 2글자");
+//			
+//			for (int a = 0; a < Integer.parseInt(day); a++) {
+//				// 10보다 작으면 같지 않으니까 예외처리
+//				if (Integer.parseInt(checkDate2Str)==a) {
+//					System.out.println("내부for문: " + kadais.get(i) + "몇일이야? :" + a);				
+//					
+//					daykadai.add(kadais.get(i));
+//		
+//					dayList.put(checkDate2Str, daykadai);
+//					
+//					System.out.println(daykadai.size());
+//				}
+				//System.out.println(checkDate2Str + daykadai);
+		//	}
+			List<String> daySch = new ArrayList();
+			
 			for (int a = 0; a < Integer.parseInt(day); a++) {
-				// 10보다 작으면 같지 않으니까 예외처리
-				if (Integer.parseInt(checkDate2Str) == a) {
-					daykadai.add(kadais.get(i));
-					System.out.println("내부for문: " + kadais.get(i) + "몇일이야? :" + a);
+				if (Integer.parseInt(checkDate2Str)==a) {
+					
+					
+					daySch.add(kadais.get(i).getKadai_naiyou());
+					daySch.add(simpleDateFormat.format(kadais.get(i).getTassei_yoteibi()));
+					
+					dayList.put(checkDate2Str, daySch);
+					
+//					CSVdownloadDTO daySch = new CSVdownloadDTO();
+//					daySch.setKadai_naiyou(kadais.get(i).getKadai_naiyou());
+//					daySch.setTassei_yoteibi(kadais.get(i).getTassei_yoteibi());
+					
+					
 				}
 			}
-			dayList.put(checkDate2Str, daykadai);
+			
+			
+			System.out.println(daySch);
+
+			
 			System.out.println("============ 일별dayList추가완료");
 		}
-		//	확인용
-		System.out.println("★★★★★★★★★★★★★★★★★★★★★");
-		for (String i : dayList.keySet()) { // 저장된 key값 확인
-			System.out.println("[Key]:" + i + " [Value]:" + dayList.get(i));
-			for (CSVdownloadDTO csVdownloadDTO : daykadai) {
-				System.out.println(csVdownloadDTO.getKadai_naiyou());
-			}
-		}
-		System.out.println("★★★★★★★★★★★★★★★★★★★★★");
+		
 		request.setAttribute("kadais", kadais);
+		request.setAttribute("dayList", dayList);
 	}
 
 }
