@@ -93,36 +93,38 @@
 
 //작동 스크립트
   window.addEventListener('load', () => {
-    const cancelBtn = document.getElementById('cancel-btn');
-    const registerBtn = document.getElementById('register-btn');
-    const taskInput = document.getElementById('task-input');
-    const kadaikannriNumber = '<%= request.getParameter("kadaikannri_number") %>';
-    const yearAndMonthData = '<%= request.getParameter("yearAndMonthData") %>';
+  const cancelBtn = document.getElementById('cancel-btn');
+  const registerBtn = document.getElementById('register-btn');
+  const taskInput = document.getElementById('task-input');
+  const yearAndMonthData = '<%= request.getParameter("yearAndMonthData") %>';
    
     
     
-    registerBtn.addEventListener('click', () => {
-    	 var shainn_number = document.getElementById('shainn_number').value;
-    	    
-    	
-      const task = taskInput.value;
-      if (task.trim().length < 1) {
-        warning.style.display = 'block';
-      } else {
-        try {
-          location.href = 'popupAdd.do?kadaikannri_number=' + kadaikannriNumber + '&kadai_naiyou=' + task + '&tassei_yoteibi=' + yearAndMonthData  + '&shainn_number=' + shainn_number;
-          window.close();
-        } catch (e) {
-          console.error(e);
-        }
-      }
-    });
+  registerBtn.addEventListener('click', () => {
+	  var shainn_number = document.getElementById('shainn_number').value;
+	  const task = taskInput.value.trim();
+	  if (task.length < 1) {
+	    warning.style.display = 'block';
+	  } else {
+	    const url = 'popupAdd.do?kadai_naiyou=' + task + '&tassei_yoteibi=' + yearAndMonthData + '&shainn_number=' + shainn_number;
+	    fetch(url)
+	      .then(response => {
+	        if (!response.ok) {
+	          throw new Error('課題数は最大10個まで登録できます。');
+	        }
+	        window.close();
+	      })
+	      .catch(error => {
+	        alert(error.message);
+	      });
+	  }
+	});
 
-    cancelBtn.addEventListener('click', () => {
-      window.close();
-    });
+    	cancelBtn.addEventListener('click', () => {
+    	  window.close();
+    	});
 
-  });
+    });
 </script>
 
 </body>

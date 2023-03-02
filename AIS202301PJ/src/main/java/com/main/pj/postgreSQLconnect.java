@@ -1,5 +1,6 @@
 package com.main.pj;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,25 +55,12 @@ public class postgreSQLconnect {
 	}
 
 	// 등록 버튼 SQL
-	public static void insertTask(String kadaikannriNumber, 
-            String shainn_number, 
-            String tasseiYoteibi, 
-            String kadaiNaiyou, 
-            int tasseiKahi, 
-            LocalDate kadaiTourokubi, 
-            LocalDateTime tasseiHiduke)
- throws Exception {
-		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		java.util.Date parsedDate = dateFormat.parse(tasseiYoteibi);
-		java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
-		
+	public static void insertTask(String shainn_number, String tasseiYoteibi, String kadaiNaiyou, int tasseiKahi, LocalDate kadaiTourokubi, LocalDateTime tasseiHiduke) throws Exception {
 
 
-		
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		System.out.println(kadaikannriNumber);
+	
 		System.out.println(shainn_number + "회원번호");
 		System.out.println(tasseiYoteibi);
 		System.out.println(kadaiNaiyou);
@@ -79,7 +68,7 @@ public class postgreSQLconnect {
 		System.out.println(kadaiTourokubi);
 		System.out.println(tasseiHiduke);
 		
-		if (kadaikannriNumber == null || kadaikannriNumber.trim().isEmpty() ||
+		if (
 				shainn_number == null || shainn_number.trim().isEmpty() ||
 			tasseiYoteibi == null || tasseiYoteibi.trim().isEmpty() ||
 			kadaiNaiyou == null || kadaiNaiyou.trim().isEmpty()) {
@@ -88,15 +77,34 @@ public class postgreSQLconnect {
 
 		try {
 			conn = getConnection();
-			String sql = "INSERT INTO kadai_table (kadaikannri_number, shainn_number, tassei_yoteibi, kadai_naiyou, tassei_kahi, kadai_tourokubi, tassei_hiduke) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	        // 최대 10개까지만 작동할 수 있게 하자.
+	        String countSql = "SELECT COUNT(*) FROM kadai_table WHERE shainn_number = ? AND tassei_yoteibi = ?::DATE";
+	        stmt = conn.prepareStatement(countSql);
+	        stmt.setString(1, shainn_number);
+	        stmt.setString(2, tasseiYoteibi);
+	        ResultSet rs = stmt.executeQuery();
+	        rs.next();
+	        int count = rs.getInt(1);
+	        rs.close();
+	        stmt.close();
+	        
+	        
+
+	        if (count >= 10) {
+	        	throw new Error("The maximum number of tasks for the given date has been exceeded.");
+	        	
+	        	}
+
+			//추가 데이터
+			String sql = "INSERT INTO kadai_table (shainn_number, tassei_yoteibi, kadai_naiyou, tassei_kahi, kadai_tourokubi, tassei_hiduke) VALUES (?, ?::DATE, ?, ?, ?, ?)";
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, kadaikannriNumber);
-			stmt.setString(2, shainn_number);
-			stmt.setDate(3, sqlDate);
-			stmt.setString(4, kadaiNaiyou);
-			stmt.setInt(5, 0);
-			stmt.setDate(6, java.sql.Date.valueOf(LocalDate.now()));
-			stmt.setTimestamp(7, null);
+			
+			stmt.setString(1, shainn_number);
+			stmt.setString(2, tasseiYoteibi);
+			stmt.setString(3, kadaiNaiyou);
+			stmt.setInt(4, 0);
+			stmt.setDate(5, java.sql.Date.valueOf(LocalDate.now()));
+			stmt.setTimestamp(6, null);
 			
 			
 			if (stmt.executeUpdate() == 1) {
@@ -110,28 +118,29 @@ public class postgreSQLconnect {
 	
 
 	//수정 버튼 SQL 입니다.
-	public static void updateTask(int id, String task) throws SQLException, Exception {
+	public static void updateTask(int kadaikannri_number, String kadaiNaiyou) throws SQLException, Exception {
 	    Connection conn = null;
 	    PreparedStatement stmt = null;
 
 	    try {
 	        conn = getConnection();
-	        String sql = "UPDATE tasks SET task = ? WHERE id = ?";
+	        String sql = "UPDATE kadai_table SET kadai_naiyou = ? WHERE kadaikannri_number = ?";
 	        stmt = conn.prepareStatement(sql);
-
-	        stmt.setString(1, task);
-	        stmt.setInt(2, id);
+	        stmt.setString(1, kadaiNaiyou);
+	        stmt.setInt(2, kadaikannri_number);
 
 	        if (stmt.executeUpdate() == 1) {
 	            System.out.println("Task updated successfully");
-	            conn.close();
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
+	    } finally {
+	        if (stmt != null) {
+	            stmt.close();
+	        }
+	        if (conn != null) {
+	            conn.close();
+	        }
 	    }
-	    
-	    
 	}
-
-
 }

@@ -2,9 +2,11 @@ package com.main.pj;
 
 import java.net.http.HttpRequest;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,11 +32,6 @@ public class PopupController {
     @RequestMapping(value = "/popupAdd.do", method = RequestMethod.GET)
     public String popupAdd(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	String shainn_number = request.getParameter("shainn_number");
-    	
-        String kadaikannriNumberStr = request.getParameter("kadaikannri_number");
-        if (kadaikannriNumberStr == null || kadaikannriNumberStr.trim().isEmpty()) {
-            throw new Exception("kadaikannri_number parameter is null or empty");
-        }
 
         String kadaiNaiyou = request.getParameter("kadai_naiyou");
         if (kadaiNaiyou == null || kadaiNaiyou.trim().isEmpty()) {
@@ -47,9 +44,8 @@ public class PopupController {
         }
         LocalDate kadaiTourokubi = LocalDate.now();
         LocalDateTime tasseiHiduke = null;
-
-
-        postgreSQLconnect.insertTask(kadaikannriNumberStr, 
+        
+        postgreSQLconnect.insertTask( 
         		shainn_number, 
                 tasseiYoteibi, 
                 kadaiNaiyou, 
@@ -62,22 +58,34 @@ public class PopupController {
 
     
     
-    
-    
+   
+//	@RequestParam("kadaiNum") String kadaiNum,
+//	@RequestParam("kadai_naiyou") String kadai_naiyou
  
     //수정 버튼 눌렀을 때 호출
     @RequestMapping(value = "/popupEdit", method = RequestMethod.GET)
-    public String popupEdit(Model model) {
+    public String popupEdit(Model model,HttpServletRequest request, HttpServletResponse response,    		
+    		@RequestParam("kadaiNum") String kadaiNum, @RequestParam("kadai_naiyou") String kadai_naiyou) {
+    	
+//    	String kadaiNum = request.getParameter("kadaiNum");
+//    	String kadai_naiyou = request.getParameter("kadai_naiyou");
+    	System.out.println(kadaiNum);
+    	System.out.println(kadai_naiyou);
+    	
+    	
+    	
+    	request.setAttribute("kadaiNum", kadaiNum);
+    	request.setAttribute("kadai_naiyou", kadai_naiyou);
         return "todolist/05_popupEdit";
     }
 
     //수정 버튼 눌렀을 때 반응
     @RequestMapping(value = "/popupEdit.do", method = RequestMethod.GET)
-    public String popupEdit(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String task = request.getParameter("task");
-        postgreSQLconnect.updateTask(id, task);
+    public String popupEdit(HttpServletRequest request, HttpServletResponse response,
+            @RequestParam("kadaikannri_number") int kadaikannri_number,
+            @RequestParam("kadai_naiyou") String kadaiNaiyou) throws Exception {
+        postgreSQLconnect.updateTask(kadaikannri_number, kadaiNaiyou);
         return "todolist/05_popupEdit";
     }
-}
 
+}

@@ -29,18 +29,22 @@
             margin-top: 20px;
         }
     </style>
+    
 </head>
 <body>
+  
     <div class="popup">
         <h2>課題編集</h2>
-		<input name="editTask" id="task-input" value="${requestScope.task}" 
-		onfocus="this.placeholder=''" onblur="this.placeholder='新規課題入力'">
-		<button id="cancel-btn" style="font-size: 18px; padding: 10px 20px;">キャンセル</button>
-        <button id="update-btn" style="font-size: 18px; padding: 10px 20px;">修正</button>
+        
+        <input name="editTask" id="kadai_naiyou" value="${kadai_naiyou }" onfocus="this.placeholder=''" onblur="this.placeholder='新規課題入力'">
+        <input type="text" value="${kadaiNum }" id="kadaiNum">
+        <button id="cancel-btn">キャンセル</button>
+        <button id="update-btn">修正</button>
 
     </div>
     
     <script>
+    
         'use strict';
         
         // 작동 스크립트
@@ -54,9 +58,11 @@
             });
             
             updateBtn.addEventListener('click', () => {
-                const task = taskInput.value;
+            	var kadaiNum = document.getElementById('kadaiNum').value();
+            	var kadai_naiyou = document.getElementById('kadai_naiyou').value();
+            	const task = taskInput.value;
                 try {
-                    location.href = 'popupEdit.do?id=<%= request.getParameter("id") %>&task=' + task;
+                    location.href = 'popupEdit.do?kadaikannri_number='+kadaiNum+'&kadai_naiyou=' + kadai_naiyou;
                     window.close();
                 } catch (e) {
                     console.error(e);
