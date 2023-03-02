@@ -23,11 +23,9 @@
 								.getElementById("simpleDateInput").value;
 						var simpleDateSub = simpleDateVal.substr(0, 3);
 						$("#simpleDateSpan").text(simpleDateSub);
-
 						$('#csvCalendar').calendar({
 							type : 'month'
 						});
-
 						/* 오늘 날짜 불러오기 */
 						var today = new Date();
 						var todayEN = today.toLocaleDateString("en-us", {
@@ -68,27 +66,16 @@
 							location.href = 'monthlylist?yearAndMonthData='
 									+ yearAndMonthData;
 							/* =============================================== */
-
 						};
-
 					});
 </script>
 </head>
 <body>
+
+	
 	<div class="PageMainDiv">
-	
-<%-- 	<td>${y.checkDate2Str}</td>
-					<td>${y.key}=${y.value}</td>
-					<td>${y.value}</td>
-					<td>${y.key.kadai_naiyou}</td>
-		<td> --%>
-	
-	<!-- ========================= -->
-
-
+		<!--  ==================	임시 데이터 출력 -->
 		<table border="1">
-
-			
 			<c:forEach items="${forRequest}" var="fr" varStatus="frstatus">
 				<c:forEach items="${fr}" var="fa" varStatus="faStatus">
 				<tr>
@@ -99,16 +86,22 @@
 			</c:forEach>
 			
 		</table>
-
-
-
-		<!-- ========================= -->
-	
-	
-	
-	
-	
+	<!-- ========================= -->
+	<div id="mainlist_header">
+		<!-- sankaku button -->
+		
+			<div class="ui calendar" id="csvCalendar">
+				<label for="yearAndMonthData"> <input style="opacity: 0;"
+					type="checkbox" id="yearAndMonthData" class="calendarClass"
+					value="${simpleDate}"> ▼
+				</label>
+			</div>
+			<div class="user_name"><span>${sessionScope.loginShainn.shainn_name }様</span></div>
+	</div>
+		
+	<!-- ================================= -->
 		<!-- Main div 【上】-->
+		
 		<div>
 			<input type="hidden"
 				value="${sessionScope.loginShainn.shainn_number }"
@@ -120,16 +113,17 @@
 		<div>
 			<span id="simpleDateSpan"></span>月
 		</div>
+		
+		
 		<!-- Calendar-->
 		<div>
 			<br>
-			<div class="ui calendar" id="csvCalendar">
+			<div class="ui calendar" id="csvCalendar" style="visibility: hidden;">
 				<div class="ui input left icon">
 					<i class="time icon"></i> <input name="selectedMonth"
 						id="yearAndMonthData" type="text" value="${simpleDate }" />
 				</div>
 			</div>
-			<br />
 		</div>
 
 		<div>
