@@ -82,10 +82,13 @@ public class PopupController {
     //수정 버튼 눌렀을 때 반응
     @RequestMapping(value = "/popupEdit.do", method = RequestMethod.GET)
     public String popupEdit(HttpServletRequest request, HttpServletResponse response,
-            @RequestParam("kadaikannri_number") int kadaikannri_number,
-            @RequestParam("kadai_naiyou") String kadaiNaiyou) throws Exception {
+                            @RequestParam("kadaikannri_number") int kadaikannri_number,
+                            @RequestParam("kadai_naiyou") String kadaiNaiyou) throws Exception {
         postgreSQLconnect.updateTask(kadaikannri_number, kadaiNaiyou);
-        return "todolist/05_popupEdit";
+        // 업데이트 결과에 따라 적절한 뷰를 반환하도록 구현해야 합니다.
+        // 수정에 성공한 경우, 수정된 내용을 보여주는 뷰를 반환하거나
+        // 메인 페이지로 리다이렉트하는 등의 동작을 구현할 수 있습니다.
+        return "redirect:/mainlist";
     }
 
 }
