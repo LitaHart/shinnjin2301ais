@@ -26,6 +26,7 @@
 		on kadai_table.shainn_number = shainn_table.shainn_number
 		where kadai_table.shainn_number = #{shainn_number}
 		and kadai_table.tassei_yoteibi between date'${betweenDate01}' and date'${betweenDate02}'
+		order by tassei_yoteibi asc
 	</select>
 
 

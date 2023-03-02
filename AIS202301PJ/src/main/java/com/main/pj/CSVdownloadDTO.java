@@ -3,7 +3,7 @@ package com.main.pj;
 import java.util.Date;
 
 public class CSVdownloadDTO {
-	
+
 	private String shainn_number;
 	private String shainn_name;
 	private String kadai_naiyou;
@@ -14,7 +14,7 @@ public class CSVdownloadDTO {
 	public CSVdownloadDTO() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public CSVdownloadDTO(String shainn_number, String shainn_name, String kadai_naiyou, Date tassei_yoteibi,
 			int tassei_kahi, Date tassei_hiduke) {
 		super();
@@ -73,5 +73,5 @@ public class CSVdownloadDTO {
 	public void setTassei_hiduke(Date tassei_hiduke) {
 		this.tassei_hiduke = tassei_hiduke;
 	}
-	
+
 }

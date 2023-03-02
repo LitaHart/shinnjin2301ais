@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
-<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
- <script type="text/javascript">
+<link
+	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css"
+	rel="stylesheet" type="text/css" />
+<script
+	src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+<script type="text/javascript">
  /* checkBoxes */
 	function checkOnlyOne(element) {
 		const checkBoxes = document.getElementsByName("timeSelect");
@@ -52,34 +57,37 @@
 </head>
 <body>
 
-<form action="csvdownload.check">
-	<div class="PageMainDiv">
-	<!-- Main div 【上】-->
-	<div id="mainDiv_csvDownload">
-		<div>
-			<input name="timeSelect" value="csvMonth" type="checkbox" onclick='checkOnlyOne(this)' checked="checked"/> 月別
-			<input name="timeSelect" value="csvAll" type="checkbox" onclick='checkOnlyOne(this)'/> すべて
+	<form action="csvdownload.check">
+		<div class="PageMainDiv">
+			<!-- Main div 【上】-->
+			<div id="mainDiv_csvDownload">
+				<div>
+					<input name="timeSelect" value="csvMonth" type="checkbox"
+						onclick='checkOnlyOne(this)' checked="checked" /> 月別 <input
+						name="timeSelect" value="csvAll" type="checkbox"
+						onclick='checkOnlyOne(this)' /> すべて
+				</div>
+				<div>
+					<input name="csvInclude" value="csvInclude" type="checkbox">
+					未達成課題を含む
+				</div>
+				<div>
+					<br>
+					<div class="ui calendar" id="csvCalendar">
+						<div class="ui input left icon">
+							<i class="time icon"></i> <input name="selectedMonth"
+								id="yearAndMonthData" type="text" placeholder="年月を選択" />
+						</div>
+					</div>
+					<br />
+				</div>
+				<div>
+					<button type="submit">csvダウンロード</button>
+				</div>
+			</div>
+			<!--　Main div 【下】 -->
 		</div>
-		<div>
-			<input name="csvInclude" value="csvInclude" type="checkbox"> 未達成課題を含む
-		</div>
-		<div>
-				<br>
-  				<div class="ui calendar" id="csvCalendar">
-   				<div class="ui input left icon">
-      			<i class="time icon"></i>
-     				<input name="selectedMonth" id="yearAndMonthData" type="text" placeholder="年月を選択"/>
-    			</div>
-  				</div>
-  			<br/>
-		</div>
-		<div>
-			<button type="submit">csvダウンロード</button>
-		</div>
-	</div>
-	<!--　Main div 【下】 -->
-	</div>
-</form>
+	</form>
 
 
 

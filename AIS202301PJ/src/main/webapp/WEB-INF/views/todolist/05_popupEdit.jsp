@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,12 +65,12 @@
                     location.href = 'popupEdit.do?kadaikannri_number='+kadaiNum+'&kadai_naiyou=' + kadai_naiyou;
                     window.close();
                 } catch (e) {
-                    console.error(e);
+                   console.error(e);
                 }
             });
 
         });
     </script>
-    
+
 </body>
 </html>

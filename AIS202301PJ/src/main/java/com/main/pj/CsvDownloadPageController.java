@@ -30,7 +30,7 @@ public class CsvDownloadPageController {
 	private LoginDAO ldao;
 
 	@RequestMapping(value = "/csvdownload", method = RequestMethod.GET)
-	public String csvDownloadPage(Model model,HttpServletRequest request) {
+	public String csvDownloadPage(Model model, HttpServletRequest request) {
 		// DB link Check
 		try {
 			System.out.println("Start DownloadController");
@@ -39,7 +39,7 @@ public class CsvDownloadPageController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		if (ldao.loginCheck(request)) {
 			model.addAttribute("innerPageData", "todolist/04_csvdownload.jsp");
 		} else {
@@ -49,13 +49,14 @@ public class CsvDownloadPageController {
 	}
 
 	@RequestMapping(value = "/csvdownload.check", method = RequestMethod.GET)
-	public void downloadDataCheck(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+	public void downloadDataCheck(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws Exception {
 		logger.info("------->>>>>>>>>> Download Controller DataCheck Start");
-		
-		Shainn_info loginShainn =  (Shainn_info) session.getAttribute("loginShainn");
+
+		Shainn_info loginShainn = (Shainn_info) session.getAttribute("loginShainn");
 		String emID = loginShainn.getShainn_number();
 		System.out.println(emID);
-		
+
 		List<Object[]> csvDataFromDB = csvDAO.checkOptionandExcute(request, emID);
 
 		logger.info("------->>>>>>>>>> Download Controller writeCSV Start");
@@ -73,7 +74,7 @@ public class CsvDownloadPageController {
 			kadaiData.put(Integer.toString(j + 1), csvDataFromDB.get(j));
 		}
 
-		// data에서 keySet를 가져온다. 이 Set 값들을 조회하면서 데이터들을 sheet에 입력한다.
+		// data에서 keySet를 가져온다. 이 Set 값들을 조회하면서 데이터들을 sheet에 입력
 		Set<String> keyset = kadaiData.keySet();
 		int rownum = 0;
 
