@@ -58,22 +58,25 @@
 	font-size: 14px;
 	margin-top: 5px;
 }
+
+
 </style>
 </head>
 <body>
 	<div class="popup">
 		<h2>課題追加</h2>
-		<input type="text" value="${sessionScope.loginShainn.shainn_number }"
-			id="shainn_number"> <input name=addTask id="task-input"
-			placeholder="新規課題入力" onfocus="this.placeholder=''"
-			onblur="this.placeholder='新規課題入力'" required>
+		<input type="text" value="${sessionScope.loginShainn.shainn_number }"id="shainn_number">
+		
+		<input name=addTask id="task-input" placeholder="新規課題入力"
+			onfocus="this.placeholder=''" onblur="this.placeholder='新規課題入力'"
+			required>
 		<div id="warning">必ず一文字以上書いてください。</div>
 		<h4>⚠️登録された課題は削除できません。ご注意ください。</h4>
 		<button id="cancel-btn">キャンセル</button>
 		<button id="register-btn">登録</button>
 	</div>
 
-	<script>
+<script>
   const taskInput = document.getElementById('task-input');
   const warning = document.getElementById('warning');
 

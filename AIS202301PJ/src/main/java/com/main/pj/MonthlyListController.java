@@ -11,14 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MonthlyListController {
-
+	
 	@Autowired
 	private MainListDAO mDAO;
 	@Autowired
 	private LoginDAO ldao;
-
+	
+	
 	@RequestMapping(value = "/monthlylist", method = RequestMethod.GET)
-	public String monthlyListPage(Model model, HttpServletRequest request, KadaiDTO k, HttpSession session) {
+	public String monthlyListPage(Model model,HttpServletRequest request,KadaiDTO k,HttpSession session) {
+
 
 		if (ldao.loginCheck(request)) {
 			mDAO.getSystemDate(request);
@@ -28,7 +30,7 @@ public class MonthlyListController {
 		} else {
 			request.setAttribute("innerPageData", "todolist/01_login.jsp");
 		}
-
+		
 		return "home";
 	}
 

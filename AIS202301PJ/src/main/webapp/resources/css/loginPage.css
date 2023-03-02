@@ -2,9 +2,9 @@
 
 .PageMainDiv_login {
 	font-family: 'DotGothic16', sans-serif;
-	background-color: rgb(238, 238, 238);
-	width: 450px;
-	height: 600px;
+	background-color: rgb(238,238,238);
+	width:450px;
+    height:600px;
 }
 
 .loginForm  form {

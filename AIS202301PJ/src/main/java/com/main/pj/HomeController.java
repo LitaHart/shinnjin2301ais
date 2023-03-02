@@ -13,34 +13,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
-
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-
+		
 		try {
 			postgreSQLconnect.getConnection();
-			postgreSQLconnect.testConnect();
-			;
-		} catch (Exception e) {
+			postgreSQLconnect.testConnect();;
+		}  catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		logger.info("Welcome home! The client locale is {}.", locale);
-
+		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
+		
 		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate);
-
-		// 들어왔을 때 로그인 페이지 출력
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		//들어왔을 때 로그인 페이지 출력		
 		model.addAttribute("innerPageData", "todolist/01_login.jsp");
-
+		
 		return "home";
 	}
-
+	
 }

@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class LoginController {
-
+	
 	@Autowired
 	private LoginDAO ldao;
 	@Autowired
 	private MainListDAO mDAO;
+	
 
 	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
 	public String loginPage(Model model) {
@@ -28,26 +29,28 @@ public class LoginController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		model.addAttribute("innerPageData", "todolist/01_login.jsp");
-
+		
 		return "home";
 	}
-
+	
+	
 	@RequestMapping(value = "/mainLogin", method = RequestMethod.POST)
-	public String mainLoginStart(HttpServletRequest request, Shainn_info si, HttpSession session) {
-
+	public String mainLoginStart(HttpServletRequest request, Shainn_info si,HttpSession session) {
+		
 		ldao.loginStart(request, si);
 		ldao.loginCheck(request);
-
+		
 		KadaiDTO k = new KadaiDTO();
 		k.setShainn_number(si.getShainn_number());
-
+		
 		mDAO.getSystemDate(request);
-		mDAO.getAllKadaiList(request, k, session);
-
-		request.setAttribute("innerPageData", "todolist/02_mainlist.jsp");
+		mDAO.getAllKadaiList(request, k,session);
+		
+		request.setAttribute("innerPageData", "todolist/02_mainlist.jsp" );
 		return "home";
 	}
-
+	
+	
 }

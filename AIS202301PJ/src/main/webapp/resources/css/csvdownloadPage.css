@@ -1,18 +1,18 @@
 @charset "UTF-8";
 
 /* body 전체 적용 */
-body {
+body{
 	font-family: 'DotGothic16', sans-serif;
 }
 /*스크롤 */
-.PageMainDiv {
-	background-color: rgb(238, 238, 238);
-	overflow: auto;
-	width: 450px;
-	height: 600px;
+.PageMainDiv{
+	background-color: rgb(238,238,238);
+	overflow:auto;
+	width:450px;
+    height:600px;
 }
 
-#mainDiv_csvDownload {
+#mainDiv_csvDownload{
 	font-family: 'DotGothic16', sans-serif;
 	text-align: center;
 	padding-right: auto;
@@ -20,14 +20,16 @@ body {
 	padding-top: 33%;
 }
 
-#mainDiv_csvDownload input {
+#mainDiv_csvDownload input{
 	font-family: 'DotGothic16', sans-serif;
 }
+
 
 #mainDiv_csvDownload button {
 	width: 200px;
 	height: 40px;
-	background-color: rgb(89, 89, 89);
+	
+	background-color: rgb(89,89,89);
 	color: white;
 	border: none;
 	font-size: 13pt;
