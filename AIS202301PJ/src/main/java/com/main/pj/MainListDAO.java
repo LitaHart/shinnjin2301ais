@@ -55,9 +55,7 @@ public class MainListDAO {
 		kadais = ss.getMapper(MainlistMapper.class).getAllkadaiList(k);
 		
 		
-		
 		request.setAttribute("kadais",kadais);
-		
 	}
 
 
@@ -71,10 +69,6 @@ public class MainListDAO {
 		
 		
 		return ss.getMapper(MainlistMapper.class).updateKadai(k);
-		
-		
-		
-		
 	}
 
 	public void selectHidukeDate(HttpServletRequest request, String yearAndMonthData, String shainn_number) {
@@ -203,48 +197,137 @@ public class MainListDAO {
 		d.setShainn_number(emID);
 		
 		
-		
-		
 		List<CSVdownloadDTO> kadais = new ArrayList<CSVdownloadDTO>();
 		kadais = ss.getMapper(MainlistMapper.class).selectMonthDate(d);
-		
-		
-		
+
+//		3페이지기능
 		Date checkDate1 = null;
 		String checkDate2 = null;
 		String checkDate2Str = null;
-		
+
 		List<CSVdownloadDTO> daykadai = new ArrayList<CSVdownloadDTO>();
 		HashMap<String, List<CSVdownloadDTO>> dayList = new HashMap<String, List<CSVdownloadDTO>>();
-	
-		System.out.println("여기서부터---------------------------------");
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
-			//내용으로 돌림
-			for (int i = 0; i < kadais.size() ; i++) {
-					checkDate1 = kadais.get(i).getTassei_yoteibi();
-					checkDate2 = simpleDateFormat.format(checkDate1); 
-					checkDate2Str = checkDate2.substring(checkDate2.length()-2, checkDate2.length());
-					System.out.println(checkDate2Str + ": 뒤에 2글자");
-				for (int a = 0; a < Integer.parseInt(day); a++) {
-					//10보다 작으면 같지 않으니까 예외처리
-					if (Integer.parseInt(checkDate2Str)== a) {
-						daykadai.add(kadais.get(i));
-						System.out.println("내부for문: " + kadais.get(i) + "몇일이야? :" + a);
+//	
+//		System.out.println("여기서부터---------------------------------");
+//			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+//			//내용으로 돌림
+//			for (int i = 0; i < kadais.size() ; i++) {
+//					checkDate1 = kadais.get(i).getTassei_yoteibi();
+//					checkDate2 = simpleDateFormat.format(checkDate1); 
+//					checkDate2Str = checkDate2.substring(checkDate2.length()-2, checkDate2.length());
+//					System.out.println(checkDate2Str + ": 뒤에 2글자");
+//				for (int a = 0; a < Integer.parseInt(day); a++) {
+//					//10보다 작으면 같지 않으니까 예외처리
+//					if (Integer.parseInt(checkDate2Str)== a) {
+//						daykadai.add(kadais.get(i));
+//						System.out.println("내부for문: " + kadais.get(i) + "몇일이야? :" + a);
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		List<Map<String, String>> forRequest = new ArrayList<Map<String,String>>();
+		
+		for (int i = 0; i < kadais.size(); i++) {
+			checkDate1 = kadais.get(i).getTassei_yoteibi();
+			checkDate2 = simpleDateFormat.format(checkDate1);
+			checkDate2Str = checkDate2.substring(checkDate2.length() - 2, checkDate2.length());
+			
+			Map<String, String> forADD = new HashMap<String, String>();
+			
+			for (int a = 0; a < Integer.parseInt(day); a++) {
+					if (Integer.parseInt(checkDate2Str)==a) {
+						forADD.put(checkDate2Str, kadais.get(i).getKadai_naiyou());
+						forRequest.add(forADD);
+						System.out.println(forADD);
+						System.out.println(forRequest);
 					}
 				}
 				dayList.put(checkDate2Str,daykadai);		
 				System.out.println("============ 일별dayList추가완료");
 			}
-//			확인용
-		System.out.println("★★★★★★★★★★★★★★★★★★★★★");
-		for(String i : dayList.keySet()){ //저장된 key값 확인
-		    System.out.println("[Key]:" + i + " [Value]:" + dayList.get(i));
-		    	for (CSVdownloadDTO csVdownloadDTO : daykadai) {
-					System.out.println(csVdownloadDTO.getKadai_naiyou());
-				}
-		}
-		System.out.println("★★★★★★★★★★★★★★★★★★★★★");
-		request.setAttribute("kadais",kadais);		
+
+	
+		request.setAttribute("kadais", kadais);
+		request.setAttribute("forRequest", forRequest);
 	}
+
+	public void getMonthList3page(HttpServletRequest request, KadaiDTO k, HttpSession session) {
+		
+		Shainn_info loginShainn = (Shainn_info) session.getAttribute("loginShainn");
+		String emID = loginShainn.getShainn_number();
+		Date date = new Date();
+		csvDownloadSelectDTO d = new csvDownloadSelectDTO();
+		System.out.println(request.getParameter("yearAndMonthData"));
+		String yearAndMonthData = request.getParameter("yearAndMonthData");
+		String betweenDate01 = "";
+		String betweenDate02 = "";
+		String year = "";
+		String numMonth = "";
+		String day = "";
+
+		if (request.getParameter("yearAndMonthData") == null || request.getParameter("yearAndMonthData").isBlank()) {
+
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			// 원하는 데이터 포맷 지정
+			String strNowDate = simpleDateFormat.format(date);
+
+			year = strNowDate.substring(0, 4);
+			numMonth = strNowDate.substring(5, 7);
+
+			day = CSVdownloadDAO.setDateStringForSQL(numMonth, year);
+			// 검색용 날짜 문자열 설정
+			betweenDate01 = year + "-" + numMonth + "-01";
+			betweenDate02 = year + "-" + numMonth + "-" + day;
+
+			d.setBetweenDate01(betweenDate01);
+			d.setBetweenDate02(betweenDate02);
+			request.setAttribute("simpleDate", numMonth);
+
+		} else {
+			year = yearAndMonthData.substring(yearAndMonthData.length() - 4, yearAndMonthData.length());
+			String numMonthSub = yearAndMonthData.substring(0, 3);
+			numMonth = CSVdownloadDAO.changeMonth(numMonthSub);
+			day = CSVdownloadDAO.setDateStringForSQL(numMonth, year);
+
+			betweenDate01 = year + "-" + numMonth + "-01";
+			betweenDate02 = year + "-" + numMonth + "-" + day;
+			d.setBetweenDate01(betweenDate01);
+			d.setBetweenDate02(betweenDate02);
+			request.setAttribute("simpleDate", numMonth);
+		}
+		d.setShainn_number(emID);
+		
+		List<CSVdownloadDTO> kadais = new ArrayList<CSVdownloadDTO>();
+		
+//		여기 if문 처리
+		kadais = ss.getMapper(MainlistMapper.class).selectMonthDate(d);
+
+//		3페이지기능
+		Date checkDate1 = null;
+		String checkDate2 = null;
+		String checkDate2Str = null;
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		List<Map<String, String>> forRequest = new ArrayList<Map<String,String>>();
+		
+		for (int i = 0; i < kadais.size(); i++) {
+			checkDate1 = kadais.get(i).getTassei_yoteibi();
+			checkDate2 = simpleDateFormat.format(checkDate1);
+			checkDate2Str = checkDate2.substring(checkDate2.length() - 2, checkDate2.length());
+			
+			Map<String, String> forADD = new HashMap<String, String>();
+			
+			for (int a = 0; a < Integer.parseInt(day); a++) {
+					if (Integer.parseInt(checkDate2Str)==a) {
+						forADD.put(checkDate2Str, kadais.get(i).getKadai_naiyou());
+						forRequest.add(forADD);
+						System.out.println(forADD);
+						System.out.println(forRequest);
+					}
+			}
+		}	
+		request.setAttribute("kadais", kadais);
+		request.setAttribute("forRequest", forRequest);
+	}
+	
+	
 
 }
