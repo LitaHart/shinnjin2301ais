@@ -84,10 +84,15 @@
 				total ++;
 			} else {
 			}
+    		
+
     		// 2
     		 aaa = ((total / checkArr.length) * 100);
     		 if ($(this).val() == 0) {
-    			 $(this).siblings('#span1').html("<a href='asd'>修正</a>");
+   			var kadaiNum = $(this).siblings('#kadaiNum').val();
+			var kadai_naiyou = $(this).siblings('#kadai_naiyou2').val();
+    			 
+				$(this).siblings('#span1').html("<a class='content'>修正</a>");
 			}else if ($(this).val() == 1) {
 				$(this).prop('checked',true);
 				$(this).siblings('#span1').text("完了");
@@ -97,6 +102,7 @@
 				if ($(this).is(":checked")) {
 					$(this).siblings('#changeKahi').attr("value", "1");
 					$(this).siblings('#span1').text("完了");
+					
 					const query = 'input[name="checkname"]:checked';
 					const selectedElements = document.querySelectorAll(query);
 					const selectedElementsCnt = selectedElements.length;
@@ -119,9 +125,23 @@
 					}, 30);
 
 				} else {
+					var kadaiNum = $(this).siblings('#kadaiNum').val();
+					var kadai_naiyou = $(this).siblings('#kadai_naiyou2').val();
+					
+
+					var link = "popupEdit?kadaiNum="+kadaiNum+"&kadai_naiyou="+kadai_naiyou;
+
+					
+					//window.open(link, '_blank', 'width=600,height=400');
+				
+						//"<a onclick='asd('${k.kadaikannri_number }','${k.kadai_naiyou }')'>修正</a>"
+			
+
+					
 					$(this).siblings('#changeKahi').attr("value", "0");
 					$(this).siblings('#span1').text(" ");
-					$(this).siblings('#span1').html("<a href='asd'>修正</a>");
+					$(this).siblings('#span1').html("<a class='content' >修正</a>");
+					
 					const query = 'input[name="checkname"]:checked';
 					const selectedElements = document.querySelectorAll(query);
 					const selectedElementsCnt = selectedElements.length;
@@ -166,7 +186,17 @@
 			}
 		}, 30);
 
-	});
+
+    
+    });
+    
+    
+    
+    
+    
+    
+    
+    
 </script>
 
 <!-- HONG JS -->
@@ -177,11 +207,25 @@ function popupAdd() {	//팝업 추가창
     var url = "popupAdd?yearAndMonthData=" + yearAndMonthData;
     var popup = window.open(url, "Pop-up Window", "width=500,height=500");
     popup.opener = window;
-}
-
-	function popupEdit() { // 팝업 수정창
-		window.open("popupEdit", "Pop-up Window", "width=500, height=500");
 	}
+
+	//팝업 수정창 불러내는 JSP
+	
+	//function asd (a,b) {
+	//	alert(a);
+	//	alert(b);
+	//	var kadaiNum = $(this).siblings('#kadaiNum').val();
+	//	var kadai_naiyou = $(this).siblings('#kadai_naiyou2').val();
+	//
+	  //var popupWindow = window.open('popupEdit?kadaiNum='+kadaiNum+'&kadai_naiyou='+kadai_naiyou, '_blank', 'width=600,height=400');
+	
+	//}
+		
+		});
+		
+		
+	 
+
 	$(document).ready(function() {
 						let percent = 0
 						let tasseiritu = document.getElementById('tasseiritu');
@@ -190,27 +234,16 @@ function popupAdd() {	//팝업 추가창
 							$('.progress-text').text(percent + '%')
 							$('.bar').css('width', percent)
 
-						// 체크박스    https://openlife.tistory.com/381
-						$(".cbox")
-								.change(
-										function() {
-											if ($($(this)).is(":checked")) {
-												$('#asdasd').text("完了")
-
-											} else {
-												$(".asdasd").html("");
-												$(".asdasd")
-														.append(
-																"<a href='#' onclick='popupEdit()'>修正</a>");
-											}
-										});
+						
 					});
+	
+	
+	
 </script>
 </head>
 <body>
 	<div class="PageMainDiv">
 		<!-- Main div 【上】-->
-
 		<input type="hidden" value="" name="result2" id="resultID2" />
 		<div id="mainlist_header">
 			<div>
@@ -282,6 +315,7 @@ function popupAdd() {	//팝업 추가창
 							<td id="kadai_tassei">
 							<input type='checkbox' id="checknameId" name='checkname' value='${k.tassei_kahi }'>
 							<span id="span1"></span>
+							<input type="hidden" id="kadai_naiyou2" value='${k.kadai_naiyou }'>
 							<input type="hidden" id="kadaiNum" value='${k.kadaikannri_number }'>
 							<input type="hidden" id="yoteibi" value='${k.tassei_yoteibi }'>
 							<input type="hidden" value="${k.tassei_kahi }" id="changeKahi">
@@ -299,5 +333,38 @@ function popupAdd() {	//팝업 추가창
 	</div>
 
 </body>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#asd123').click(function funcA() {
+		alert('assadasdasdd');
+		
+		var kadaiNum = $(this).siblings('#kadaiNum').val();
+	var kadai_naiyou = $(this).siblings('#kadai_naiyou2').val();
+		
+
+		//var link = "popupEdit?kadaiNum="+kadaiNum+"&kadai_naiyou="+kadai_naiyou;
+
+		
+		//window.open(link, '_blank', 'width=600,height=400');
+		
+	})
+	
+	
+	
+});
+
+
+$(document).ready(function () {
+	$('.content').click(function(){
+		
+		alert('asdaasd12');
+	
+	
+	});
+
+
+
+</script>
 </html>
 
