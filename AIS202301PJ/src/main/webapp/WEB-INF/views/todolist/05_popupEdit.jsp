@@ -16,8 +16,16 @@
             border-radius: 10px;
             width: 500px;
             text-align: center;
+            
+            
+            
+           
         }
         
+        
+        
+        
+       /
         .popup h2 {
             text-align: left;
         }
