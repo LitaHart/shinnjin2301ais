@@ -62,8 +62,9 @@
 			<!-- Main div 【上】-->
 			<div id="mainDiv_csvDownload">
 				<div>
-					<input name="timeSelect" value="csvMonth" type="checkbox"
-						onclick='checkOnlyOne(this)' checked="checked" /> 月別 <input
+						<input name="timeSelect" value="csvMonth" type="checkbox"
+						onclick='checkOnlyOne(this)' checked="checked" /> 月別 
+						<input
 						name="timeSelect" value="csvAll" type="checkbox"
 						onclick='checkOnlyOne(this)' /> すべて
 				</div>

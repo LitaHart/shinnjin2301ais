@@ -12,7 +12,9 @@ public interface MainlistMapper {
 
 	public List<KadaiDTO> selectHidukeDate(KadaiDTO k);
 
-	public List<CSVdownloadDTO> selectMonthDate(csvDownloadSelectDTO csvDAO);
+	public List<CSVdownloadDTO> selectMonthDate_all(csvDownloadSelectDTO csvDAO);
+	
+	public List<CSVdownloadDTO> selectMonthDate_done(csvDownloadSelectDTO csvDAO);
 
 
 

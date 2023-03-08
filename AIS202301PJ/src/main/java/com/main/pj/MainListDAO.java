@@ -4,10 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -65,7 +68,6 @@ public class MainListDAO {
 	}
 
 	public void selectHidukeDate(HttpServletRequest request, String yearAndMonthData, String shainn_number) {
-
 		KadaiDTO k = new KadaiDTO();
 
 		String yearAndMonthDataSplit[] = yearAndMonthData.split("\\s");
@@ -117,7 +119,6 @@ public class MainListDAO {
 		request.setAttribute("kadais", kadais);
 
 	}
-
 	public void getMonthList(HttpServletRequest request, KadaiDTO k, HttpSession session) {
 
 		Shainn_info loginShainn = (Shainn_info) session.getAttribute("loginShainn");
@@ -131,6 +132,15 @@ public class MainListDAO {
 		String year = "";
 		String numMonth = "";
 		String day = "";
+		
+//		SimpleDateFormat sdfEN = new SimpleDateFormat("MMM yyyy");
+//		Date startDate = new Date();
+//		String startDatestr = sdfEN.format(startDate);
+		
+//		System.out.println(startDatestr);
+		System.out.println(date);
+		
+		
 
 		if (request.getParameter("yearAndMonthData") == null || request.getParameter("yearAndMonthData").isBlank()) {
 
@@ -148,8 +158,8 @@ public class MainListDAO {
 
 			d.setBetweenDate01(betweenDate01);
 			d.setBetweenDate02(betweenDate02);
-			request.setAttribute("simpleDate", numMonth);
-
+//			request.setAttribute("startDate",startDatestr);
+			request.setAttribute("simpleDate", numMonth);			
 		} else {
 			year = yearAndMonthData.substring(yearAndMonthData.length() - 4, yearAndMonthData.length());
 			String numMonthSub = yearAndMonthData.substring(0, 3);
@@ -166,10 +176,10 @@ public class MainListDAO {
 		d.setShainn_number(emID);
 
 		List<CSVdownloadDTO> kadais = new ArrayList<CSVdownloadDTO>();
-		kadais = ss.getMapper(MainlistMapper.class).selectMonthDate(d);
-
+		kadais = ss.getMapper(MainlistMapper.class).selectMonthDate_done(d);
 		
-//		3페이지기능
+//		------------------------
+
 		Date checkDate1 = null;
 		String checkDate2 = null;
 		String checkDate2Str = null;
@@ -188,8 +198,6 @@ public class MainListDAO {
 					if (Integer.parseInt(checkDate2Str)==a) {
 						forADD.put(checkDate2Str, kadais.get(i).getKadai_naiyou());
 						forRequest.add(forADD);
-						System.out.println(forADD);
-						System.out.println(forRequest);
 					}
 			}
 		}	
@@ -197,8 +205,9 @@ public class MainListDAO {
 		request.setAttribute("forRequest", forRequest);
 	}
 
+	
 	public void getMonthList3page(HttpServletRequest request, KadaiDTO k, HttpSession session) {
-		
+
 		Shainn_info loginShainn = (Shainn_info) session.getAttribute("loginShainn");
 		String emID = loginShainn.getShainn_number();
 		Date date = new Date();
@@ -210,16 +219,15 @@ public class MainListDAO {
 		String year = "";
 		String numMonth = "";
 		String day = "";
-
 		if (request.getParameter("yearAndMonthData") == null || request.getParameter("yearAndMonthData").isBlank()) {
 
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			// 원하는 데이터 포맷 지정
 			String strNowDate = simpleDateFormat.format(date);
-
+			
 			year = strNowDate.substring(0, 4);
 			numMonth = strNowDate.substring(5, 7);
-
+			
 			day = CSVdownloadDAO.setDateStringForSQL(numMonth, year);
 			// 검색용 날짜 문자열 설정
 			betweenDate01 = year + "-" + numMonth + "-01";
@@ -231,7 +239,8 @@ public class MainListDAO {
 
 		} else {
 			year = yearAndMonthData.substring(yearAndMonthData.length() - 4, yearAndMonthData.length());
-			String numMonthSub = yearAndMonthData.substring(0, 3);
+			String numMonthSub = yearAndMonthData.substring(0, 1);
+			System.out.println(numMonthSub);
 			numMonth = CSVdownloadDAO.changeMonth(numMonthSub);
 			day = CSVdownloadDAO.setDateStringForSQL(numMonth, year);
 
@@ -241,14 +250,14 @@ public class MainListDAO {
 			d.setBetweenDate02(betweenDate02);
 			request.setAttribute("simpleDate", numMonth);
 		}
-		d.setShainn_number(emID);
-		
-		List<CSVdownloadDTO> kadais = new ArrayList<CSVdownloadDTO>();
-		
-//		여기 if문 처리
-		kadais = ss.getMapper(MainlistMapper.class).selectMonthDate(d);
 
-//		3페이지기능
+		d.setShainn_number(emID);
+
+		List<CSVdownloadDTO> kadais = new ArrayList<CSVdownloadDTO>();
+		kadais = ss.getMapper(MainlistMapper.class).selectMonthDate_all(d);
+		
+//		------------------------
+
 		Date checkDate1 = null;
 		String checkDate2 = null;
 		String checkDate2Str = null;
@@ -267,8 +276,6 @@ public class MainListDAO {
 					if (Integer.parseInt(checkDate2Str)==a) {
 						forADD.put(checkDate2Str, kadais.get(i).getKadai_naiyou());
 						forRequest.add(forADD);
-						System.out.println(forADD);
-						System.out.println(forRequest);
 					}
 			}
 		}	
