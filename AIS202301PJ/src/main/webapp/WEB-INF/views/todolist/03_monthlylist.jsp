@@ -57,9 +57,6 @@ $(document).ready(function(){
 	 	/* =============================================== */ 	 
 	 	
 	 	
-	 	
-	 	
-	 	
 		};
 	
 });
@@ -133,7 +130,7 @@ $(document).ready(function(){
 		<div><span id="simpleDateSpan"></span>月</div>
 	<!-- Calendar-->
 	
-	<div class="PageMainDiv">
+	<div>
 		<!--  ==================	임시 데이터 출력 -->
 		<table border="1">
 			<c:forEach items="${forRequest}" var="fr" varStatus="frstatus">
@@ -146,6 +143,7 @@ $(document).ready(function(){
 			</c:forEach>
 			
 		</table>
+	</div>
 	<!-- ========================= -->
 	<div id="mainlist_header">
 	${simpleDate}
@@ -167,36 +165,9 @@ $(document).ready(function(){
 		<div>
 			<span id="simpleDateSpan"></span>月
 		</div>
-		
-		
-		<%-- <!-- Calendar-->
-		<div>
-			<br>
-			
-			<div class="ui calendar" id="csvCalendar">
-				<div class="ui input left icon">
-					<i style="opacity: 0;" class="time icon"></i> <input name="selectedMonth"
-						id="yearAndMonthData" type="text" value="${simpleDate }" />
-				</div>
-			</div>
-		</div>
- --%>
+
 		<div>
 			<input name="includeCheckBox" id="checkBox_include" type="checkbox" value="includeAll" onclick="change()"> 未達成課題を含む
-		</div>
-		
-		<div>
-		<!-- table あります。 【下】-->
-			<table border="1">
-			<c:forEach items="${kadais }" var="k">
-			<tr>
-				<td>${k.kadai_naiyou }</td>
-				<td><fmt:formatDate value="${k.tassei_yoteibi }" pattern="dd日"/></td>
-				<td>✔︎︎</td>
-			</tr>
-			</c:forEach>
-			</table>
-		<!-- table あります。 【上】-->
 		</div>
 		
 	<!--　Main div 【下】 -->

@@ -82,27 +82,9 @@
 				</div>
 			</div>
 			<!--　Main div 【下】 -->
+		</div>
 
-		</div>
-		<div>
-			<input name="csvInclude" value="csvInclude" type="checkbox"> 未達成課題を含む
-		</div>
-		<div>
-				<br>
-  				<div class="ui calendar" id="csvCalendar">
-   				<div class="ui input left icon">
-      			<i class="time icon"></i>
-     				<input name="selectedMonth" id="yearAndMonthData" type="text" placeholder="年月を選択"/>
-    			</div>
-  				</div>
-  			<br/>
-		</div>
-		<div>
-			<button type="submit">csvダウンロード</button>
-		</div>
-	</div>
 	<!--　Main div 【下】 -->
-	</div>
 </form>
 
 
