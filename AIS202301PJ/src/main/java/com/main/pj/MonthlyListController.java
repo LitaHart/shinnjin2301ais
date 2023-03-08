@@ -11,13 +11,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MonthlyListController {
-
+	
 	@Autowired
 	private MainListDAO mDAO;
 	@Autowired
 	private LoginDAO ldao;
-
+	
+	
 	@RequestMapping(value = "/monthlylist", method = RequestMethod.GET)
+
 	public String monthlyListPage_basic(Model model, HttpServletRequest request, KadaiDTO k, HttpSession session) {
 
 		if (ldao.loginCheck(request)) {

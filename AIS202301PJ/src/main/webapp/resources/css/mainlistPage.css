@@ -1,10 +1,9 @@
 @charset "UTF-8";
 
-body {
+body{
 	font-family: 'DotGothic16', sans-serif;
 }
-
-.PageMainDiv_mainlist {
+.PageMainDiv_mainlist{
 	font-size: 11pt;
 	margin-top: 10%;
 	width: 100%;
@@ -14,28 +13,25 @@ body {
 	padding-left: auto;
 }
 
-#mainlist_header {
+#mainlist_header{
 	font-size: 13pt;
 	margin-top: 5%;
 	display: flex;
 	float: left;
 	margin-left: 27px;
 }
-
-.second_header {
+.second_header{
 	margin-top: 5%;
 	margin-bottom: 10px;
 	width: 100%;
 	display: flex;
 }
-
 #box_image {
 	text-align: right;
 	padding-right: 70px;
 	width: 70%;
 	margin: auto;
 }
-
 #addBtn {
 	text-align: right;
 	padding-right: 30px;
@@ -43,25 +39,25 @@ body {
 	margin: auto;
 }
 /* =========================== */
-.empty_txt {
+
+.empty_txt{
 	color: gray;
 	width: 100%;
 	margin-top: 30px;
-	padding-left: 35px;
+	padding-left:35px; 
 }
 
 .cbox2 {
 	margin: 30px;
 }
-
-.touroku_kadai_table {
+.touroku_kadai_table{
 	margin-top: 30px;
 	width: 100%;
-	padding-left: 35px;
-	padding-right: 35px;
+	padding-left:35px; 
+	padding-right:35px; 
 }
 
-#kadai_list {
+#kadai_list{
 	height: 30px;
 	width: 300px;
 	text-align: left;
@@ -69,8 +65,8 @@ body {
 
 #kadai_tassei {
 	height: 30px;
-	width: 100px;
-	text-align: right;
+	width: 100px;	
+	text-align:right;
 }
 
 /* ============= PROGRESS BAR */
@@ -80,33 +76,34 @@ body {
 }
 
 .progress-text {
-	color: #9f9fa1;
+  color: #9f9fa1;
 }
 
 .progress-bar {
-	margin: auto;
-	width: 400px;
-	height: 25px;
-	background-color: #8b8b8d;
-	border-radius: 0px;
-	position: relative;
-	/*   overflow: hidden; */
-	overflow: visible;
+  margin: auto;
+  width: 400px;
+  height: 25px;
+  background-color: #8b8b8d;
+  border-radius: 0px;
+  position: relative;
+/*   overflow: hidden; */
+  overflow: visible;
 }
-
 .progress-bar .bar {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	background-color: #00ff00;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #00ff00;
 }
-
 a {
-	text-decoration-line: none;
+  text-decoration-line: none;
 }
 
-.user_name {
+.user_name{
+	
 	padding-left: 130px;
 	padding-right: 25px;
+	
+	
 }

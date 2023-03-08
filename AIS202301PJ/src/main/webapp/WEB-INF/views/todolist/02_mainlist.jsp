@@ -92,7 +92,7 @@
    			var kadaiNum = $(this).siblings('#kadaiNum').val();
 			var kadai_naiyou = $(this).siblings('#kadai_naiyou2').val();
     			 
-				$(this).siblings('#span1').html("<a class='content'>修正</a>");
+				$(this).siblings('#span1').html("<a class='content' onclick='javascript:aTagFunc()' id='aTagId' >修正</a>");
 			}else if ($(this).val() == 1) {
 				$(this).prop('checked',true);
 				$(this).siblings('#span1').text("完了");
@@ -125,22 +125,8 @@
 					}, 30);
 
 				} else {
-					var kadaiNum = $(this).siblings('#kadaiNum').val();
-					var kadai_naiyou = $(this).siblings('#kadai_naiyou2').val();
-					
-
-					var link = "popupEdit?kadaiNum="+kadaiNum+"&kadai_naiyou="+kadai_naiyou;
-
-					
-					//window.open(link, '_blank', 'width=600,height=400');
-				
-						//"<a onclick='asd('${k.kadaikannri_number }','${k.kadai_naiyou }')'>修正</a>"
-			
-
-					
 					$(this).siblings('#changeKahi').attr("value", "0");
-					$(this).siblings('#span1').text(" ");
-					$(this).siblings('#span1').html("<a class='content' >修正</a>");
+					$(this).siblings('#span1').html("<a class='content' onclick='javascript:aTagFunc()' id='aTagId' >修正</a>");
 					
 					const query = 'input[name="checkname"]:checked';
 					const selectedElements = document.querySelectorAll(query);
@@ -187,41 +173,40 @@
 		}, 30);
 
 
+		
+		
+		$('span a').click(function(){
+	 		var aaa= $(this).val();
+			var kadaiNum = $(this).parent().siblings('#kadaiNum').val();
+			var kadai_naiyou = $(this).parent().siblings('#kadai_naiyou2').val();
+			window.open('popupEdit?kadaiNum='+kadaiNum+'&kadai_naiyou='+kadai_naiyou, '_blank', 'width=600,height=400');
+		});
+		
+    
+    
     
     });
-    
-    
-    
-    
-    
-    
-    
-    
+ 
 </script>
 
 <!-- HONG JS -->
 <script type="text/javascript">
 
-function popupAdd() {	//팝업 추가창
-    var yearAndMonthData = document.getElementById("yearAndMonthData").value;
-    var url = "popupAdd?yearAndMonthData=" + yearAndMonthData;
-    var popup = window.open(url, "Pop-up Window", "width=500,height=500");
-    popup.opener = window;
-	}
+function popupAdd() {	// 팝업 추가창
+	  
+	  const MAX_TASK_COUNT = 10;
+	  const kadais = document.querySelectorAll("#trId");
+	  if (kadais.length >= MAX_TASK_COUNT) {
+	    alert(`課題数は最大10個まで登録できます。`);
+	    return;
+	  }
 
-	//팝업 수정창 불러내는 JSP
-	
-	//function asd (a,b) {
-	//	alert(a);
-	//	alert(b);
-	//	var kadaiNum = $(this).siblings('#kadaiNum').val();
-	//	var kadai_naiyou = $(this).siblings('#kadai_naiyou2').val();
-	//
-	  //var popupWindow = window.open('popupEdit?kadaiNum='+kadaiNum+'&kadai_naiyou='+kadai_naiyou, '_blank', 'width=600,height=400');
-	
-	//}
-		
-		});
+	  var yearAndMonthData = document.getElementById("yearAndMonthData").value;
+	  var url = "popupAdd?yearAndMonthData=" + yearAndMonthData;
+	  var popup = window.open(url, "Pop-up Window", "width=500,height=500");
+
+	  popup.opener = window;
+	}
 		
 		
 	 
@@ -232,13 +217,9 @@ function popupAdd() {	//팝업 추가창
 						let tasseirituValue = Number(tasseiritu.value);
 
 							$('.progress-text').text(percent + '%')
-							$('.bar').css('width', percent)
-
-						
+							$('.bar').css('width', percent)					
 					});
-	
-	
-	
+
 </script>
 </head>
 <body>
@@ -293,12 +274,6 @@ function popupAdd() {	//팝업 추가창
 			</div>
 		</div>
 
-
-
-
-	
-
-
 		<c:if test="${empty kadais}">
 			<div class="empty_txt">
 				<div class="emptyTxt">目標の履歴がありません。</div>
@@ -310,13 +285,13 @@ function popupAdd() {	//팝업 추가창
 			<div class="touroku_kadai_table">
 				<table>
 					<c:forEach var="k" items="${kadais}">
-						<tr>
+						<tr id="trId">
 							<td id="kadai_list"><span id="kadai_naiyou">${k.kadai_naiyou }</span></td>
 							<td id="kadai_tassei">
 							<input type='checkbox' id="checknameId" name='checkname' value='${k.tassei_kahi }'>
 							<span id="span1"></span>
-							<input type="hidden" id="kadai_naiyou2" value='${k.kadai_naiyou }'>
-							<input type="hidden" id="kadaiNum" value='${k.kadaikannri_number }'>
+							<input type="hidden" id="kadai_naiyou2"  value='${k.kadai_naiyou }'>
+							<input type="hidden" id="kadaiNum" class="numkadai" value='${k.kadaikannri_number }'>
 							<input type="hidden" id="yoteibi" value='${k.tassei_yoteibi }'>
 							<input type="hidden" value="${k.tassei_kahi }" id="changeKahi">
 							<input type="hidden" value="${k.shainn_number }" id="shainn_number">
@@ -333,38 +308,4 @@ function popupAdd() {	//팝업 추가창
 	</div>
 
 </body>
-
-<script type="text/javascript">
-$(document).ready(function() {
-	$('#asd123').click(function funcA() {
-		alert('assadasdasdd');
-		
-		var kadaiNum = $(this).siblings('#kadaiNum').val();
-	var kadai_naiyou = $(this).siblings('#kadai_naiyou2').val();
-		
-
-		//var link = "popupEdit?kadaiNum="+kadaiNum+"&kadai_naiyou="+kadai_naiyou;
-
-		
-		//window.open(link, '_blank', 'width=600,height=400');
-		
-	})
-	
-	
-	
-});
-
-
-$(document).ready(function () {
-	$('.content').click(function(){
-		
-		alert('asdaasd12');
-	
-	
-	});
-
-
-
-</script>
 </html>
-
