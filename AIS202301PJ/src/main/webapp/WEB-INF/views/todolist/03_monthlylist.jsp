@@ -11,7 +11,8 @@
 <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
 <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
 <script type="text/javascript">
-<<<<<<< HEAD
+
+
 $(document).ready(function(){
    	var simpleDateVal = document.getElementById("simpleDateInput").value;
 	var simpleDateSub = simpleDateVal.substr(0, 3);
@@ -61,16 +62,8 @@ $(document).ready(function(){
 	 	
 		};
 	
-		
-		
-		
-		
-    
 });
 
-
-
-=======
 	$(document)
 			.ready(
 					function() {
@@ -107,7 +100,10 @@ $(document).ready(function(){
 						; // max날짜 정하고싶은데 진행중
 						/* =============================================== */
 						/* 선택한 달 가져오기 */
+						
 						document.getElementById("yearAndMonthData").onblur = function() {
+							
+							var include = document.getElementById("checkBox_include").value;
 							var shainn_number = document
 									.getElementById("shainn_numberInput").value;
 							/* 인풋창	값 */
@@ -115,15 +111,16 @@ $(document).ready(function(){
 									.getElementById("yearAndMonthData").value;
 							/* 인풋창에서 선택한 날짜 출력 */
 							console.log(yearAndMonthData);
+							console.log("미달성과제 포함여부 : "+include);
+							
 							//yearAndMonthData 보내고 if로 바꾸기
 							$('#yearAndMonthData').val(yearAndMonthData);
-
-							location.href = 'monthlylist?yearAndMonthData='
-									+ yearAndMonthData;
-							/* =============================================== */
+								location.href = 'monthlylist?yearAndMonthData='
+										+ yearAndMonthData;
 						};
+
 					});
->>>>>>> d8bdb89f5c9a8ec3aa83cdd2e21d447736acca53
+
 </script>
 </head>
 <body>
@@ -151,8 +148,8 @@ $(document).ready(function(){
 		</table>
 	<!-- ========================= -->
 	<div id="mainlist_header">
+	${simpleDate}
 		<!-- sankaku button -->
-		
 			<div class="ui calendar" id="csvCalendar">
 				<label for="yearAndMonthData"> <input style="opacity: 0;"
 					type="checkbox" id="yearAndMonthData" class="calendarClass"
@@ -165,26 +162,27 @@ $(document).ready(function(){
 	<!-- ================================= -->
 		<!-- Main div 【上】-->
 		<div>
-			<input value="${simpleDate }" id="simpleDateInput" type="hidden">
+			<input value="${simpleDate}" id="simpleDateInput" type="hidden">
 		</div>
 		<div>
 			<span id="simpleDateSpan"></span>月
 		</div>
 		
 		
-		<!-- Calendar-->
+		<%-- <!-- Calendar-->
 		<div>
 			<br>
-			<div class="ui calendar" id="csvCalendar" style="visibility: hidden;">
+			
+			<div class="ui calendar" id="csvCalendar">
 				<div class="ui input left icon">
-					<i class="time icon"></i> <input name="selectedMonth"
+					<i style="opacity: 0;" class="time icon"></i> <input name="selectedMonth"
 						id="yearAndMonthData" type="text" value="${simpleDate }" />
 				</div>
 			</div>
 		</div>
-
+ --%>
 		<div>
-			<input type="checkbox"> 未達成課題を含む
+			<input name="includeCheckBox" id="checkBox_include" type="checkbox" value="includeAll" onclick="change()"> 未達成課題を含む
 		</div>
 		
 		<div>

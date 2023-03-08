@@ -147,4 +147,19 @@ public class CSVdownloadDAO {
 		return enTonum;
 	}
 
+	public static String changeMonth2(String numMonthSub) {
+		String[] numMonth = new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" };
+		String[] monthDataEN = new String[] { "January", "February", "March", "April", "May", "June", "July", "August",
+				"September", "October", "November", "December" };
+		String enTonum = null;
+		
+		for (int i = 0; i < numMonth.length; i++) {
+			if (numMonthSub.equals(monthDataEN[i])) {
+				enTonum = numMonth[i];
+			}
+		}
+		System.out.println("変換後値確認: " + enTonum);
+		return enTonum;
+	}
+
 }

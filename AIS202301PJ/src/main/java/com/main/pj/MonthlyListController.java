@@ -19,19 +19,36 @@ public class MonthlyListController {
 	
 	
 	@RequestMapping(value = "/monthlylist", method = RequestMethod.GET)
-	public String monthlyListPage(Model model,HttpServletRequest request,KadaiDTO k,HttpSession session) {
 
+	public String monthlyListPage_basic(Model model, HttpServletRequest request, KadaiDTO k, HttpSession session) {
 
 		if (ldao.loginCheck(request)) {
 			mDAO.getSystemDate(request);
 			mDAO.getMonthList(request, k, session);
-			mDAO.getMonthList3page(request, k, session);
+//			mDAO.getMonthList3page(request, k, session);
+			
 			model.addAttribute("innerPageData", "todolist/03_monthlylist.jsp");
 		} else {
 			request.setAttribute("innerPageData", "todolist/01_login.jsp");
 		}
-		
 		return "home";
 	}
+	
+
+	@RequestMapping(value = "/monthlylistCallAll", method = RequestMethod.GET)
+	public String monthlyListPage_CallAll(Model model, HttpServletRequest request, KadaiDTO k, HttpSession session) {
+
+		if (ldao.loginCheck(request)) {
+			mDAO.getSystemDate(request);
+//			mDAO.getMonthList(request, k, session);
+			mDAO.getMonthList3page(request, k, session);
+			
+			model.addAttribute("innerPageData", "todolist/03_monthlylist.jsp");
+		} else {
+			request.setAttribute("innerPageData", "todolist/01_login.jsp");
+		}
+		return "home";
+	}
+
 
 }

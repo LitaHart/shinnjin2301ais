@@ -19,7 +19,7 @@
 	</select>
 
 
-	<select id="selectMonthDate" parameterType="com.main.pj.csvDownloadSelectDTO" resultType="com.main.pj.CSVdownloadDTO">
+	<select id="selectMonthDate_all" parameterType="com.main.pj.csvDownloadSelectDTO" resultType="com.main.pj.CSVdownloadDTO">
 		select shainn_table.shainn_number, shainn_name, kadai_naiyou, tassei_yoteibi, tassei_kahi, tassei_hiduke
 		from shainn_table
 		join kadai_table 
@@ -27,6 +27,22 @@
 		where kadai_table.shainn_number = #{shainn_number}
 		and kadai_table.tassei_yoteibi between date'${betweenDate01}' and date'${betweenDate02}'
 	</select>
+	
+	<select id="selectMonthDate_done" parameterType="com.main.pj.csvDownloadSelectDTO" resultType="com.main.pj.CSVdownloadDTO">
+		select shainn_table.shainn_number, shainn_name, kadai_naiyou, tassei_yoteibi, tassei_kahi, tassei_hiduke
+		from shainn_table
+		join kadai_table 
+		on kadai_table.shainn_number = shainn_table.shainn_number
+		where kadai_table.shainn_number = #{shainn_number}
+		and kadai_table.tassei_kahi = '1'
+		and kadai_table.tassei_yoteibi between date'${betweenDate01}' and date'${betweenDate02}'
+		order by tassei_yoteibi asc
+	</select>
+
+
+
+
+
 
 
 </mapper>
