@@ -56,24 +56,15 @@ public class PopupController {
         return "todolist/06_popupAdd";
     }
 
-    
-    
-   
-//	@RequestParam("kadaiNum") String kadaiNum,
-//	@RequestParam("kadai_naiyou") String kadai_naiyou
- 
+
     //수정 버튼 눌렀을 때 호출
     @RequestMapping(value = "/popupEdit", method = RequestMethod.GET)
     public String popupEdit(Model model,HttpServletRequest request, HttpServletResponse response,    		
     		@RequestParam("kadaiNum") String kadaiNum, @RequestParam("kadai_naiyou") String kadai_naiyou) {
-    	
-//    	String kadaiNum = request.getParameter("kadaiNum");
-//    	String kadai_naiyou = request.getParameter("kadai_naiyou");
+
     	System.out.println(kadaiNum);
     	System.out.println(kadai_naiyou);
-    	
-    	
-    	
+
     	request.setAttribute("kadaiNum", kadaiNum);
     	request.setAttribute("kadai_naiyou", kadai_naiyou);
         return "todolist/05_popupEdit";
@@ -85,9 +76,8 @@ public class PopupController {
                             @RequestParam("kadaikannri_number") int kadaikannri_number,
                             @RequestParam("kadai_naiyou") String kadaiNaiyou) throws Exception {
         postgreSQLconnect.updateTask(kadaikannri_number, kadaiNaiyou);
-        // 업데이트 결과에 따라 적절한 뷰를 반환하도록 구현해야 합니다.
-        // 수정에 성공한 경우, 수정된 내용을 보여주는 뷰를 반환하거나
-        // 메인 페이지로 리다이렉트하는 등의 동작을 구현할 수 있습니다.
+        
+        //수정 결과를 화면에 바로 보여줄 수 있도록 비동기 방식으로 재공사 하는것이 필요할듯
         return "redirect:/mainlist";
     }
 
