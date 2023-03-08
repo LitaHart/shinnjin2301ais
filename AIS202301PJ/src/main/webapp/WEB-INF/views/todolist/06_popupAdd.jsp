@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<link href='resources/css/popupAdd.css' rel='stylesheet'type='text/css'>
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
@@ -14,53 +15,6 @@
 	rel="stylesheet" type="text/css" />
 <meta charset="UTF-8">
 <title>課題追加</title>
-<style>
-.popup {
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	background-color: white;
-	padding: 20px;
-	border-radius: 10px;
-	width: 500px;
-	height: 300px;
-	margin: auto;
-	text-align: center;
-}
-
-.popup h2 {
-	text-align: left;
-}
-
-.popup h4 {
-	color: red;
-	text-align: left;
-}
-
-.popup input {
-	width: 100%;
-	padding: 10px;
-	font-size: 18px;
-	margin-top: 20px;
-}
-
-.popup #deadline-btn {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-}
-
-.popup #warning {
-	display: none;
-	color: red;
-	font-size: 14px;
-	margin-top: 5px;
-}
-
-
-</style>
 </head>
 <body>
 	<div class="popup">

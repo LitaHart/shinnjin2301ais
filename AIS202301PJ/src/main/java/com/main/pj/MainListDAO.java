@@ -54,6 +54,11 @@ public class MainListDAO {
 		k.setTassei_yoteibi(d);
 		kadais = ss.getMapper(MainlistMapper.class).getAllkadaiList(k);
 		
+		  // kadais 변수에 저장된 값 출력하기
+		 for (KadaiDTO kadai : kadais) {
+		        System.out.println(kadai.getKadai_naiyou());
+		    }
+		
 		
 		request.setAttribute("kadais",kadais);
 	}

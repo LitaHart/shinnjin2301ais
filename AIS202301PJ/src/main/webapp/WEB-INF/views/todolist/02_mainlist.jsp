@@ -179,8 +179,6 @@
 	 		var aaa= $(this).val();
 			var kadaiNum = $(this).parent().siblings('#kadaiNum').val();
 			var kadai_naiyou = $(this).parent().siblings('#kadai_naiyou2').val();
-			alert(kadaiNum);
-			alert(kadai_naiyou);
 			window.open('popupEdit?kadaiNum='+kadaiNum+'&kadai_naiyou='+kadai_naiyou, '_blank', 'width=600,height=400');
 		});
 		
@@ -194,13 +192,21 @@
 <!-- HONG JS -->
 <script type="text/javascript">
 
-function popupAdd() {	//팝업 추가창
-    var yearAndMonthData = document.getElementById("yearAndMonthData").value;
-    var url = "popupAdd?yearAndMonthData=" + yearAndMonthData;
-    var popup = window.open(url, "Pop-up Window", "width=500,height=500");
-    popup.opener = window;
+function popupAdd() {	// 팝업 추가창
+	  
+	  const MAX_TASK_COUNT = 10;
+	  const kadais = document.querySelectorAll("#trId");
+	  if (kadais.length >= MAX_TASK_COUNT) {
+	    alert(`課題数は最大10個まで登録できます。`);
+	    return;
+	  }
+
+	  var yearAndMonthData = document.getElementById("yearAndMonthData").value;
+	  var url = "popupAdd?yearAndMonthData=" + yearAndMonthData;
+	  var popup = window.open(url, "Pop-up Window", "width=500,height=500");
+
+	  popup.opener = window;
 	}
-	});
 		
 		
 	 
@@ -211,13 +217,9 @@ function popupAdd() {	//팝업 추가창
 						let tasseirituValue = Number(tasseiritu.value);
 
 							$('.progress-text').text(percent + '%')
-							$('.bar').css('width', percent)
-
-						
+							$('.bar').css('width', percent)					
 					});
-	
-	
-	
+
 </script>
 </head>
 <body>
@@ -307,4 +309,3 @@ function popupAdd() {	//팝업 추가창
 
 </body>
 </html>
-

@@ -1,43 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<link href='resources/css/popupEdit.css' rel='stylesheet'type='text/css'>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>課題編集</title>
-    <style>
-        .popup {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 500px;
-            text-align: center;
-            
-            
-            
-           
-        }
-        
-        
-        
-        
-       /
-        .popup h2 {
-            text-align: left;
-        }
-        
-        .popup input {
-            width: 100%;
-            padding: 10px;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-    </style>
-    
 </head>
 <body>
     <div class="popup">
